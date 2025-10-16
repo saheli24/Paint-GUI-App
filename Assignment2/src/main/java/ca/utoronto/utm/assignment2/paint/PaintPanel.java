@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
+// need to figure out how to display rectangle mid construction
 public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Observer {
     private String mode="Circle";
     private PaintModel model;
