@@ -3,7 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-
+//Need to figure out how to highlight buttons for bug
 public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEvent> {
 
         private View view;
