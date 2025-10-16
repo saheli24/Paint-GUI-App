@@ -1,10 +1,10 @@
 # Fill in, commit and push each day.
-Member name:      email:     utorid:   
+Member name: Saheli  email: ssaheli.saha@mail.utoronto.ca  utorid: sahasah1
 
 Oct 15,2025
 	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I will do today: Fixed BUG1.002
+	Obstacles I face: Ensuring the button style updates consistently without affecting other buttons and deciding on the best visual style for the selected buttons.
 
 Oct 16,2025
 	What I did yesterday:
