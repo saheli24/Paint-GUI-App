@@ -4,13 +4,10 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
-import java.util.ArrayList;
-import java.util.List;
 //Need to figure out how to highlight buttons for bug
 public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEvent> {
 
         private View view;
-        private List<Button> buttons = new ArrayList<>(); // store buttons
         private Button selectedButton = null; // track button currently selected
 
         public ShapeChooserPanel(View view) {
