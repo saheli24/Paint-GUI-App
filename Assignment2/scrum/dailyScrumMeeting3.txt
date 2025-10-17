@@ -1,5 +1,5 @@
 # Fill in, commit and push each day.
-Member name:      email:     utorid:   
+Member name:      email:     utorid:
 
 Oct 15,2025
 	What I did yesterday:
@@ -7,9 +7,9 @@ Oct 15,2025
 	Obstacles I face:
 
 Oct 16,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Created Branches for BUG1.002 and US1.004 and completed/merged BUG1.002
+	What I will do today: Create some ideas on how to implement US1.004 task
+	Obstacles I face: Figuring how to implement US1.004 in the best way
 
 Oct 17,2025
 	What I did yesterday:
