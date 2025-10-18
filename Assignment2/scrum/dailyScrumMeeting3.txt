@@ -12,9 +12,9 @@ Oct 16,2025
 	Obstacles I face: Figuring how to implement US1.004 in the best way
 
 Oct 17,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Create some ideas on how to implement US1.004 task
+	What I will do today: What classes I need to implement
+	Obstacles I face: No difficulties faced so far
 
 Oct 18,2025
 	What I did yesterday:

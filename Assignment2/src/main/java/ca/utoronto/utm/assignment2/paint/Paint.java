@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 // 1) While the mouse is being dragged, dynamically draw a temporary rectangle from the initial click point to the current mouse position (mid-construction view).
 // 2) On mouse release, finalize the rectangle by adding it to the canvas or shapes list.
-
+// Required to implement a Rectangle class in order to achieve US1.004
 public class Paint extends Application {
 
         PaintModel model; // Model
