@@ -17,9 +17,9 @@ Oct 17,2025
 	Obstacles I face: No difficulties faced so far
 
 Oct 18,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Figuring out the classes I need to implement and how it will work
+	What I will do today: Figuring out what to implement and where
+	Obstacles I face: What classes were needed to complete this
 
 Oct 19,2025
 	What I did yesterday:
