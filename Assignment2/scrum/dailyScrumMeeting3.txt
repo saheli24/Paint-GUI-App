@@ -22,9 +22,9 @@ Oct 18,2025
 	Obstacles I face: What classes were needed to complete this
 
 Oct 19,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Figure out what I need to implement
+	What I will do today: Let my teammates know what needs to be done and wrote down what US needs to be implemented in order to implement this result
+	Obstacles I face: No difficulties yet
 
 Oct 20,2025
 	What I did yesterday:
