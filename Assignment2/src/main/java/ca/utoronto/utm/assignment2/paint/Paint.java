@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 // Required to implement a Rectangle class in order to achieve US1.004
 // Classes I need to implement/use in order to complete: Rectangle Class, Paint Model, Paint Panel, Point
 // Bugs/US that need to be complete in order to implement the result: US1.003 which is creating the drawing rectangle class
+// With rectangle class, I need to implement method drawRectangle(MouseEvent start, MouseEvent current) to dynamically create and finalize rectangles during drag and release.
 public class Paint extends Application {
 
         PaintModel model; // Model
