@@ -6,10 +6,10 @@
 # Sprint 1 Backlog UserStories go below
 
 --------------------------------------------------------------------------
-TYPE     : BUG BUG1.001 : habiban4 : Started
+TYPE     : BUG BUG1.001 : habiban4 : Complete
 NAME     : Icons instead of text for drawing mode selection
 PRIORITY : 1 
-ESTIMATE : (1 day)    ACTUAL :
+ESTIMATE : (1 hour)    ACTUAL : (1 hour)
 ISSUE    : Would be nice to have icons instead of "Circle", "Rectangle", ...
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
@@ -54,7 +54,7 @@ SO THAT  : I can see the circle I am about to build on release of the mouse
            button.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US1.003 : habiban4 : Completed
+TYPE     : USER STORY US1.003 : habiban4 : Complete
 NAME     : Draw Rectangle
 PRIORITY : 2
 ESTIMATE : (2 hours)  ACTUAL : (2 hours)
