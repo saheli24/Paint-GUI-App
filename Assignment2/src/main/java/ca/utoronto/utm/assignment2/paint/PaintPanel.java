@@ -14,8 +14,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     private String mode = "Circle";
     private PaintModel model;
 
-    public Circle circle; // This is VERY UGLY, should somehow fix this!!
-
     public Rectangle rectangle;
 
     public PaintPanel(PaintModel model) {
@@ -51,20 +49,26 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 if(mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
                     System.out.println("Started Circle");
                      Point centre = new Point(mouseEvent.getX(), mouseEvent.getY());
-                        this.circle=new Circle(centre, 0);
+                     Circle c = new Circle(centre, 0);
+                     model.setCurrentCircle(c);
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    Circle c = model.getCurrentCircle();
+                    if(c != null) {
+                        Point centre = c.getCentre();
+                        double radius = Math.sqrt(Math.pow(mouseEvent.getX() - centre.x, 2) + Math.pow(mouseEvent.getY() - centre.y, 2));
+                        c.setRadius(radius);
+                        model.notifyObserversOfChange();
+                    }
 
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_MOVED)) {
 
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
-                    if(this.circle!=null){
+                    Circle c = model.getCurrentCircle();
+                    if(c != null){
                                 // Problematic notion of radius and centre!!
-
-                                double radius = Math.abs(this.circle.getCentre().x-mouseEvent.getX()*2);
-                                this.circle.setRadius(radius);
-                                this.model.addCircle(this.circle);
+                                model.addCircle(c);
                                 System.out.println("Added Circle");
-                                this.circle=null;
+                                model.clearCurrentCircle();
                         }
                 }
                 break;

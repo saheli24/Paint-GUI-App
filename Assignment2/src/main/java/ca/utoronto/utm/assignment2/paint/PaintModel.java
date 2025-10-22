@@ -8,6 +8,8 @@ public class PaintModel extends Observable {
         private ArrayList<Circle> circles=new ArrayList<Circle>();
         private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
 
+        private Circle currentCircle;
+
         public void addPoint(Point p){
                 this.points.add(p);
                 this.setChanged();
@@ -27,6 +29,22 @@ public class PaintModel extends Observable {
         public ArrayList<Circle> getCircles(){
                 return circles;
         }
+
+    public Circle getCurrentCircle() {
+        return currentCircle;
+    }
+
+    public void setCurrentCircle(Circle c) {
+        this.currentCircle = c;
+        notifyObserversOfChange();
+    }
+
+    public void clearCurrentCircle() {
+        currentCircle = null;
+        notifyObserversOfChange();
+
+    }
+
 
         /**
          * Adds a Rectangle to the list of displayed Rectangles.
