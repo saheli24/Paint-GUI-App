@@ -32,9 +32,9 @@ Oct 20,2025
 	Obstacles I face: No difficulties
 
 Oct 21,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Figured out what methods to implement
+	What I will do today: Communicated to team-mates to finish up on US1.003 in order for me to implement
+	Obstacles I face: None
 
 Oct 22,2025
 	What I did yesterday:
