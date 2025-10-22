@@ -1,5 +1,5 @@
 # Fill in, commit and push each day.
-Member name:      email:     utorid:   
+NAME: Anas H. | EMAIL: anas.habib@mail.utoronto.ca | UTORID: habiban4
 
 Oct 15,2025
 	What I did yesterday:
@@ -32,14 +32,17 @@ Oct 20,2025
 	Obstacles I face:
 
 Oct 21,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: There was no work done in the previous days.
+	What I will do today: Today, I will be working on US1.003
+	Obstacles I face: Understanding the files of the painting app, how to create a shape
+	(in other words looking at Circle's implementation) and trying to create one for
+	Rectangle.
 
 Oct 22,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: I worked on and completed US1.003
+	What I will do today: today, I will be working on BUG1.001
+	Obstacles I face: I need to understand how to add images to the buttons, and make sure
+	that the rest of the code still works just fine without it breaking.
 
 Oct 23,2025
 	What I did yesterday:
