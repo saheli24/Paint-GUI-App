@@ -7,39 +7,39 @@ Oct 15,2025
 	Obstacles I face: Ensuring the button style updates consistently without affecting other buttons and deciding on the best visual style for the selected buttons.
 
 Oct 16,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Created Branches for BUG1.002 and US1.004 and completed/merged BUG1.002
+	What I will do today: Create some ideas on how to implement US1.004 task
+	Obstacles I face: Figuring how to implement US1.004 in the best way
 
 Oct 17,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Create some ideas on how to implement US1.004 task
+	What I will do today: What classes I need to implement
+	Obstacles I face: No difficulties faced so far
 
 Oct 18,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Figuring out the classes I need to implement and how it will work
+	What I will do today: Figuring out what to implement and where
+	Obstacles I face: What classes were needed to complete this
 
 Oct 19,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Figure out what I need to implement
+	What I will do today: Let my teammates know what needs to be done and wrote down what US needs to be implemented in order to implement this result
+	Obstacles I face: No difficulties yet
 
 Oct 20,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Communicating with my teamates and wrote down implementations of US
+	What I will do today: Figured out what methods to implement
+	Obstacles I face: No difficulties
 
 Oct 21,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Figured out what methods to implement
+	What I will do today: Communicated to team-mates to finish up on US1.003 in order for me to implement
+	Obstacles I face: None
 
 Oct 22,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Communicated with teamates
+	What I will do today: Completed US1.004 and added features of coordinates and diagonal dashed lines for guidance
+	Obstacles I face: Implementing the ghost rectangle during drag
 
 Oct 23,2025
 	What I did yesterday:

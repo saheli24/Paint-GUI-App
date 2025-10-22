@@ -50,4 +50,14 @@ public class PaintModel extends Observable {
         public ArrayList<Rectangle> getRectangles(){
                 return rectangles;
         }
+
+        /**
+         * Notifies all observers that the model has changed for mid-construction shapes,
+         * like when dragging a rectangle or circle, without adding it permanently to the model.
+         * Allowing the view to provide live feedback (ghost shapes) as the user drags.
+         */
+        public void notifyObserversOfChange() {
+            this.setChanged();
+            this.notifyObservers();
+        }
 }

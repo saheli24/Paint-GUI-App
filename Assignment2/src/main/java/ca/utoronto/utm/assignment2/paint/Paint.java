@@ -3,7 +3,6 @@ package ca.utoronto.utm.assignment2.paint;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 public class Paint extends Application {
 
         PaintModel model; // Model
