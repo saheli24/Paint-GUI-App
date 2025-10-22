@@ -95,6 +95,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         // sets the new width and height to the current Rectangle
                         this.rectangle.setWidth(width);
                         this.rectangle.setHeight(height);
+
+                        //notify observers of mid-construction shapes
+                        this.model.notifyObserversOfChange();
+
                     }
                 }
                 else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
@@ -165,5 +169,46 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     g2d.fillRect(drawX, drawY, drawWidth, drawHeight);
                 }
 
+                // Draw the rectangle currently being dragged (mid-construction feedback)
+                if (this.rectangle != null) {
+                    double x = this.rectangle.getOrigin().x;
+                    double y = this.rectangle.getOrigin().y;
+                    double width = this.rectangle.getWidth();
+                    double height = this.rectangle.getHeight();
+
+                    double drawX = x;
+                    if (width < 0) {
+                        drawX = x + width;
+                    }
+
+                    double drawY = y;
+                    if (height < 0) {
+                        drawY = y + height;
+                    }
+
+                    double drawWidth = Math.abs(width);
+                    double drawHeight = Math.abs(height);
+
+                    // Semi-transparent fill for ghost rectangle during drag
+                    g2d.setFill(Color.rgb(100, 100, 255, 0.3)); // blue with 30% opacity
+                    g2d.fillRect(drawX, drawY, drawWidth, drawHeight);
+
+                    // Diagonal dashed lines for guidance
+                    g2d.setStroke(Color.LIGHTGRAY);
+                    g2d.setLineDashes(5); // dashed line
+                    g2d.strokeLine(drawX, drawY, drawX + drawWidth, drawY + drawHeight);
+                    g2d.strokeLine(drawX, drawY + drawHeight, drawX + drawWidth, drawY);
+                    g2d.setLineDashes(null); // reset to solid lines
+
+                    // Display top-left coordinates + width/height
+                    g2d.setFill(Color.BLACK);
+                    g2d.fillText(
+                            String.format("(%.0f, %.0f) w: %.0f h: %.0f", drawX, drawY, drawWidth, drawHeight),
+                            drawX + 5, drawY - 5
+                    );
+
+                    g2d.setStroke(Color.BLACK); // reset squiggle stroke (to black)
+
+                }
     }
 }
