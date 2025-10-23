@@ -119,8 +119,12 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             case "Square": break;
 
             case "Squiggle":
-                if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    this.model.addPoint(new Point(mouseEvent.getX(), mouseEvent.getY()));
+                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
+                    model.startSquiggle();
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    model.addPointToCurrentSquiggle(new Point(mouseEvent.getX(), mouseEvent.getY()));
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
+                    model.endSquiggle();
                 }
                 break;
             case "Polyline": break;
@@ -133,13 +137,25 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 GraphicsContext g2d = this.getGraphicsContext2D();
                 g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
                 // Draw Lines
-                ArrayList<Point> points = this.model.getPoints();
+                g2d.setStroke(Color.BLACK);
+                for (Squiggle squiggle : model.getSquiggles()) {
+                    ArrayList<Point> points = squiggle.getPoints();
+                    for (int i = 0; i < points.size() - 1; i++) {
+                        Point p1 = points.get(i);
+                        Point p2 = points.get(i + 1);
+                        g2d.strokeLine(p1.x, p1.y, p2.x, p2.y);
+                    }
+                }
 
-                g2d.setFill(Color.RED);
-                for(int i=0;i<points.size()-1; i++){
-                        Point p1=points.get(i);
-                        Point p2=points.get(i+1);
-                        g2d.strokeLine(p1.x,p1.y,p2.x,p2.y);
+                // Draw the squiggle currently being dragged (live feedback)
+                Squiggle current_s = model.getCurrentSquiggle();
+                if (current_s != null) {
+                    ArrayList<Point> pts = current_s.getPoints();
+                    for (int i = 0; i < pts.size() - 1; i++) {
+                        Point p1 = pts.get(i);
+                        Point p2 = pts.get(i + 1);
+                        g2d.strokeLine(p1.x, p1.y, p2.x, p2.y);
+                    }
                 }
 
                 // Draw Circles
@@ -224,6 +240,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     );
 
                     g2d.setStroke(Color.BLACK); // reset squiggle stroke (to black)
+
 
                 }
     }

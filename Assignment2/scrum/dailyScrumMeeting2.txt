@@ -42,9 +42,9 @@ Oct 22,2025
 	Obstacles I face:
 
 Oct 23,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Looked over the code and saw what needed to be done.
+	What I will do today: Fix the squiggle bug.
+	Obstacles I face: I need to create a new squiggle class and have the VMC handle it to stop each squiggle from connected to the next.
 
 Oct 24,2025
 	What I did yesterday:
