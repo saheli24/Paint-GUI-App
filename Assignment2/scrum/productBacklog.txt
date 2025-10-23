@@ -149,10 +149,10 @@ ISSUE    : Squiggles are connected to each other by a straight line. Each drag
            the issue is with the representation of the squiggles in the Model.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : BUG BUG1.006 : UTORID : pate2652 InProgress
+TYPE     : BUG BUG1.006 : UTORID : pate2652 Complete
 NAME     : Circle drawing is broken
 PRIORITY : 1
-ESTIMATE : (2 hours)    ACTUAL :
+ESTIMATE : (2 hours)    ACTUAL : (1 hour)
 ISSUE    : The first click should specify the center of the circle, with
            a drag for the radius. This is not the case in the current
            implementation.

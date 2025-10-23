@@ -3,43 +3,43 @@ Member name: Prem Patel     email: prem.patel@mail.utoronto.ca  utorid: pate2652
 
 Oct 15,2025
 	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I will do today: Go over the base code.
+	Obstacles I face: Understanding the UI.
 
 Oct 16,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Went over the base code, adn understood the UI.
+	What I will do today: Decide which BUG or US to do.
+	Obstacles I face: Deciding which BUG or US I will choose.
 
 Oct 17,2025
-	What I did yesterday:
-	What I will do today:
+	What I did yesterday: Decided which BUG i will do.
+	What I will do today: Decide with US I will do.
 	Obstacles I face:
 
 Oct 18,2025
-	What I did yesterday:
+	What I did yesterday: Choose US I will do: US1.002.
 	What I will do today:
 	Obstacles I face:
 
 Oct 19,2025
 	What I did yesterday:
-	What I will do today:
+	What I will do today: Confirm my selected BUG and US with my group members.
 	Obstacles I face:
 
 Oct 20,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Confirmed my US and BUG with my team members.
+	What I will do today: I will start with my US1.002.
+	Obstacles I face: The circle not correctly being made based on the radius.
 
 Oct 21,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started working on US1.002.
+	What I will do today: Try finishing the US1.002.
+	Obstacles I face: Not finishing by today.
 
 Oct 22,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Tried finishing US1.002.
+	What I will do today: Completed US1.002, and started on BUG1.006, and finished.
+	Obstacles I face: Issues with the graphics of the circle when running Paint.java.
 
 Oct 23,2025
 	What I did yesterday:

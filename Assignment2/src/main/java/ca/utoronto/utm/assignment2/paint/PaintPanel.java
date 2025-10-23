@@ -65,10 +65,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
                     Circle c = model.getCurrentCircle();
                     if(c != null){
-                                // Problematic notion of radius and centre!!
-                                model.addCircle(c);
-                                System.out.println("Added Circle");
-                                model.clearCurrentCircle();
+                        // Problematic notion of radius and centre!!
+                        model.addCircle(c);
+                        System.out.println("Added Circle");
+                        model.clearCurrentCircle();
                         }
                 }
                 break;
@@ -151,6 +151,17 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         double y = c.getCentre().y;
                         double radius = c.getRadius();
                         g2d.fillOval(x, y, radius, radius);
+                }
+
+                Circle current = model.getCurrentCircle();
+                if(current != null) {
+                    double x = current.getCentre().x - current.getRadius();
+                    double y = current.getCentre().y - current.getRadius();
+                    double diameter = current.getRadius() * 2;
+                    g2d.setFill(Color.rgb(0, 225, 0, 0.3));
+                    g2d.fillOval(x, y, diameter, diameter);
+                    g2d.setStroke(Color.GRAY);
+                    g2d.strokeOval(x, y, diameter, diameter);
                 }
 
                 // list of all following rectangles  to be drawn
