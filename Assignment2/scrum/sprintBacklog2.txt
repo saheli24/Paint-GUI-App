@@ -4,3 +4,48 @@
 
 # Sprint 2 Oct 24-Oct 30, 2025
 # Sprint 2 Backlog UserStories go below
+
+--------------------------------------------------------------------------
+TYPE     : BUG BUG2.003 : UTORID : NotStarted
+NAME     : Architecture behind choosing selection mode is poor
+PRIORITY : 3
+ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
+ISSUE    : Code is not modular and is difficult to expand. Need a better
+           architecture behind selecting a drawing mode, and handling
+           the drawing events. Consider some design patterns here.
+           Refactor ShapeChooserPanel and PaintPanel to get rid of the
+           'if' blocks in the PaintPanel mouse event code.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US2.008 : UTORID : NotStarted
+NAME     : Draw Square
+PRIORITY : 3
+ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
+AS A     : user
+I WANT   : To click and drag to define a square, where all sides are equal.
+           The square should be drawn using the current color, line thickness,
+           and fill style, similar to how rectangles and circles are drawn.
+SO THAT  : I can draw squares like in Microsoft Paint.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US2.009 : UTORID : NotStarted
+NAME     : Draw Triangle
+PRIORITY : 3
+ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
+AS A     : user
+I WANT   : To click and drag to define a triangle within a bounding box.
+           The triangle should be drawn according to the current color,
+           line thickness, and fill style.
+SO THAT  : I can draw triangles like in Microsoft Paint.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US2.010 : UTORID : NotStarted
+NAME     : Draw Oval
+PRIORITY : 3
+ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
+AS A     : user
+I WANT   : To click and drag to define an oval shape (ellipse) within a
+           bounding box. The oval should reflect the current color, line
+           thickness, and fill style.
+SO THAT  : I can draw ovals like in Microsoft Paint.
+--------------------------------------------------------------------------
