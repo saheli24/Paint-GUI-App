@@ -128,6 +128,34 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 }
                 break;
             case "Polyline": break;
+
+            case "Oval":
+                if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    System.out.println("Started Oval");
+                    Point origin = new Point(mouseEvent.getX(), mouseEvent.getY());
+                    Oval oval = new Oval(origin, 0, 0);
+                    model.setCurrentOval(oval);
+                } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                    Oval oval = model.getCurrentOval();
+                    if (oval != null) {
+                        // Calculate current width and height based on mouse position
+                        double width = mouseEvent.getX() - oval.getOrigin().x;
+                        double height = mouseEvent.getY() - oval.getOrigin().y;
+                        oval.setWidth(width);
+                        oval.setHeight(height);
+                        model.notifyObserversOfChange();
+                    }
+
+                } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    Oval oval = model.getCurrentOval();
+                    if (oval != null) {
+                        model.addOval(oval);
+                        model.clearCurrentOval();
+                        System.out.println("Added Oval");
+                    }
+                }
+                break;
+
             default: break;
         }
     }
@@ -243,5 +271,42 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
 
                 }
+
+                // Draw finalized ovals
+                g2d.setFill(Color.ORANGE);
+                for (Oval oval : model.getOvals()) {
+                    double x = oval.getOrigin().x;
+                    double y = oval.getOrigin().y;
+                    double width = oval.getWidth();
+                    double height = oval.getHeight();
+
+                    double drawX = width >= 0 ? x : x + width;
+                    double drawY = height >= 0 ? y : y + height;
+                    double drawWidth = Math.abs(width);
+                    double drawHeight = Math.abs(height);
+
+                    g2d.fillOval(drawX, drawY, drawWidth, drawHeight);
+                }
+
+                // Draw live oval (mid-drag)
+                Oval currentOval = model.getCurrentOval();
+                if (currentOval != null) {
+                    double x = currentOval.getOrigin().x;
+                    double y = currentOval.getOrigin().y;
+                    double width = currentOval.getWidth();
+                    double height = currentOval.getHeight();
+
+                    double drawX = width >= 0 ? x : x + width;
+                    double drawY = height >= 0 ? y : y + height;
+                    double drawWidth = Math.abs(width);
+                    double drawHeight = Math.abs(height);
+
+                    g2d.setFill(Color.rgb(255, 165, 0, 0.3)); // semi-transparent orange
+                    g2d.fillOval(drawX, drawY, drawWidth, drawHeight);
+
+                    g2d.setStroke(Color.DARKORANGE);
+                    g2d.strokeOval(drawX, drawY, drawWidth, drawHeight);
+                }
+
     }
 }

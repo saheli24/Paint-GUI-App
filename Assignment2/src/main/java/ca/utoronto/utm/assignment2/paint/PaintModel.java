@@ -9,6 +9,9 @@ public class PaintModel extends Observable {
         private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
         private ArrayList<Squiggle> squiggles = new ArrayList<>();
 
+        private ArrayList<Oval> ovals = new ArrayList<>();
+        private Oval currentOval;
+
         private Circle currentCircle;
         private Squiggle currentSquiggle;
 
@@ -96,6 +99,51 @@ public class PaintModel extends Observable {
          */
         public ArrayList<Rectangle> getRectangles(){
                 return rectangles;
+        }
+
+        /**
+         * Adds a completed Oval to the list of drawn ovals and updates observers.
+         *
+         * @param oval the Oval object to be added to the canvas
+         */
+        public void addOval(Oval oval) {
+            ovals.add(oval);
+            notifyObserversOfChange();
+        }
+
+        /**
+         * Sets the currently active Oval that is being drawn and updates observers.
+         *
+         * @param oval the Oval currently being drawn
+         */
+        public void setCurrentOval(Oval oval) {
+            this.currentOval = oval;
+            notifyObserversOfChange();
+        }
+
+        /**
+         * Returns the Oval currently being drawn on the canvas.
+         *
+         * @return the current Oval, or null if none is being drawn
+         */
+        public Oval getCurrentOval() {
+            return currentOval;
+        }
+
+        /**
+         * Clears the reference to the current Oval when drawing is complete.
+         */
+        public void clearCurrentOval() {
+            this.currentOval = null;
+        }
+
+        /**
+         * Returns a list of all completed Ovals drawn on the canvas.
+         *
+         * @return a list of all Ovals
+         */
+        public ArrayList<Oval> getOvals() {
+            return ovals;
         }
 
         /**

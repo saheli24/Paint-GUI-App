@@ -92,6 +92,21 @@ public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEv
             this.add(polylineButton, 0, 4);
             polylineButton.setOnAction(this);
 
+            // sets image for oval
+            Image iconSix = new Image(getClass().getResourceAsStream("/icons/oval.png"));
+            ImageView iconViewSix = new ImageView(iconSix);
+            iconViewSix.setFitWidth(15);
+            iconViewSix.setFitHeight(15);
+
+            Button ovalButton = new Button();
+            ovalButton.setUserData("Oval");
+            ovalButton.setGraphic(iconViewSix);
+            ovalButton.setText("");
+            ovalButton.setMinWidth(100);
+            this.add(ovalButton, 0, 5);
+            ovalButton.setOnAction(this);
+
+
         }
 
         @Override
