@@ -39,10 +39,10 @@ I WANT   : To click and drag to define a triangle within a bounding box.
 SO THAT  : I can draw triangles like in Microsoft Paint.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US2.010 : sahasah1 : Started
+TYPE     : USER STORY US2.010 : sahasah1 : Complete
 NAME     : Draw Oval
 PRIORITY : 3
-ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
+ESTIMATE : (1 day)    ACTUAL : (4 hours)
 AS A     : user
 I WANT   : To click and drag to define an oval shape (ellipse) within a
            bounding box. The oval should reflect the current color, line
