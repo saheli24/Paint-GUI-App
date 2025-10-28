@@ -39,7 +39,7 @@ I WANT   : To click and drag to define a triangle within a bounding box.
 SO THAT  : I can draw triangles like in Microsoft Paint.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US2.010 : UTORID : NotStarted
+TYPE     : USER STORY US2.010 : sahasah1 : Started
 NAME     : Draw Oval
 PRIORITY : 3
 ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
