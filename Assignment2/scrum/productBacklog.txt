@@ -111,10 +111,10 @@ SO THAT  :
 --------------------------------------------------------------------------
 
 --------------------------------------------------------------------------
-TYPE     : USER STORY US2.008 : habiban4 : Started
+TYPE     : USER STORY US2.008 : habiban4 : Completed
 NAME     : Draw Square
 PRIORITY : 3
-ESTIMATE : (2 hours)    ACTUAL :
+ESTIMATE : (2 hours)    ACTUAL : (2 hours)
 AS A     : user
 I WANT   : To click and drag to define a square, where all sides are equal.
            The square should be drawn using the current color, line thickness,

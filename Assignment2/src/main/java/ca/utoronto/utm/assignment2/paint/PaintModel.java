@@ -6,8 +6,11 @@ import java.util.Observable;
 public class PaintModel extends Observable {
         private ArrayList<Point> points=new ArrayList<Point>();
         private ArrayList<Circle> circles=new ArrayList<Circle>();
-        private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
-        private ArrayList<Square> squares = new ArrayList<>();
+
+    // @habiban4
+    private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+    private ArrayList<Square> squares = new ArrayList<Square>();
+
         private ArrayList<Squiggle> squiggles = new ArrayList<>();
 
 
@@ -79,52 +82,59 @@ public class PaintModel extends Observable {
 
     }
 
-
-        /**
-         * Adds a Rectangle to the list of displayed Rectangles.
-         * Then notifies the rest of the observers.
-         *
-         * @param rectangle the rectangle to be added to the list of models
-         *
-         */
-        public void addRectangle(Rectangle rectangle) {
-                rectangles.add(rectangle);
-                this.setChanged();
-                this.notifyObservers();
-        }
-
-        /**
-         * Returns the ArrayList of Rectangles
-         *
-         * @return rectangles
-         *
-         */
-        public ArrayList<Rectangle> getRectangles(){
-                return rectangles;
-        }
-
-        /**
-         * Adds a square to the list of displayed squares.
-         * Then notifies the rest of the observers.
-         *
-         * @param square the square to be added to the list of models
-         *
-         */
-        public void addSquare(Square square) {
-            squares.add(square);
+    /**
+     * Adds a Rectangle to the list of displayed Rectangles.
+     * Then notifies the rest of the observers.
+     *
+     * @param rectangle the rectangle to be added to the list of models
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public void addRectangle(Rectangle rectangle) {
+            rectangles.add(rectangle);
             this.setChanged();
             this.notifyObservers();
-        }
+    }
 
-        /**
-         * Returns the ArrayList of squares
-         *
-         * @return squares
-         *
-         */
-        public ArrayList<Square> getSquares() {
-            return squares;
-        }
+    /**
+     * Returns the ArrayList of Rectangles
+     *
+     * @return rectangles
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public ArrayList<Rectangle> getRectangles(){
+            return rectangles;
+    }
+
+    /**
+     * Adds a square to the list of displayed squares.
+     * Then notifies the rest of the observers.
+     *
+     * @param square the square to be added to the list of models
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public void addSquare(Square square) {
+        squares.add(square);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    /**
+     * Returns the ArrayList of squares
+     *
+     * @return squares
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public ArrayList<Square> getSquares() {
+        return squares;
+    }
 
 
         /**

@@ -14,8 +14,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     private String mode = "Circle";
     private PaintModel model;
 
+    // @habiban4
     public Rectangle rectangle;
     public Square square;
+    private Point squareStart;
 
 
     public PaintPanel(PaintModel model) {
@@ -117,47 +119,42 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     }
                 }
                 break;
-
             case "Square":
                 if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
                     System.out.println("Started Square");
 
-                    // creates a Point for the original (x, y) at the mouse location
-                    Point origin = new Point(mouseEvent.getX(), mouseEvent.getY());
+                    // original press point
+                    squareStart = new Point(mouseEvent.getX(), mouseEvent.getY());
 
-                    // creates a Square with the origin and initial width 0
-                    this.square = new Square(origin, 0);
-                }
-                else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    // create a new square at that origin with size 0
+                    this.square = new Square(new Point(squareStart.x, squareStart.y), 0);
+
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
                     if (this.square != null) {
-                        // gets current ending (x, y) mouse values
+
                         double currentX = mouseEvent.getX();
                         double currentY = mouseEvent.getY();
 
-                        // starting point
-                        Point start = this.square.getOrigin();
+                        // distance dragged
+                        double dx = currentX - squareStart.x;
+                        double dy = currentY - squareStart.y;
 
-                        // calculate width and height based on drag
-                        double dx = currentX - start.x;
-                        double dy = currentY - start.y;
-
-                        // pick the smaller distance to enforce square shape
+                        // side length = min of dx, dy
                         double side = Math.min(Math.abs(dx), Math.abs(dy));
 
-                        // preserve drag direction by flipping origin if needed
-                        double newX = (dx >= 0) ? start.x : start.x - side;
-                        double newY = (dy >= 0) ? start.y : start.y - side;
+                        // adjust origin for top/left drag
+                        double newX = dx >= 0 ? squareStart.x : squareStart.x - side;
+                        double newY = dy >= 0 ? squareStart.y : squareStart.y - side;
 
                         // update square
                         this.square.setOrigin(new Point(newX, newY));
-                        this.square.setWidth(side);  // height will automatically match
-                        // this.square.setHeight(side); // optional, redundant with setWidth
+                        this.square.setWidth(side);
 
-                        // notify observers of mid-construction shapes
+                        // redraw
                         this.model.notifyObserversOfChange();
                     }
-                }
-                else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
+
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
                     if (this.square != null) {
                         this.model.addSquare(this.square);
                         System.out.println("Added Square");
@@ -165,13 +162,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     }
                 }
                 break;
-
-
-
-
-
-
-
 
             case "Squiggle":
                 if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
@@ -327,56 +317,51 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
                 }
 
-        // list of all following squares to be drawn
-        ArrayList<Square> squares = this.model.getSquares();
+                // Draw all completed squares
+                g2d.setFill(Color.CHOCOLATE);
+                for (Square square : this.model.getSquares()) {
+                    double x = square.getOrigin().x;
+                    double y = square.getOrigin().y;
+                    double side = square.getWidth();
 
-        g2d.setFill(Color.CHOCOLATE);
-        for (Square square : this.model.getSquares()) {
-            double x = square.getOrigin().x;
-            double y = square.getOrigin().y;
-            double side = square.getWidth();
+                    double drawX = side >= 0 ? x : x + side;
+                    double drawY = side >= 0 ? y : y + side;
+                    double drawSide = Math.abs(side);
 
-            g2d.fillRect(x, y, side, side);
-        }
+                    // draw the square
+                    g2d.fillRect(drawX, drawY, drawSide, drawSide);
+                }
 
-        // Draw all completed squares
-        g2d.setFill(Color.CHOCOLATE);
-        for (Square square : this.model.getSquares()) {
-            double x = square.getOrigin().x;
-            double y = square.getOrigin().y;
-            double side = square.getWidth(); // square side
+                if (this.square != null) {
+                    double x = this.square.getOrigin().x;
+                    double y = this.square.getOrigin().y;
+                    double side = this.square.getWidth();
 
-            // draw the square
-            g2d.fillRect(x, y, side, side);
-        }
+                    // adjust origin for top/left drag
+                    double drawX = side >= 0 ? x : x + side;
+                    double drawY = side >= 0 ? y : y + side;
+                    double drawSide = Math.abs(side);
 
-// Draw the square currently being dragged (mid-construction feedback)
-        if (this.square != null) {
-            double x = this.square.getOrigin().x;
-            double y = this.square.getOrigin().y;
-            double side = this.square.getWidth(); // square side
+                    // Semi-transparent fill for ghost square during drag
+                    g2d.setFill(Color.rgb(100, 100, 255, 0.3)); // blue with 30% opacity
+                    g2d.fillRect(drawX, drawY, drawSide, drawSide);
 
-            // Semi-transparent fill for ghost square during drag
-            g2d.setFill(Color.rgb(100, 100, 255, 0.3)); // blue with 30% opacity
-            g2d.fillRect(x, y, side, side);
+                    // Diagonal dashed lines for guidance
+                    g2d.setStroke(Color.LIGHTGRAY);
+                    g2d.setLineDashes(5); // dashed line
+                    g2d.strokeLine(drawX, drawY, drawX + drawSide, drawY + drawSide);
+                    g2d.strokeLine(drawX, drawY + drawSide, drawX + drawSide, drawY);
+                    g2d.setLineDashes(null); // reset to solid lines
 
-            // Diagonal dashed lines for guidance
-            g2d.setStroke(Color.LIGHTGRAY);
-            g2d.setLineDashes(5); // dashed line
-            g2d.strokeLine(x, y, x + side, y + side);
-            g2d.strokeLine(x, y + side, x + side, y);
-            g2d.setLineDashes(null); // reset to solid lines
+                    // Display top-left coordinates + side
+                    g2d.setFill(Color.BLACK);
+                    g2d.fillText(
+                            String.format("(%.0f, %.0f) h & w: %.0f", drawX, drawY, drawSide),
+                            drawX + 5, drawY - 5
+                    );
 
-            // Display top-left coordinates + side length
-            g2d.setFill(Color.BLACK);
-            g2d.fillText(
-                    String.format("(%.0f, %.0f) side: %.0f", x, y, side),
-                    x + 5, y - 5
-            );
-
-            g2d.setStroke(Color.BLACK); // reset stroke
-        }
-
+                    g2d.setStroke(Color.BLACK); // reset stroke
+                }
 
 
 
