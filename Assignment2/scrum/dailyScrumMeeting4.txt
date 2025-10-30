@@ -27,9 +27,9 @@ Oct 19,2025
 	Obstacles I face:
 
 Oct 20,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Nothing was done yesterday.
+	What I will do today: Claimed US1.003 and BUG1.001
+	Obstacles I face: No difficulties so far.
 
 Oct 21,2025
 	What I did yesterday: There was no work done in the previous days.
@@ -75,14 +75,18 @@ Oct 28,2025
 	Obstacles I face:
 
 Oct 29,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Nothing was done yesterday.
+	What I will do today: Selected US2.008
+	Obstacles I face: No difficulties to face so far.
 
 Oct 30,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Nothing was done the past few days that have no entries.
+	What I will do today: Today, I will be working on US2.008
+	Obstacles I face: The main issue that I am facing today is how to go about basically doing Rectangles
+	but this time making sure both the width and height are the same. So that way, I am able to create
+	and draw a square. I was the one who previously implemented Rectangle, so I have a decent idea of
+	what I exactly have to do. I just have to make sure both the height and width are the same, and they
+	do not change while they are getting drawn.
 
 Oct 31,2025
 	What I did yesterday:

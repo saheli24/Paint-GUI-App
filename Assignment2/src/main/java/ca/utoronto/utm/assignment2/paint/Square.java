@@ -2,7 +2,8 @@ package ca.utoronto.utm.assignment2.paint;
 
 /**
  * Represents a geometric square that can be drawn on the canvas.
- * Stores its origin point and width
+ * Stores its origin point, width, and height. Both the width and
+ * height are the same values.
  *
  * @author Anas H. | habiban4
  *
@@ -13,26 +14,16 @@ public class Square {
     private double height;
 
     /**
-     * Constructs a new Square with the specified origin and width
+     * Constructs a new Square with the specified origin and side
      *
      * @param origin starting (x, y) of the square
-     * @param width the width of the square
+     * @param side the width and height of the square
      *
      */
-    public Square(Point origin, double width) {
+    public Square(Point origin, double side) {
         this.origin = origin;
-        this.width = width;
-        this.height = width;
-    }
-
-    /**
-     * Returns the area of the following square
-     *
-     * @return the width * height
-     *
-     */
-    public double getArea() {
-        return width * height;
+        this.width = side;
+        this.height = side;
     }
 
     /**
@@ -55,7 +46,7 @@ public class Square {
     }
 
     /**
-     * Returns the width of the following Square
+     * Returns the width of the following square
      *
      * @return width
      */
@@ -64,7 +55,8 @@ public class Square {
     }
 
     /**
-     * Sets the new width of the following Square
+     * Sets the new width of the following square. The height is
+     * also set to be the same value as the width.
      *
      * @param width the new width value of the Square in pixels
      *
@@ -85,7 +77,8 @@ public class Square {
     }
 
     /**
-     * Sets the height of this square
+     * Sets the height of this square. The width is also set
+     * to be the same value of the height.
      *
      * @param height the new height value of the square in pixels
      */
