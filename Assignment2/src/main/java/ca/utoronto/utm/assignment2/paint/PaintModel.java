@@ -7,7 +7,9 @@ public class PaintModel extends Observable {
         private ArrayList<Point> points=new ArrayList<Point>();
         private ArrayList<Circle> circles=new ArrayList<Circle>();
         private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+        private ArrayList<Square> squares = new ArrayList<>();
         private ArrayList<Squiggle> squiggles = new ArrayList<>();
+
 
         private ArrayList<Oval> ovals = new ArrayList<>();
         private Oval currentOval;
@@ -100,6 +102,30 @@ public class PaintModel extends Observable {
         public ArrayList<Rectangle> getRectangles(){
                 return rectangles;
         }
+
+        /**
+         * Adds a square to the list of displayed squares.
+         * Then notifies the rest of the observers.
+         *
+         * @param square the square to be added to the list of models
+         *
+         */
+        public void addSquare(Square square) {
+            squares.add(square);
+            this.setChanged();
+            this.notifyObservers();
+        }
+
+        /**
+         * Returns the ArrayList of squares
+         *
+         * @return squares
+         *
+         */
+        public ArrayList<Square> getSquares() {
+            return squares;
+        }
+
 
         /**
          * Adds a completed Oval to the list of drawn ovals and updates observers.
