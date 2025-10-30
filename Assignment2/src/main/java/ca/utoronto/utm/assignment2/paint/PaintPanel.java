@@ -201,7 +201,41 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 }
                 break;
 
+            case "Triangle":
+                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
+                    System.out.println("Started Oval");
+                    Point start = new Point(mouseEvent.getX(), mouseEvent.getY());
+                    Triangle t = new Triangle(start, 0, 0);
+                    model.setCurrentTriangle(t);
+                }
+                else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    Triangle t = model.getCurrentTriangle();
+                    if (t != null) {
+                        double startX = t.getOrigin().x;
+                        double startY = t.getOrigin().y;
+                        double currX = mouseEvent.getX();
+                        double currY = mouseEvent.getY();
+                        double width = currX - startX;
+                        double height = currY - startY;
+
+
+                        t.setWidth(Math.abs(width));
+                        t.setHeight(Math.abs(height));
+                        model.notifyObserversOfChange();
+                    }
+                }
+                else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
+                    Triangle t = model.getCurrentTriangle();
+                    if (t != null) {
+                        model.addTriangle(t);
+                        model.clearCurrentTriangle();
+                        System.out.println("Added Triangle");
+                    }
+
+            }
+            break;
             default: break;
+
         }
     }
     @Override
@@ -400,6 +434,67 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     g2d.setStroke(Color.DARKORANGE);
                     g2d.strokeOval(drawX, drawY, drawWidth, drawHeight);
                 }
+
+        g2d.setFill(Color.PURPLE);
+        for (Triangle triangle : model.getTriangles()) {
+            double x = triangle.getOrigin().x;
+            double y = triangle.getOrigin().y;
+            double width = triangle.getWidth();
+            double height = triangle.getHeight();
+
+            double drawX = width >= 0 ? x : x + width;
+            double drawY = height >= 0 ? y : y + height;
+            double drawWidth = Math.abs(width);
+            double drawHeight = Math.abs(height);
+            double[] xPoints, yPoints;
+            if (width >= 0 && height >= 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width < 0 && height >= 0) {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width >= 0 && height < 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            } else {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            }
+
+            g2d.fillPolygon(xPoints, yPoints, 3);
+        }
+        Triangle currentTriangle = model.getCurrentTriangle();
+        if (currentTriangle != null) {
+            double x = currentTriangle.getOrigin().x;
+            double y = currentTriangle.getOrigin().y;
+            double width = currentTriangle.getWidth();
+            double height = currentTriangle.getHeight();
+
+            double drawX = width >= 0 ? x : x + width;
+            double drawY = height >= 0 ? y : y + height;
+            double drawWidth = Math.abs(width);
+            double drawHeight = Math.abs(height);
+
+            double[] xPoints, yPoints;
+            if (width >= 0 && height >= 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width < 0 && height >= 0) {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width >= 0 && height < 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            } else {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            }
+            g2d.setFill(Color.rgb(128, 0, 128, 0.3)); // purple with transparency
+            g2d.fillPolygon(xPoints, yPoints, 3);
+            g2d.setStroke(Color.DARKMAGENTA);
+            g2d.strokePolygon(xPoints, yPoints, 3);
+        }
+
 
     }
 }
