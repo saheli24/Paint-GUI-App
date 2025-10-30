@@ -8,10 +8,10 @@ public class PaintModel extends Observable {
         private ArrayList<Circle> circles=new ArrayList<Circle>();
         private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
         private ArrayList<Squiggle> squiggles = new ArrayList<>();
-
+        private ArrayList<Triangle> triangles = new ArrayList<>();
         private ArrayList<Oval> ovals = new ArrayList<>();
         private Oval currentOval;
-
+        private Triangle currentTriangle;
         private Circle currentCircle;
         private Squiggle currentSquiggle;
 
@@ -54,7 +54,7 @@ public class PaintModel extends Observable {
                 this.notifyObservers();
         }
 
-        public ArrayList<Circle> getCircles(){
+    public ArrayList<Circle> getCircles(){
                 return circles;
         }
 
@@ -145,6 +145,31 @@ public class PaintModel extends Observable {
         public ArrayList<Oval> getOvals() {
             return ovals;
         }
+
+        public void setCurrentTriangle(Triangle t) {
+            this.currentTriangle = t;
+            notifyObserversOfChange();
+        }
+
+        public Triangle getCurrentTriangle() {
+            return currentTriangle;
+        }
+
+        public void clearCurrentTriangle() {
+            this.currentTriangle = null;
+        }
+        public void addTriangle(Triangle t) {
+            triangles.add(t);
+            notifyObserversOfChange();
+        }
+
+    /**
+     * Returns a list of all completed Triangles drawn on the canvas.
+     * @return a list of all Triangles
+     */
+    public ArrayList<Triangle> getTriangles() {
+        return triangles;
+    }
 
         /**
          * Notifies all observers that the model has changed for mid-construction shapes,

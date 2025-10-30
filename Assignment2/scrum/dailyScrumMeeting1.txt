@@ -42,44 +42,44 @@ Oct 22,2025
 	Obstacles I face: Issues with the graphics of the circle when running Paint.java.
 
 Oct 23,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Finished my Us1.002 and BUG1.006 for Sprint 1.
+	What I will do today: Check in with my teammates for the status on their assigned US's and BUG's Sprint 1.
+	Obstacles I face: No difficulties.
 
 Oct 24,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Communicated with the Product Owner for the next steps.
+	What I will do today: Meet with my team to decide on the US and BUG each member will do.
+	Obstacles I face: Waiting for conformation from team.
 
 Oct 25,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Decided which US I want to complete for Sprint 2.
+	What I will do today: Go over my team's implementations for Sprint 1.
+	Obstacles I face: No difficulties.
 
 Oct 26,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Understood the current implementation of the program.
+	What I will do today: Finding out which members are doing the other US's or BUG's.
+	Obstacles I face: No difficulties.
 
 Oct 27,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: All group members decided which US or BUG we will be doing for Sprint 2.
+	What I will do today: Go over my US for Sprint2 and see what needs to be done.
+	Obstacles I face: No difficulties.
 
 Oct 28,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Went over the US I need to complete.
+	What I will do today: Decide how much time it will take me.
+	Obstacles I face: No difficulties.
 
 Oct 29,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Stated the time estimated to complete the US2.009.
+	What I will do today: Start my US.
+	Obstacles I face: Had difficulties in the displaying of the opaque Triangle when drawing it.
 
 Oct 30,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started my US2.009 and implemented Triangle class.
+	What I will do today: Make necessary changes to PaintModel.java, PaintPanel.java, ShapeChooserPanel.java, and Resources root.
+	Obstacles I face: No difficulties.
 
 Oct 31,2025
 	What I did yesterday:

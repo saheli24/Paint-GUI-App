@@ -122,10 +122,10 @@ I WANT   : To click and drag to define a square, where all sides are equal.
 SO THAT  : I can draw squares like in Microsoft Paint.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US2.009 : UTORID : pate2652 Started
+TYPE     : USER STORY US2.009 : UTORID : pate2652 Complete
 NAME     : Draw Triangle
 PRIORITY : 3
-ESTIMATE : (1 day)    ACTUAL :
+ESTIMATE : (1 day)    ACTUAL : (1 day)
 AS A     : user
 I WANT   : To click and drag to define a triangle within a bounding box.
            The triangle should be drawn according to the current color,
