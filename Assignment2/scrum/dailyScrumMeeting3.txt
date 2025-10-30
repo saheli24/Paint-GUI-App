@@ -72,9 +72,9 @@ Oct 28,2025
 	Obstacles I face: None
 
 Oct 29,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Communication with teammates
+    What I will do today: Communicate with teammates on their progress
+    Obstacles I face: None
 
 Oct 30,2025
 	What I did yesterday:
