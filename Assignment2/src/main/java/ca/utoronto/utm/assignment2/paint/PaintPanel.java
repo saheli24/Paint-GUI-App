@@ -151,6 +151,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         double y = c.getCentre().y;
                         double radius = c.getRadius();
                         g2d.fillOval(x, y, radius, radius);
+
                 }
 
                 // list of all following rectangles  to be drawn
