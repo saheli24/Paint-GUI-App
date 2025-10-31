@@ -13,7 +13,6 @@ public class PaintModel extends Observable {
 
         private ArrayList<Squiggle> squiggles = new ArrayList<>();
 
-
         private ArrayList<Oval> ovals = new ArrayList<>();
         private Oval currentOval;
 
