@@ -106,18 +106,6 @@ public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEv
             this.add(ovalButton, 0, 5);
             ovalButton.setOnAction(this);
 
-            Image iconSeven = new Image(getClass().getResourceAsStream("/icons/triangle.png"));
-            ImageView iconViewSeven = new ImageView(iconSeven);
-            iconViewSeven.setFitWidth(15);
-            iconViewSeven.setFitHeight(15);
-            Button triangleButton = new Button();
-            triangleButton.setUserData("Triangle");  // the mode that PaintPanel will recognize
-            triangleButton.setGraphic(iconViewSeven);
-            triangleButton.setText(""); // hide text
-            triangleButton.setMinWidth(100);
-            this.add(triangleButton, 0, 6); // next row in the grid
-            triangleButton.setOnAction(this);
-
 
         }
 
