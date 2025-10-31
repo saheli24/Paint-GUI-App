@@ -206,7 +206,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 break;
 
             default: break;
-
         }
     }
     @Override
@@ -412,8 +411,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     g2d.setStroke(Color.DARKORANGE);
                     g2d.strokeOval(drawX, drawY, drawWidth, drawHeight);
                 }
-
-
+                
     }
 }
 
