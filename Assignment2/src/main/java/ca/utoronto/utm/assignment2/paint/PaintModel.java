@@ -19,6 +19,8 @@ public class PaintModel extends Observable {
         private Circle currentCircle;
         private Squiggle currentSquiggle;
 
+        private ArrayList<Triangle> triangles = new ArrayList<>();
+        private Triangle currentTriangle;
         public void addPoint(Point p){
                 this.points.add(p);
                 this.setChanged();
@@ -189,5 +191,42 @@ public class PaintModel extends Observable {
         public void notifyObserversOfChange() {
             this.setChanged();
             this.notifyObservers();
+        }
+        /**
+         * Adds a completed Triangle to the model and notifies observers.
+         * @param triangle the triangle to be added
+         */
+        public void addTriangle(Triangle triangle) {
+            triangles.add(triangle);
+            notifyObserversOfChange();
+        }
+
+        /**
+         * Returns the list of all completed triangles.
+         */
+        public ArrayList<Triangle> getTriangles() {
+            return triangles;
+        }
+
+        /**
+         * Sets the current triangle being drawn.
+         */
+        public void setCurrentTriangle(Triangle triangle) {
+            this.currentTriangle = triangle;
+            notifyObserversOfChange();
+        }
+
+        /**
+         * Returns the current triangle being drawn.
+         */
+        public Triangle getCurrentTriangle() {
+            return currentTriangle;
+        }
+
+        /**
+         * Clears the current triangle reference.
+         */
+        public void clearCurrentTriangle() {
+            this.currentTriangle = null;
         }
 }
