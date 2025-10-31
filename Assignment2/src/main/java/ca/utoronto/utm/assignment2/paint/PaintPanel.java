@@ -14,7 +14,11 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     private String mode = "Circle";
     private PaintModel model;
 
+    // @habiban4
     public Rectangle rectangle;
+    public Square square;
+    private Point squareStart;
+
 
     public PaintPanel(PaintModel model) {
         super(300, 300);
@@ -65,10 +69,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
                     Circle c = model.getCurrentCircle();
                     if(c != null){
-                                // Problematic notion of radius and centre!!
-                                model.addCircle(c);
-                                System.out.println("Added Circle");
-                                model.clearCurrentCircle();
+                        // Problematic notion of radius and centre!!
+                        model.addCircle(c);
+                        System.out.println("Added Circle");
+                        model.clearCurrentCircle();
                         }
                 }
                 break;
@@ -115,16 +119,123 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     }
                 }
                 break;
+            case "Square":
+                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
+                    System.out.println("Started Square");
 
-            case "Square": break;
+                    // original press point
+                    squareStart = new Point(mouseEvent.getX(), mouseEvent.getY());
+
+                    // create a new square at that origin with size 0
+                    this.square = new Square(new Point(squareStart.x, squareStart.y), 0);
+
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    if (this.square != null) {
+
+                        double currentX = mouseEvent.getX();
+                        double currentY = mouseEvent.getY();
+
+                        // distance dragged
+                        double dx = currentX - squareStart.x;
+                        double dy = currentY - squareStart.y;
+
+                        // side length = min of dx, dy
+                        double side = Math.min(Math.abs(dx), Math.abs(dy));
+
+                        // adjust origin for top/left drag
+                        double newX = dx >= 0 ? squareStart.x : squareStart.x - side;
+                        double newY = dy >= 0 ? squareStart.y : squareStart.y - side;
+
+                        // update square
+                        this.square.setOrigin(new Point(newX, newY));
+                        this.square.setWidth(side);
+
+                        // redraw
+                        this.model.notifyObserversOfChange();
+                    }
+
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
+                    if (this.square != null) {
+                        this.model.addSquare(this.square);
+                        System.out.println("Added Square");
+                        this.square = null;
+                    }
+                }
+                break;
 
             case "Squiggle":
-                if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    this.model.addPoint(new Point(mouseEvent.getX(), mouseEvent.getY()));
+                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
+                    model.startSquiggle();
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    model.addPointToCurrentSquiggle(new Point(mouseEvent.getX(), mouseEvent.getY()));
+                } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
+                    model.endSquiggle();
                 }
                 break;
             case "Polyline": break;
+
+            case "Oval":
+                if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    System.out.println("Started Oval");
+                    Point origin = new Point(mouseEvent.getX(), mouseEvent.getY());
+                    Oval oval = new Oval(origin, 0, 0);
+                    model.setCurrentOval(oval);
+                } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                    Oval oval = model.getCurrentOval();
+                    if (oval != null) {
+                        // Calculate current width and height based on mouse position
+                        double width = mouseEvent.getX() - oval.getOrigin().x;
+                        double height = mouseEvent.getY() - oval.getOrigin().y;
+                        oval.setWidth(width);
+                        oval.setHeight(height);
+                        model.notifyObserversOfChange();
+                    }
+
+                } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    Oval oval = model.getCurrentOval();
+                    if (oval != null) {
+                        model.addOval(oval);
+                        model.clearCurrentOval();
+                        System.out.println("Added Oval");
+                    }
+                }
+                break;
+
+            case "Triangle":
+                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
+                    System.out.println("Started Oval");
+                    Point start = new Point(mouseEvent.getX(), mouseEvent.getY());
+                    Triangle t = new Triangle(start, 0, 0);
+                    model.setCurrentTriangle(t);
+                }
+                else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
+                    Triangle t = model.getCurrentTriangle();
+                    if (t != null) {
+                        double startX = t.getOrigin().x;
+                        double startY = t.getOrigin().y;
+                        double currX = mouseEvent.getX();
+                        double currY = mouseEvent.getY();
+                        double width = currX - startX;
+                        double height = currY - startY;
+
+
+                        t.setWidth(Math.abs(width));
+                        t.setHeight(Math.abs(height));
+                        model.notifyObserversOfChange();
+                    }
+                }
+                else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
+                    Triangle t = model.getCurrentTriangle();
+                    if (t != null) {
+                        model.addTriangle(t);
+                        model.clearCurrentTriangle();
+                        System.out.println("Added Triangle");
+                    }
+
+            }
+            break;
             default: break;
+
         }
     }
     @Override
@@ -133,13 +244,25 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 GraphicsContext g2d = this.getGraphicsContext2D();
                 g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
                 // Draw Lines
-                ArrayList<Point> points = this.model.getPoints();
+                g2d.setStroke(Color.BLACK);
+                for (Squiggle squiggle : model.getSquiggles()) {
+                    ArrayList<Point> points = squiggle.getPoints();
+                    for (int i = 0; i < points.size() - 1; i++) {
+                        Point p1 = points.get(i);
+                        Point p2 = points.get(i + 1);
+                        g2d.strokeLine(p1.x, p1.y, p2.x, p2.y);
+                    }
+                }
 
-                g2d.setFill(Color.RED);
-                for(int i=0;i<points.size()-1; i++){
-                        Point p1=points.get(i);
-                        Point p2=points.get(i+1);
-                        g2d.strokeLine(p1.x,p1.y,p2.x,p2.y);
+                // Draw the squiggle currently being dragged (live feedback)
+                Squiggle current_s = model.getCurrentSquiggle();
+                if (current_s != null) {
+                    ArrayList<Point> pts = current_s.getPoints();
+                    for (int i = 0; i < pts.size() - 1; i++) {
+                        Point p1 = pts.get(i);
+                        Point p2 = pts.get(i + 1);
+                        g2d.strokeLine(p1.x, p1.y, p2.x, p2.y);
+                    }
                 }
 
                 // Draw Circles
@@ -150,6 +273,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         double x = c.getCentre().x;
                         double y = c.getCentre().y;
                         double radius = c.getRadius();
+
                         g2d.fillOval(x, y, radius, radius);
 
                 }
@@ -215,6 +339,153 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
                     g2d.setStroke(Color.BLACK); // reset squiggle stroke (to black)
 
+
                 }
+
+                // Draw all completed squares
+                g2d.setFill(Color.CHOCOLATE);
+                for (Square square : this.model.getSquares()) {
+                    double x = square.getOrigin().x;
+                    double y = square.getOrigin().y;
+                    double side = square.getWidth();
+
+                    double drawX = side >= 0 ? x : x + side;
+                    double drawY = side >= 0 ? y : y + side;
+                    double drawSide = Math.abs(side);
+
+                    // draw the square
+                    g2d.fillRect(drawX, drawY, drawSide, drawSide);
+                }
+
+                if (this.square != null) {
+                    double x = this.square.getOrigin().x;
+                    double y = this.square.getOrigin().y;
+                    double side = this.square.getWidth();
+
+                    // adjust origin for top/left drag
+                    double drawX = side >= 0 ? x : x + side;
+                    double drawY = side >= 0 ? y : y + side;
+                    double drawSide = Math.abs(side);
+
+                    // Semi-transparent fill for ghost square during drag
+                    g2d.setFill(Color.rgb(100, 100, 255, 0.3)); // blue with 30% opacity
+                    g2d.fillRect(drawX, drawY, drawSide, drawSide);
+
+                    // Diagonal dashed lines for guidance
+                    g2d.setStroke(Color.LIGHTGRAY);
+                    g2d.setLineDashes(5); // dashed line
+                    g2d.strokeLine(drawX, drawY, drawX + drawSide, drawY + drawSide);
+                    g2d.strokeLine(drawX, drawY + drawSide, drawX + drawSide, drawY);
+                    g2d.setLineDashes(null); // reset to solid lines
+
+                    // Display top-left coordinates + side
+                    g2d.setFill(Color.BLACK);
+                    g2d.fillText(
+                            String.format("(%.0f, %.0f) h & w: %.0f", drawX, drawY, drawSide),
+                            drawX + 5, drawY - 5
+                    );
+
+                    g2d.setStroke(Color.BLACK); // reset stroke
+                }
+
+
+
+        // Draw finalized ovals
+                g2d.setFill(Color.ORANGE);
+                for (Oval oval : model.getOvals()) {
+                    double x = oval.getOrigin().x;
+                    double y = oval.getOrigin().y;
+                    double width = oval.getWidth();
+                    double height = oval.getHeight();
+
+                    double drawX = width >= 0 ? x : x + width;
+                    double drawY = height >= 0 ? y : y + height;
+                    double drawWidth = Math.abs(width);
+                    double drawHeight = Math.abs(height);
+
+                    g2d.fillOval(drawX, drawY, drawWidth, drawHeight);
+                }
+
+                // Draw live oval (mid-drag)
+                Oval currentOval = model.getCurrentOval();
+                if (currentOval != null) {
+                    double x = currentOval.getOrigin().x;
+                    double y = currentOval.getOrigin().y;
+                    double width = currentOval.getWidth();
+                    double height = currentOval.getHeight();
+
+                    double drawX = width >= 0 ? x : x + width;
+                    double drawY = height >= 0 ? y : y + height;
+                    double drawWidth = Math.abs(width);
+                    double drawHeight = Math.abs(height);
+
+                    g2d.setFill(Color.rgb(255, 165, 0, 0.3)); // semi-transparent orange
+                    g2d.fillOval(drawX, drawY, drawWidth, drawHeight);
+
+                    g2d.setStroke(Color.DARKORANGE);
+                    g2d.strokeOval(drawX, drawY, drawWidth, drawHeight);
+                }
+
+        g2d.setFill(Color.PURPLE);
+        for (Triangle triangle : model.getTriangles()) {
+            double x = triangle.getOrigin().x;
+            double y = triangle.getOrigin().y;
+            double width = triangle.getWidth();
+            double height = triangle.getHeight();
+
+            double drawX = width >= 0 ? x : x + width;
+            double drawY = height >= 0 ? y : y + height;
+            double drawWidth = Math.abs(width);
+            double drawHeight = Math.abs(height);
+            double[] xPoints, yPoints;
+            if (width >= 0 && height >= 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width < 0 && height >= 0) {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width >= 0 && height < 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            } else {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            }
+
+            g2d.fillPolygon(xPoints, yPoints, 3);
+        }
+        Triangle currentTriangle = model.getCurrentTriangle();
+        if (currentTriangle != null) {
+            double x = currentTriangle.getOrigin().x;
+            double y = currentTriangle.getOrigin().y;
+            double width = currentTriangle.getWidth();
+            double height = currentTriangle.getHeight();
+
+            double drawX = width >= 0 ? x : x + width;
+            double drawY = height >= 0 ? y : y + height;
+            double drawWidth = Math.abs(width);
+            double drawHeight = Math.abs(height);
+
+            double[] xPoints, yPoints;
+            if (width >= 0 && height >= 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width < 0 && height >= 0) {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY + drawHeight, drawY, drawY + drawHeight};
+            } else if (width >= 0 && height < 0) {
+                xPoints = new double[]{drawX, drawX + drawWidth / 2, drawX + drawWidth};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            } else {
+                xPoints = new double[]{drawX + drawWidth, drawX + drawWidth / 2, drawX};
+                yPoints = new double[]{drawY, drawY + drawHeight, drawY};
+            }
+            g2d.setFill(Color.rgb(128, 0, 128, 0.3)); // purple with transparency
+            g2d.fillPolygon(xPoints, yPoints, 3);
+            g2d.setStroke(Color.DARKMAGENTA);
+            g2d.strokePolygon(xPoints, yPoints, 3);
+        }
+
+
     }
 }
