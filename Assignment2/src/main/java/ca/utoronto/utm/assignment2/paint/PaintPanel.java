@@ -244,6 +244,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         double y = c.getCentre().y;
                         double radius = c.getRadius();
 
+
                         g2d.fillOval(x - radius, y - radius, radius * 2, radius * 2);
 
                 }
@@ -257,6 +258,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     g2d.fillOval(x, y, diameter, diameter);
                     g2d.setStroke(Color.GRAY);
                     g2d.strokeOval(x, y, diameter, diameter);
+
 
                 }
 
