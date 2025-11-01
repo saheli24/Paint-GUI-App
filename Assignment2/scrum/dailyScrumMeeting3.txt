@@ -87,9 +87,9 @@ Oct 31,2025
 	Obstacles I face:
 
 Nov 1,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Communicated with teammates
+	What I will do today: Updated SprintBacklog3 with new bugs and user stories.
+	Obstacles I face: None
 
 Nov 2,2025
 	What I did yesterday:
