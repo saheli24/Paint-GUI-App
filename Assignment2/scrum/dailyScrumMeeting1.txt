@@ -72,29 +72,29 @@ Oct 28,2025
 	Obstacles I face:
 
 Oct 29,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Finished Sprint 2.
+	What I will do today: Will go over what is required for Sprint 3.
+	Obstacles I face: No difficulties.
 
 Oct 30,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: I went over the things that need to be completed for Sprint 3.
+	What I will do today: Contact with the Product owner to decide the next steps.
+	Obstacles I face: No difficulties.
 
 Oct 31,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Checked in with the Product Owner.
+	What I will do today: I will decide with my team as to what US each member will be doing.
+	Obstacles I face: No difficulties.
 
 Nov 1,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Went over the US's for Sprint 3.
+	What I will do today: Decide which US I will do for Sprint 3.
+	Obstacles I face: No difficulties.
 
 Nov 2,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Decided that I will be doing US3.006 and updated my team members about this decision.
+	What I will do today: Start looking over what things I will need to complete and the files I will need to modify to complete my selected US.
+	Obstacles I face: No difficulties.
 
 Nov 3,2025
 	What I did yesterday:
