@@ -260,10 +260,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         GraphicsContext g2d = this.getGraphicsContext2D();
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-        // Draw all completed squiggles
+        // Draw Lines
         for (Squiggle squiggle : model.getSquiggles()) {
             g2d.setStroke(squiggle.getColor());
-            g2d.setLineWidth(2); // optional, make it a bit thicker
+            g2d.setLineWidth(2); // slightly thicker
             ArrayList<Point> points = squiggle.getPoints();
             for (int i = 0; i < points.size() - 1; i++) {
                 Point p1 = points.get(i);
@@ -272,7 +272,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             }
         }
 
-        // Draw the squiggle currently being dragged
+        // Draw the squiggle currently being dragged (live feedback)
         Squiggle current_s = model.getCurrentSquiggle();
         if (current_s != null) {
             g2d.setStroke(current_s.getColor());
@@ -286,7 +286,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
 
         // Draw Circles
-        for (Circle c : model.getCircles()) {
+        ArrayList<Circle> circles = this.model.getCircles();
+        g2d.setFill(Color.GREEN); // default fill if needed
+        for(Circle c: circles){
             g2d.setFill(c.getColor());
             double x = c.getCentre().x;
             double y = c.getCentre().y;
@@ -294,13 +296,13 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             g2d.fillOval(x - radius, y - radius, radius * 2, radius * 2);
         }
 
-        Circle currentCircle = model.getCurrentCircle();
-        if (currentCircle != null) {
-            Color ghost = currentCircle.getColor().deriveColor(0, 1, 1, 0.3);
+        Circle current = model.getCurrentCircle();
+        if(current != null) {
+            Color ghost = current.getColor().deriveColor(0, 1, 1, 0.3);
             g2d.setFill(ghost);
-            double x = currentCircle.getCentre().x - currentCircle.getRadius();
-            double y = currentCircle.getCentre().y - currentCircle.getRadius();
-            double diameter = currentCircle.getRadius() * 2;
+            double x = current.getCentre().x - current.getRadius();
+            double y = current.getCentre().y - current.getRadius();
+            double diameter = current.getRadius() * 2;
             g2d.fillOval(x, y, diameter, diameter);
             g2d.setStroke(Color.GRAY);
             g2d.strokeOval(x, y, diameter, diameter);
@@ -308,6 +310,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
         // Draw all completed rectangles
         ArrayList<Rectangle> rectangles = this.model.getRectangles();
+
         for (Rectangle rectangle : rectangles) {
             g2d.setFill(rectangle.getColor());
             double x = rectangle.getOrigin().x;
@@ -333,7 +336,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             double drawY = height >= 0 ? y : y + height;
             double drawWidth = Math.abs(width);
             double drawHeight = Math.abs(height);
-
             g2d.fillRect(drawX, drawY, drawWidth, drawHeight);
 
             // Diagonal dashed lines for guidance
@@ -354,6 +356,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
 
         // Draw all completed squares
+        g2d.setFill(Color.CHOCOLATE);
         for (Square square : this.model.getSquares()) {
             g2d.setFill(square.getColor());
             double x = square.getOrigin().x;
@@ -376,7 +379,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             double drawX = side >= 0 ? x : x + side;
             double drawY = side >= 0 ? y : y + side;
             double drawSide = Math.abs(side);
-
             g2d.fillRect(drawX, drawY, drawSide, drawSide);
 
             // Diagonal dashed lines for guidance
@@ -397,6 +399,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
 
         // Draw all completed ovals
+        g2d.setFill(Color.ORANGE);
         for (Oval oval : model.getOvals()) {
             g2d.setFill(oval.getColor());
             double x = oval.getOrigin().x;
@@ -429,6 +432,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
 
         // Draw all completed triangles
+        g2d.setFill(Color.PURPLE);
         for (Triangle triangle : model.getTriangles()) {
             g2d.setFill(triangle.getColor());
             double x = triangle.getOrigin().x;
@@ -493,5 +497,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             g2d.strokePolygon(xPoints, yPoints, 3);
         }
     }
+
 }
 
