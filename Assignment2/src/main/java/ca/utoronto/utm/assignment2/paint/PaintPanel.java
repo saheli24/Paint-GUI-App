@@ -12,6 +12,7 @@ import java.util.Observer;
 // need to figure out how to display rectangle mid construction
 public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Observer {
     private String mode = "Circle";
+    private DrawingTool currentTool = new CircleTool();
     private PaintModel model;
 
     // @habiban4
@@ -37,7 +38,273 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
      */
     public void setMode(String mode){
         this.mode = mode;
+        // "Circle", "Rectangle", "Square", "Squiggle", "Polyline", "Oval", "Triangle"
+        switch(this.mode) {
+            case "Circle" :
+                currentTool = new CircleTool();
+                break;
+            case "Rectangle" :
+                currentTool = new RectangleTool();
+                break;
+            case "Square":
+                currentTool = new SquareTool();
+                break;
+            case "Squiggle":
+                currentTool = new SquiggleTool();
+                break;
+            case "Polyline":
+                currentTool = new PolylineTool();
+                break;
+            case "Oval":
+                currentTool = new OvalTool();
+                break;
+            case "Triangle":
+                currentTool = new TriangleTool();
+                break;
+        }
         System.out.println(this.mode);
+    }
+
+    public class CircleTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            System.out.println("Started Circle");
+            Point centre = new Point(e.getX(), e.getY());
+            Circle c = new Circle(centre, 0);
+            model.setCurrentCircle(c);
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            Circle c = model.getCurrentCircle();
+            if(c != null) {
+                Point centre = c.getCentre();
+                double dx = e.getX() - centre.x;
+                double dy = e.getY() - centre.y;
+                double radius = Math.sqrt(dx * dx + dy * dy);
+                c.setRadius(radius);
+                model.notifyObserversOfChange();
+            }
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            Circle c = model.getCurrentCircle();
+            if(c != null){
+                model.addCircle(c);
+                System.out.println("Added Circle");
+                model.clearCurrentCircle();
+            }
+        }
+    }
+
+    public class RectangleTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            System.out.println("Started Rectangle");
+
+            // creates a Point for the original (x, y) at the mouse location
+            Point origin = new Point(e.getX(), e.getY());
+
+            // creates a Rectangle with the origin, and a height and width of 0
+            rectangle = new Rectangle(origin, 0, 0);
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            if (rectangle != null) {
+                // gets current ending (x,y) mouse values
+                double currentX = e.getX();
+                double currentY = e.getY();
+
+                // creates a "start" with the original starting points
+                Point start = rectangle.getOrigin();
+
+                // calculates both width and height
+                double width = currentX - start.x;
+                double height = currentY - start.y;
+
+                // sets the new width and height to the current Rectangle
+                rectangle.setWidth(width);
+                rectangle.setHeight(height);
+
+                //notify observers of mid-construction shapes
+                model.notifyObserversOfChange();
+
+            }
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            if (rectangle != null) {
+                // add the Rectangle to the list of Rectangles in the Model
+                model.addRectangle(rectangle);
+                System.out.println("Added Rectangle");
+                rectangle = null;
+            }
+        }
+    }
+
+    public class SquareTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            System.out.println("Started Square");
+
+            // original press point
+            squareStart = new Point(e.getX(), e.getY());
+
+            // create a new square at that origin with size 0
+            square = new Square(new Point(squareStart.x, squareStart.y), 0);
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            if (square != null) {
+
+                double currentX = e.getX();
+                double currentY = e.getY();
+
+                // distance dragged
+                double dx = currentX - squareStart.x;
+                double dy = currentY - squareStart.y;
+
+                // side length = min of dx, dy
+                double side = Math.min(Math.abs(dx), Math.abs(dy));
+
+                // adjust origin for top/left drag
+                double newX = dx >= 0 ? squareStart.x : squareStart.x - side;
+                double newY = dy >= 0 ? squareStart.y : squareStart.y - side;
+
+                // update square
+                square.setOrigin(new Point(newX, newY));
+                square.setWidth(side);
+
+                // redraw
+                model.notifyObserversOfChange();
+            }
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            if (square != null) {
+                model.addSquare(square);
+                System.out.println("Added Square");
+                square = null;
+            }
+        }
+    }
+
+    public class SquiggleTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            model.startSquiggle();
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            model.addPointToCurrentSquiggle(new Point(e.getX(), e.getY()));
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            model.endSquiggle();
+        }
+    }
+
+    public class PolylineTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+
+        }
+    }
+
+    public class OvalTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            System.out.println("Started Oval");
+            Point origin = new Point(e.getX(), e.getY());
+            Oval oval = new Oval(origin, 0, 0);
+            model.setCurrentOval(oval);
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            Oval oval = model.getCurrentOval();
+            if (oval != null) {
+                // Calculate current width and height based on mouse position
+                double width = e.getX() - oval.getOrigin().x;
+                double height = e.getY() - oval.getOrigin().y;
+                oval.setWidth(width);
+                oval.setHeight(height);
+                model.notifyObserversOfChange();
+            }
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            Oval oval = model.getCurrentOval();
+            if (oval != null) {
+                model.addOval(oval);
+                model.clearCurrentOval();
+                System.out.println("Added Oval");
+            }
+        }
+    }
+
+    public class TriangleTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            System.out.println("Started Triangle");
+            Point start = new Point(e.getX(), e.getY());
+            Triangle t = new Triangle(start, 0, 0);
+            model.setCurrentTriangle(t);
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            Triangle t = model.getCurrentTriangle();
+            if (t != null) {
+                double startX = t.getOrigin().x;
+                double startY = t.getOrigin().y;
+                double currX = e.getX();
+                double currY = e.getY();
+                double width = currX - startX;
+                double height = currY - startY;
+
+                // Keep the width and height signed if you want to allow dragging in all directions
+                t.setWidth(width);
+                t.setHeight(height);
+
+                model.notifyObserversOfChange();
+            }
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            Triangle t = model.getCurrentTriangle();
+            if (t != null) {
+                model.addTriangle(t);
+                model.clearCurrentTriangle();
+                System.out.println("Added Triangle");
+            }
+        }
     }
 
     @Override
@@ -45,203 +312,18 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         // Later when we learn about inner classes...
         // https://docs.oracle.com/javafx/2/events/DraggablePanelsExample.java.htm
 
+
         EventType<MouseEvent> mouseEventType = (EventType<MouseEvent>) mouseEvent.getEventType();
 
-        // "Circle", "Rectangle", "Square", "Squiggle", "Polyline"
-        switch(this.mode) {
-            case "Circle":
                 if(mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
-                     System.out.println("Started Circle");
-                     Point centre = new Point(mouseEvent.getX(), mouseEvent.getY());
-                     Circle c = new Circle(centre, 0);
-                     model.setCurrentCircle(c);
+                     currentTool.pressed(mouseEvent);
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    Circle c = model.getCurrentCircle();
-                    if(c != null) {
-                        Point centre = c.getCentre();
-                        double dx = mouseEvent.getX() - centre.x;
-                        double dy = mouseEvent.getY() - centre.y;
-                        double radius = Math.sqrt(dx * dx + dy * dy);
-                        c.setRadius(radius);
-                        model.notifyObserversOfChange();
-                    }
-
-                } else if (mouseEventType.equals(MouseEvent.MOUSE_MOVED)) {
-
+                     currentTool.dragged(mouseEvent);
                 } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
-                    Circle c = model.getCurrentCircle();
-                    if(c != null){
-
-                        // Problematic notion of radius and centre!!
-
-                        model.addCircle(c);
-                        System.out.println("Added Circle");
-                        model.clearCurrentCircle();
-                        }
-                }
-                break;
-
-            case "Rectangle":
-                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
-                    System.out.println("Started Rectangle");
-
-                    // creates a Point for the original (x, y) at the mouse location
-                    Point origin = new Point(mouseEvent.getX(), mouseEvent.getY());
-
-                    // creates a Rectangle with the origin, and a height and width of 0
-                    this.rectangle = new Rectangle(origin, 0, 0);
+                    currentTool.released(mouseEvent);
                 }
 
-                else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    if (this.rectangle != null) {
-                        // gets current ending (x,y) mouse values
-                        double currentX = mouseEvent.getX();
-                        double currentY = mouseEvent.getY();
 
-                        // creates a "start" with the original starting points
-                        Point start = this.rectangle.getOrigin();
-
-                        // calculates both width and height
-                        double width = currentX - start.x;
-                        double height = currentY - start.y;
-
-                        // sets the new width and height to the current Rectangle
-                        this.rectangle.setWidth(width);
-                        this.rectangle.setHeight(height);
-
-                        //notify observers of mid-construction shapes
-                        this.model.notifyObserversOfChange();
-
-                    }
-                }
-                else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
-                    if (this.rectangle != null) {
-                        // add the Rectangle to the list of Rectangles in the Model
-                        this.model.addRectangle(this.rectangle);
-                        System.out.println("Added Rectangle");
-                        this.rectangle = null;
-                    }
-                }
-                break;
-            case "Square":
-                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
-                    System.out.println("Started Square");
-
-                    // original press point
-                    squareStart = new Point(mouseEvent.getX(), mouseEvent.getY());
-
-                    // create a new square at that origin with size 0
-                    this.square = new Square(new Point(squareStart.x, squareStart.y), 0);
-
-                } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    if (this.square != null) {
-
-                        double currentX = mouseEvent.getX();
-                        double currentY = mouseEvent.getY();
-
-                        // distance dragged
-                        double dx = currentX - squareStart.x;
-                        double dy = currentY - squareStart.y;
-
-                        // side length = min of dx, dy
-                        double side = Math.min(Math.abs(dx), Math.abs(dy));
-
-                        // adjust origin for top/left drag
-                        double newX = dx >= 0 ? squareStart.x : squareStart.x - side;
-                        double newY = dy >= 0 ? squareStart.y : squareStart.y - side;
-
-                        // update square
-                        this.square.setOrigin(new Point(newX, newY));
-                        this.square.setWidth(side);
-
-                        // redraw
-                        this.model.notifyObserversOfChange();
-                    }
-
-                } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
-                    if (this.square != null) {
-                        this.model.addSquare(this.square);
-                        System.out.println("Added Square");
-                        this.square = null;
-                    }
-                }
-                break;
-
-            case "Squiggle":
-                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
-                    model.startSquiggle();
-                } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    model.addPointToCurrentSquiggle(new Point(mouseEvent.getX(), mouseEvent.getY()));
-                } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
-                    model.endSquiggle();
-                }
-                break;
-            case "Polyline": break;
-
-            case "Oval":
-                if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                    System.out.println("Started Oval");
-                    Point origin = new Point(mouseEvent.getX(), mouseEvent.getY());
-                    Oval oval = new Oval(origin, 0, 0);
-                    model.setCurrentOval(oval);
-                } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                    Oval oval = model.getCurrentOval();
-                    if (oval != null) {
-                        // Calculate current width and height based on mouse position
-                        double width = mouseEvent.getX() - oval.getOrigin().x;
-                        double height = mouseEvent.getY() - oval.getOrigin().y;
-                        oval.setWidth(width);
-                        oval.setHeight(height);
-                        model.notifyObserversOfChange();
-                    }
-
-                } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
-                    Oval oval = model.getCurrentOval();
-                    if (oval != null) {
-                        model.addOval(oval);
-                        model.clearCurrentOval();
-                        System.out.println("Added Oval");
-                    }
-                }
-                break;
-
-            case "Triangle":
-                if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
-                    System.out.println("Started Triangle");
-                    Point start = new Point(mouseEvent.getX(), mouseEvent.getY());
-                    Triangle t = new Triangle(start, 0, 0);
-                    model.setCurrentTriangle(t);
-                }
-                else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-                    Triangle t = model.getCurrentTriangle();
-                    if (t != null) {
-                        double startX = t.getOrigin().x;
-                        double startY = t.getOrigin().y;
-                        double currX = mouseEvent.getX();
-                        double currY = mouseEvent.getY();
-                        double width = currX - startX;
-                        double height = currY - startY;
-
-                        // Keep the width and height signed if you want to allow dragging in all directions
-                        t.setWidth(width);
-                        t.setHeight(height);
-
-                        model.notifyObserversOfChange();
-                    }
-                }
-                else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
-                    Triangle t = model.getCurrentTriangle();
-                    if (t != null) {
-                        model.addTriangle(t);
-                        model.clearCurrentTriangle();
-                        System.out.println("Added Triangle");
-                    }
-                }
-                break;
-
-
-            default: break;
-        }
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -291,10 +373,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     g2d.fillOval(x, y, diameter, diameter);
                     g2d.setStroke(Color.GRAY);
                     g2d.strokeOval(x, y, diameter, diameter);
-
-
-
-
                 }
 
                 // list of all following rectangles  to be drawn
