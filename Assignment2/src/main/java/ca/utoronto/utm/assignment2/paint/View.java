@@ -18,6 +18,9 @@ public class View implements EventHandler<ActionEvent> {
         private ShapeChooserPanel shapeChooserPanel;
 
         public View(PaintModel model, Stage stage) {
+
+            ColorChooserPanel colorChooserPanel = new ColorChooserPanel(this);
+
             this.paintModel = model;
 
             this.paintPanel = new PaintPanel(this.paintModel);
@@ -27,6 +30,7 @@ public class View implements EventHandler<ActionEvent> {
             root.setTop(createMenuBar());
             root.setCenter(this.paintPanel);
             root.setLeft(this.shapeChooserPanel);
+            root.setRight(colorChooserPanel); // add color panel on the right side
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Paint");

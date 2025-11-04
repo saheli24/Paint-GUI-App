@@ -2,10 +2,33 @@ package ca.utoronto.utm.assignment2.paint;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import javafx.scene.paint.Color;
 
 public class PaintModel extends Observable {
         private ArrayList<Point> points=new ArrayList<Point>();
         private ArrayList<Circle> circles=new ArrayList<Circle>();
+
+    // @sahasah1
+    private Color currentColor = Color.BLACK; // default
+
+    /**
+     * Sets the current color of this object and notifies observers of the change.
+     *
+     * @param color the new Color to set as current
+     */
+    public void setCurrentColor(Color color) {
+        this.currentColor = color;
+        notifyObserversOfChange();
+    }
+
+    /**
+     * Returns the current color of this object.
+     *
+     * @return the current Color
+     */
+    public Color getCurrentColor() {
+        return this.currentColor;
+    }
 
     // @habiban4
     private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
