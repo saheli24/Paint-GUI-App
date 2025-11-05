@@ -4,7 +4,17 @@ import java.util.ArrayList;
 
 public class Squiggle {
     private ArrayList<Point> points = new ArrayList<>();
-    private Color color = Color.BLACK; // default
+    private Color color;
+
+    /**
+     * Constructs a Squiggle with a given color.
+     * If null, defaults to BLACK.
+     *
+     * @param color the color of the squiggle
+     */
+    public Squiggle(Color color) {
+        this.color = (color != null) ? color : Color.BLACK;
+    }
 
     public void addPoint(Point p) {
         points.add(p);

@@ -24,11 +24,11 @@ public class Rectangle {
      * @param height the height of the rectangle
      *
      */
-    public Rectangle(Point origin, double width, double height) {
+    public Rectangle(Point origin, double width, double height, Color color) {
         this.origin = origin;
         this.width = width;
         this.height = height;
-        this.color = Color.GREEN; // default
+        this.color = color; // default
     }
 
     /**

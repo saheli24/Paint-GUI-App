@@ -8,11 +8,11 @@ public class Triangle {
     private Color color; // new field
 
 
-    public Triangle(Point origin, double width, double height) {
+    public Triangle(Point origin, double width, double height,  Color color) {
         this.origin = origin;
         this.width = width;
         this.height = height;
-        this.color = Color.GREEN; // default
+        this.color = color; // default
 
     }
 

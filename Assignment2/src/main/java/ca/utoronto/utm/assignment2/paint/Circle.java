@@ -7,10 +7,10 @@ public class Circle {
         private double radius;
         private Color color; // new field
 
-        public Circle(Point centre, int radius){
+        public Circle(Point centre, int radius, Color color){
                 this.centre = centre;
                 this.radius = radius;
-                this.color = Color.GREEN; // default
+                this.color = color; // default
 
         }
 

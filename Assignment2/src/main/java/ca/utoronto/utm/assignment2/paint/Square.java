@@ -23,11 +23,11 @@ public class Square {
      * @param side the width and height of the square
      *
      */
-    public Square(Point origin, double side) {
+    public Square(Point origin, double side, Color color) {
         this.origin = origin;
         this.width = side;
         this.height = side;
-        this.color = Color.GREEN; // default
+        this.color = color; // default
 
     }
 
