@@ -102,9 +102,9 @@ Nov 3,2025
 	Obstacles I face: Implement the set up of the color selector
 
 Nov 4,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Implement US3.005
+	What I will do today: Implement US3.005 again but with new architecture
+	Obstacles I face: Trying to make squiggle work
 
 Nov 5,2025
 	What I did yesterday:
