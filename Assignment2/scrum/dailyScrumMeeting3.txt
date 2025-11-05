@@ -92,14 +92,14 @@ Nov 1,2025
 	Obstacles I face: None
 
 Nov 2,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Updated SpintBacklog3
+	What I will do today: Implement US3.005
+	Obstacles I face: Implementing squiggle
 
 Nov 3,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday:Implement US3.005
+	What I will do today: Continue implementing US3.005
+	Obstacles I face: Implement the set up of the color selector
 
 Nov 4,2025
 	What I did yesterday:
