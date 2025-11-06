@@ -6,12 +6,13 @@ public class Circle {
         private Point centre;
         private double radius;
         private Color color; // new field
+        private boolean filled;
 
-        public Circle(Point centre, int radius, Color color){
+        public Circle(Point centre, int radius, Color color, boolean filled){
                 this.centre = centre;
                 this.radius = radius;
                 this.color = color; // default
-
+                this.filled = filled;
         }
 
         /**
@@ -48,4 +49,5 @@ public class Circle {
                 this.radius = radius;
         }
 
+        public boolean isFilled() { return filled; }
 }
