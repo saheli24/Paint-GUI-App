@@ -1,5 +1,7 @@
 package ca.utoronto.utm.assignment2.paint;
 
+import javafx.scene.paint.Color;
+
 /**
  * Represents a geometric rectangle that can be drawn on the canvas.
  * Stores its origin point, width, and height.
@@ -11,6 +13,8 @@ public class Rectangle {
     private Point origin;
     private double width;
     private double height;
+    private Color color; // new field
+
 
     /**
      * Constructs a new Rectangle with the specified origin, width, and height.
@@ -20,10 +24,29 @@ public class Rectangle {
      * @param height the height of the rectangle
      *
      */
-    public Rectangle(Point origin, double width, double height) {
+    public Rectangle(Point origin, double width, double height, Color color) {
         this.origin = origin;
         this.width = width;
         this.height = height;
+        this.color = color; // default
+    }
+
+    /**
+     * Sets the color of this object.
+     *
+     * @param color the new Color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * Returns the current color of this object.
+     *
+     * @return the Color of this object
+     */
+    public Color getColor() {
+        return this.color;
     }
 
     /**

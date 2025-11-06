@@ -1,4 +1,5 @@
 package ca.utoronto.utm.assignment2.paint;
+import javafx.scene.paint.Color;
 
 /**
  * Represents a geometric square that can be drawn on the canvas.
@@ -12,6 +13,8 @@ public class Square {
     private Point origin;
     private double width;
     private double height;
+    private Color color; // new field
+
 
     /**
      * Constructs a new Square with the specified origin and side
@@ -20,10 +23,30 @@ public class Square {
      * @param side the width and height of the square
      *
      */
-    public Square(Point origin, double side) {
+    public Square(Point origin, double side, Color color) {
         this.origin = origin;
         this.width = side;
         this.height = side;
+        this.color = color; // default
+
+    }
+
+    /**
+     * Sets the color of this object.
+     *
+     * @param color the new Color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * Returns the current color of this object.
+     *
+     * @return the Color of this object
+     */
+    public Color getColor() {
+        return this.color;
     }
 
     /**

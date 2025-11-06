@@ -2,10 +2,43 @@ package ca.utoronto.utm.assignment2.paint;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import javafx.scene.paint.Color;
 
 public class PaintModel extends Observable {
         private ArrayList<Point> points=new ArrayList<Point>();
         private ArrayList<Circle> circles=new ArrayList<Circle>();
+
+    private Color currentColor = Color.BLACK; // the currently selected color
+
+
+    /**
+     * Constructs a Squiggle with a given color.
+     * If null, defaults to BLACK.
+     *
+     * @param color the color of the squiggle
+     */
+    public void Squiggle(Color color) {
+        this.currentColor = (color != null) ? color : Color.BLACK;
+    }
+
+    /**
+     * Sets the current color of this object and notifies observers of the change.
+     *
+     * @param color the new Color to set as current
+     */
+    public void setCurrentColor(Color color) {
+        this.currentColor = color;
+        notifyObserversOfChange(); // redraw view to use this color for new shapes
+    }
+
+    /**
+     * Returns the current color of this object.
+     *
+     * @return the current Color
+     */
+    public Color getCurrentColor() {
+        return this.currentColor;
+    }
 
     // @habiban4
     private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
@@ -32,7 +65,7 @@ public class PaintModel extends Observable {
         }
 
     public void startSquiggle() {
-        currentSquiggle = new Squiggle();
+        currentSquiggle = new Squiggle(this.currentColor); // use the selected color
     }
 
     public void addPointToCurrentSquiggle(Point p) {

@@ -71,7 +71,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         public void pressed(MouseEvent e) {
             System.out.println("Started Circle");
             Point centre = new Point(e.getX(), e.getY());
-            Circle c = new Circle(centre, 0);
+            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
+            Circle c = new Circle(centre, 0, shapeColor);
             model.setCurrentCircle(c);
         }
 
@@ -107,9 +108,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
             // creates a Point for the original (x, y) at the mouse location
             Point origin = new Point(e.getX(), e.getY());
+            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
 
             // creates a Rectangle with the origin, and a height and width of 0
-            rectangle = new Rectangle(origin, 0, 0);
+            rectangle = new Rectangle(origin, 0, 0, shapeColor);
         }
 
         @Override
@@ -156,8 +158,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             // original press point
             squareStart = new Point(e.getX(), e.getY());
 
+            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
+
             // create a new square at that origin with size 0
-            square = new Square(new Point(squareStart.x, squareStart.y), 0);
+            square = new Square(new Point(squareStart.x, squareStart.y), 0, shapeColor);
         }
 
         @Override
@@ -239,7 +243,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         public void pressed(MouseEvent e) {
             System.out.println("Started Oval");
             Point origin = new Point(e.getX(), e.getY());
-            Oval oval = new Oval(origin, 0, 0);
+            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
+            Oval oval = new Oval(origin, 0, 0, shapeColor);
             model.setCurrentOval(oval);
         }
 
@@ -273,7 +278,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         public void pressed(MouseEvent e) {
             System.out.println("Started Triangle");
             Point start = new Point(e.getX(), e.getY());
-            Triangle t = new Triangle(start, 0, 0);
+            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
+            Triangle t = new Triangle(start, 0, 0,  shapeColor);
             model.setCurrentTriangle(t);
         }
 
@@ -334,6 +340,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 g2d.setStroke(Color.BLACK);
                 for (Squiggle squiggle : model.getSquiggles()) {
                     ArrayList<Point> points = squiggle.getPoints();
+                    g2d.setStroke(squiggle.getColor()); // use squiggle's color
                     for (int i = 0; i < points.size() - 1; i++) {
                         Point p1 = points.get(i);
                         Point p2 = points.get(i + 1);
@@ -345,6 +352,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 Squiggle current_s = model.getCurrentSquiggle();
                 if (current_s != null) {
                     ArrayList<Point> pts = current_s.getPoints();
+                    Color c = current_s.getColor() != null ? current_s.getColor() : Color.BLACK;
+                    g2d.setStroke(new Color(c.getRed(), c.getGreen(), c.getBlue(), 1)); // semi-transparent
                     for (int i = 0; i < pts.size() - 1; i++) {
                         Point p1 = pts.get(i);
                         Point p2 = pts.get(i + 1);
@@ -355,8 +364,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 // Draw Circles
                 ArrayList<Circle> circles = this.model.getCircles();
 
-                g2d.setFill(Color.GREEN);
                 for(Circle c: this.model.getCircles()){
+                        g2d.setFill(c.getColor());
                         double x = c.getCentre().x;
                         double y = c.getCentre().y;
                         double radius = c.getRadius();
@@ -369,16 +378,21 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double x = current.getCentre().x - current.getRadius();
                     double y = current.getCentre().y - current.getRadius();
                     double diameter = current.getRadius() * 2;
-                    g2d.setFill(Color.rgb(0, 225, 0, 0.3));
+                    // Get the circle's color from the model
+                    Color c = current.getColor();
+
+                    // Fill with semi-transparent color for mid-drag
+                    g2d.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.3));
                     g2d.fillOval(x, y, diameter, diameter);
-                    g2d.setStroke(Color.GRAY);
+
+                    // Stroke with darker version of the color
+                    g2d.setStroke(c.darker());
                     g2d.strokeOval(x, y, diameter, diameter);
                 }
 
                 // list of all following rectangles  to be drawn
                 ArrayList<Rectangle> rectangles = this.model.getRectangles();
 
-                g2d.setFill(Color.HOTPINK);
                 for (Rectangle rectangle : this.model.getRectangles()) {
                     // gets original x, y, width, and height values from Rectangle
                     double x = rectangle.getOrigin().x;
@@ -392,8 +406,12 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double drawWidth = Math.abs(width);
                     double drawHeight = Math.abs(height);
 
-                    // draw the Rectangle
+                    Color c = rectangle.getColor(); // use rectangle's color
+                    g2d.setFill(c);
                     g2d.fillRect(drawX, drawY, drawWidth, drawHeight);
+
+                    g2d.setStroke(c.darker()); // optional: darker border
+                    g2d.strokeRect(drawX, drawY, drawWidth, drawHeight);
                 }
 
                 // Draw the rectangle currently being dragged (mid-construction feedback)
@@ -416,9 +434,12 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double drawWidth = Math.abs(width);
                     double drawHeight = Math.abs(height);
 
-                    // Semi-transparent fill for ghost rectangle during drag
-                    g2d.setFill(Color.rgb(100, 100, 255, 0.3)); // blue with 30% opacity
+                    Color c = this.rectangle.getColor(); // rectangle currently being dragged
+                    g2d.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.3)); // semi-transparent
                     g2d.fillRect(drawX, drawY, drawWidth, drawHeight);
+
+                    g2d.setStroke(c.darker()); // border for mid-drag
+                    g2d.strokeRect(drawX, drawY, drawWidth, drawHeight);
 
                     // Diagonal dashed lines for guidance
                     g2d.setStroke(Color.LIGHTGRAY);
@@ -439,8 +460,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
                 }
 
-                // Draw all completed squares
-                g2d.setFill(Color.CHOCOLATE);
+
                 for (Square square : this.model.getSquares()) {
                     double x = square.getOrigin().x;
                     double y = square.getOrigin().y;
@@ -450,7 +470,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double drawY = side >= 0 ? y : y + side;
                     double drawSide = Math.abs(side);
 
-                    // draw the square
+                    g2d.setFill(square.getColor()); // fill with square's color
                     g2d.fillRect(drawX, drawY, drawSide, drawSide);
                 }
 
@@ -464,8 +484,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double drawY = side >= 0 ? y : y + side;
                     double drawSide = Math.abs(side);
 
-                    // Semi-transparent fill for ghost square during drag
-                    g2d.setFill(Color.rgb(100, 100, 255, 0.3)); // blue with 30% opacity
+                    // Semi-transparent fill for live square
+                    Color c = this.square.getColor();
+                    g2d.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.3));
                     g2d.fillRect(drawX, drawY, drawSide, drawSide);
 
                     // Diagonal dashed lines for guidance
@@ -488,7 +509,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
 
         // Draw finalized ovals
-                g2d.setFill(Color.ORANGE);
                 for (Oval oval : model.getOvals()) {
                     double x = oval.getOrigin().x;
                     double y = oval.getOrigin().y;
@@ -499,8 +519,12 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double drawY = height >= 0 ? y : y + height;
                     double drawWidth = Math.abs(width);
                     double drawHeight = Math.abs(height);
-
+                    Color c = oval.getColor(); // use the oval's color
+                    g2d.setFill(c);
                     g2d.fillOval(drawX, drawY, drawWidth, drawHeight);
+
+                    g2d.setStroke(c.darker());
+                    g2d.strokeOval(drawX, drawY, drawWidth, drawHeight);
                 }
 
                 // Draw live oval (mid-drag)
@@ -516,12 +540,15 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                     double drawWidth = Math.abs(width);
                     double drawHeight = Math.abs(height);
 
-                    g2d.setFill(Color.rgb(255, 165, 0, 0.3)); // semi-transparent orange
+                    Color c = currentOval.getColor();
+                    g2d.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.3)); // semi-transparent
                     g2d.fillOval(drawX, drawY, drawWidth, drawHeight);
 
-                    g2d.setStroke(Color.DARKORANGE);
+                    g2d.setStroke(c.darker());
                     g2d.strokeOval(drawX, drawY, drawWidth, drawHeight);
                 }
+
+
                 g2d.setFill(Color.PURPLE);
                 for (Triangle triangle : model.getTriangles()) {
                     double x = triangle.getOrigin().x;
@@ -549,7 +576,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         yPoints = new double[]{drawY, drawY + drawHeight, drawY};
                     }
 
+                    g2d.setFill(triangle.getColor()); // normal fill
                     g2d.fillPolygon(xPoints, yPoints, 3);
+                    g2d.setStroke(triangle.getColor().darker()); // border
+                    g2d.strokePolygon(xPoints, yPoints, 3);
                 }
 
                 Triangle currentTriangle = model.getCurrentTriangle();
@@ -579,9 +609,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                         yPoints = new double[]{drawY, drawY + drawHeight, drawY};
                     }
 
-                    g2d.setFill(Color.rgb(128, 0, 128, 0.3)); // purple with transparency
+                    Color c = currentTriangle.getColor() != null ? currentTriangle.getColor() : Color.PURPLE;
+
+                    // Semi-transparent fill for live feedback
+                    g2d.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.3));
                     g2d.fillPolygon(xPoints, yPoints, 3);
-                    g2d.setStroke(Color.DARKMAGENTA);
+
+                    // Stroke for border
+                    g2d.setStroke(c.darker());
                     g2d.strokePolygon(xPoints, yPoints, 3);
                 }
     }
