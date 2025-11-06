@@ -163,10 +163,10 @@ ISSUE    : Code is not modular and is difficult to expand. Need a better
            'if' blocks in the PaintPanel mouse event code.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : BUG BUG?.004 : UTORID : NotStarted 
+TYPE     : BUG BUG3.004 : habiban4 : Started
 NAME     : Architecture behind Model is poor
 PRIORITY : 3
-ESTIMATE : (1 hour, 2 hours, 4 hours, 1 day, 2 days, 4 days)    ACTUAL :
+ESTIMATE : (3 hours)    ACTUAL :
 ISSUE    : Having a list of different types of drawable things in the
            model is cumbersome. In fact, it is currently incorrect, with
            Squiggle's not drawing properly. Need to re-architect the Model
