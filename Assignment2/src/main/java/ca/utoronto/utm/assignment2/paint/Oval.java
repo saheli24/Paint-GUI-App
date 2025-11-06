@@ -13,7 +13,7 @@ public class Oval {
     private double width;
     private double height;
     private Color color; // new field
-
+    private boolean filled;
     /**
      * Constructs a new Oval with the specified origin, width, and height.
      *
@@ -21,12 +21,12 @@ public class Oval {
      * @param width  the horizontal diameter of Oval
      * @param height the vertical diameter of Oval
      */
-    public Oval(Point origin, double width, double height, Color color) {
+    public Oval(Point origin, double width, double height, Color color, boolean filled) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
-
+        this.filled = filled;
     }
 
     /**
@@ -100,4 +100,6 @@ public class Oval {
     public void setHeight(double height) {
         this.height = height;
     }
+
+    public boolean isFilled() { return filled; }
 }

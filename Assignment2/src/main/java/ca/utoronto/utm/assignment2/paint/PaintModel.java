@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 public class PaintModel extends Observable {
         private ArrayList<Point> points=new ArrayList<Point>();
         private ArrayList<Circle> circles=new ArrayList<Circle>();
-
+        private boolean currentFillStyle = true;
     private Color currentColor = Color.BLACK; // the currently selected color
 
 
@@ -262,4 +262,18 @@ public class PaintModel extends Observable {
         public void clearCurrentTriangle() {
             this.currentTriangle = null;
         }
+
+        public void setCurrentFillStyle(String fillStyle) {
+            this.currentFillStyle = fillStyle.equalsIgnoreCase("Solid");
+            notifyObserversOfChange();
+        }
+
+        public boolean getCurrentFillStyle() {
+            return this.currentFillStyle;
+        }
+
+        public boolean ifFillStyle() {
+            return this.currentFillStyle;
+        }
 }
+
