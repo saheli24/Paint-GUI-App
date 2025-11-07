@@ -2,5 +2,5 @@ Pull Requests:
 
 BUG3.004 | author:habiban4 | puller:utorid | status:NotStarted
 US3.005  | author:sahsah1 | puller:pate2652 | status: Complete
-US3.006  | author:utorid1 | puller:utorid1 | status:NotStarted
+US3.006  | author:pate2652 | puller:sahasah1 | status:Complete
 US3.007  | author:utorid1 | puller:utorid1 | status:NotStarted

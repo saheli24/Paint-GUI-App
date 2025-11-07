@@ -13,6 +13,7 @@ public class Square {
     private Point origin;
     private double width;
     private double height;
+    private boolean filled;
     private Color color; // new field
 
 
@@ -23,12 +24,12 @@ public class Square {
      * @param side the width and height of the square
      *
      */
-    public Square(Point origin, double side, Color color) {
+    public Square(Point origin, double side, Color color, boolean filled) {
         this.origin = origin;
         this.width = side;
         this.height = side;
         this.color = color; // default
-
+        this.filled = filled;
     }
 
     /**
@@ -109,5 +110,7 @@ public class Square {
         this.height = height;
         this.width = height;
     }
+
+    public boolean isFilled() { return filled; }
 
 }

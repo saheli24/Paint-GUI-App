@@ -10,13 +10,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 public class View implements EventHandler<ActionEvent> {
 
         private PaintModel paintModel;
         private PaintPanel paintPanel;
         private ShapeChooserPanel shapeChooserPanel;
-
+        private FillStyleChooserPanel fillStylePanel;
         public View(PaintModel model, Stage stage) {
 
             ColorChooserPanel colorChooserPanel = new ColorChooserPanel(this);
@@ -25,11 +26,15 @@ public class View implements EventHandler<ActionEvent> {
 
             this.paintPanel = new PaintPanel(this.paintModel);
             this.shapeChooserPanel = new ShapeChooserPanel(this);
+            this.fillStylePanel = new FillStyleChooserPanel(this);
+            VBox leftPanel = new VBox();
+            leftPanel.setSpacing(10);
+            leftPanel.getChildren().addAll(this.shapeChooserPanel, this.fillStylePanel);
 
             BorderPane root = new BorderPane();
             root.setTop(createMenuBar());
             root.setCenter(this.paintPanel);
-            root.setLeft(this.shapeChooserPanel);
+            root.setLeft(leftPanel);
             root.setRight(colorChooserPanel); // add color panel on the right side
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -115,5 +120,13 @@ public class View implements EventHandler<ActionEvent> {
                         Platform.exit();
                 }
         }
+
+        public PaintModel getModel() {
+            return this.paintModel;
+        }
+        public void setFillStyle(String style) {
+            this.paintModel.setCurrentFillStyle(style);
+        }
+
 
 }

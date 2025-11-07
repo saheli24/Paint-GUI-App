@@ -6,14 +6,14 @@ public class Triangle {
     private double width;
     private double height;
     private Color color; // new field
+    private boolean filled;
 
-
-    public Triangle(Point origin, double width, double height,  Color color) {
+    public Triangle(Point origin, double width, double height,  Color color, boolean filled) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
-
+        this.filled = filled;
     }
 
     /**
@@ -57,5 +57,8 @@ public class Triangle {
     public void setHeight(double height) {
         this.height = height;
     }
+
+    public boolean isFilled() { return filled; }
+
 }
 

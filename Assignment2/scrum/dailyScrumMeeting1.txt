@@ -97,24 +97,24 @@ Nov 2,2025
 	Obstacles I face: No difficulties.
 
 Nov 3,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Went over the files I need to modify.
+	What I will do today: Brainstorm FillStyleChooserPanel class.
+	Obstacles I face: No difficulties.
 
 Nov 4,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Brainstorm FillStyleChooserPanel class.
+	What I will do today: Implement FillStyleChooserPanel.java.
+	Obstacles I face: No difficulties.
 
 Nov 5,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started implementing FillStyleChooserPanel.java.
+	What I will do today: Merge my team member's US.
+	Obstacles I face: No difficulties.
 
 Nov 6,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Merged my team member's US, and made sure ti works.
+	What I will do today: Finish FillStyleChooserPanel.java, update all shape classes, PaintModel.java, and update() method in PaintPanel to correctly implement US3.006.
+	Obstacles I face: When I changed the fill style, the shapes drawn earlier also changed their fill style. So, had to resolve that.
 
 Nov 7,2025
 	What I did yesterday:

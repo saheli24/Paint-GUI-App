@@ -14,7 +14,7 @@ public class Rectangle {
     private double width;
     private double height;
     private Color color; // new field
-
+    private boolean filled;
 
     /**
      * Constructs a new Rectangle with the specified origin, width, and height.
@@ -24,11 +24,12 @@ public class Rectangle {
      * @param height the height of the rectangle
      *
      */
-    public Rectangle(Point origin, double width, double height, Color color) {
+    public Rectangle(Point origin, double width, double height, Color color, boolean filled) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
+        this.filled = filled;
     }
 
     /**
@@ -116,4 +117,5 @@ public class Rectangle {
         this.height = height;
     }
 
+    public boolean isFilled() { return filled; }
 }
