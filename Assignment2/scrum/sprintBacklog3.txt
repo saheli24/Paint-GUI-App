@@ -9,7 +9,7 @@
 TYPE     : BUG BUG3.004 : habiban4 : Started
 NAME     : Architecture behind Model is poor
 PRIORITY : 3
-ESTIMATE : (3 hours)    ACTUAL :
+ESTIMATE : 3 hours   ACTUAL :
 ISSUE    : Having a list of different types of drawable things in the
            model is cumbersome. In fact, it is currently incorrect, with
            Squiggle's not drawing properly. Need to re-architect the Model
