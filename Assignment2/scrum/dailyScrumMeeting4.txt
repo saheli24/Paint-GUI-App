@@ -123,7 +123,7 @@ Nov 6,2025
 	What I will do today: Today I will work on and complete BUG3.004.
 	Obstacles I face: The largest issue that I have with BUG3.004 is how vague the description is. The only way that
 	I am able to fix this is by checking the structure of the code, and then trying to understand what design patterns
-	would work the best with how I should be changing the file. Moreover, I will have to try undering how the idea
+	would work the best with how I should be changing the file. Moreover, I will have to try understanding how the idea
 	of a pull request works, which I will be doing today.
 
 Nov 7,2025
