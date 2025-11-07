@@ -1,8 +1,9 @@
 package ca.utoronto.utm.assignment2.paint;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
-public class Squiggle {
+public class Squiggle implements Shape {
     private ArrayList<Point> points = new ArrayList<>();
     private Color color;
 
@@ -40,5 +41,27 @@ public class Squiggle {
      */
     public Color getColor() {
         return this.color;
+    }
+
+    /**
+     * Draws a squiggle.
+     *
+     * @param g
+     * @param opacity
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public void draw(GraphicsContext g, double opacity) {
+        if (points == null || points.size() < 2) return;
+
+        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        g.setStroke(drawColor);
+
+        for (int i = 0; i < points.size() - 1; i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get(i + 1);
+            g.strokeLine(p1.x, p1.y, p2.x, p2.y);
+        }
     }
 }
