@@ -48,7 +48,7 @@ public class LineThicknessChooserPanel extends HBox {
 
     public void setThickness(Button button) {
         this.thickness = Double.parseDouble(button.getText());
-        view.getPaintModel().setThickness(this.thickness);
+        view.getPaintModel().setCurrentThickness(this.thickness);
     }
 
     public double getThickness() {
