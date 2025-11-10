@@ -13,8 +13,8 @@ public class Square {
     private Point origin;
     private double width;
     private double height;
-    private boolean filled;
     private Color color; // new field
+    private double thickness;
 
 
     /**
@@ -24,12 +24,12 @@ public class Square {
      * @param side the width and height of the square
      *
      */
-    public Square(Point origin, double side, Color color, boolean filled) {
+    public Square(Point origin, double side, Color color, double thickness) {
         this.origin = origin;
         this.width = side;
         this.height = side;
         this.color = color; // default
-        this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -48,6 +48,26 @@ public class Square {
      */
     public Color getColor() {
         return this.color;
+    }
+
+    /**
+     * Sets the thickness of this object's outline.
+     *
+     * @param thickness the new outline thickness.
+     */
+
+    public void setThickness(double thickness) {
+        this.thickness = thickness;
+    }
+
+    /**
+     * Sets the thickness of this object's outline.
+     *
+     * @return the outline thickness.
+     */
+
+    public double getThickness() {
+        return this.thickness;
     }
 
     /**
@@ -110,7 +130,5 @@ public class Square {
         this.height = height;
         this.width = height;
     }
-
-    public boolean isFilled() { return filled; }
 
 }

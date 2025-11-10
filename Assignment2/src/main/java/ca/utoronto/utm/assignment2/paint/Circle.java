@@ -6,13 +6,14 @@ public class Circle {
         private Point centre;
         private double radius;
         private Color color; // new field
-        private boolean filled;
+        private double thickness; // new field
 
-        public Circle(Point centre, int radius, Color color, boolean filled){
+        public Circle(Point centre, int radius, Color color, double thickness){
                 this.centre = centre;
                 this.radius = radius;
                 this.color = color; // default
-                this.filled = filled;
+                this.thickness = thickness; // default value
+
         }
 
         /**
@@ -33,6 +34,26 @@ public class Circle {
             return this.color;
         }
 
+        /**
+        * Sets the thickness of this object's outline.
+        *
+        * @param thickness the new outline thickness.
+        */
+
+        public void setThickness(double thickness) {
+            this.thickness = thickness;
+        }
+
+        /**
+        * Sets the thickness of this object's outline.
+        *
+        * @return the outline thickness.
+        */
+
+        public double getThickness() {
+                return this.thickness;
+        }
+
         public Point getCentre() {
                 return centre;
         }
@@ -49,5 +70,4 @@ public class Circle {
                 this.radius = radius;
         }
 
-        public boolean isFilled() { return filled; }
 }

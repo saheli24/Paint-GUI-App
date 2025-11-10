@@ -13,7 +13,8 @@ public class Oval {
     private double width;
     private double height;
     private Color color; // new field
-    private boolean filled;
+    private double thickness;
+
     /**
      * Constructs a new Oval with the specified origin, width, and height.
      *
@@ -21,12 +22,13 @@ public class Oval {
      * @param width  the horizontal diameter of Oval
      * @param height the vertical diameter of Oval
      */
-    public Oval(Point origin, double width, double height, Color color, boolean filled) {
+    public Oval(Point origin, double width, double height, Color color, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
-        this.filled = filled;
+        this.thickness = thickness;
+
     }
 
     /**
@@ -45,6 +47,26 @@ public class Oval {
      */
     public Color getColor() {
         return this.color;
+    }
+
+    /**
+     * Sets the thickness of this object's outline.
+     *
+     * @param thickness the new outline thickness.
+     */
+
+    public void setThickness(double thickness) {
+        this.thickness = thickness;
+    }
+
+    /**
+     * Sets the thickness of this object's outline.
+     *
+     * @return the outline thickness.
+     */
+
+    public double getThickness() {
+        return this.thickness;
     }
 
     /**
@@ -100,6 +122,4 @@ public class Oval {
     public void setHeight(double height) {
         this.height = height;
     }
-
-    public boolean isFilled() { return filled; }
 }
