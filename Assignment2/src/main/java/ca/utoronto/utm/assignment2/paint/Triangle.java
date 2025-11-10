@@ -7,13 +7,15 @@ public class Triangle {
     private double height;
     private Color color; // new field
     private boolean filled;
+    private double thickness;
 
-    public Triangle(Point origin, double width, double height,  Color color, boolean filled) {
+    public Triangle(Point origin, double width, double height,  Color color, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
         this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -59,6 +61,10 @@ public class Triangle {
     }
 
     public boolean isFilled() { return filled; }
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
 }
 

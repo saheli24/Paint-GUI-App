@@ -9,6 +9,7 @@ public class PaintModel extends Observable {
         private ArrayList<Circle> circles=new ArrayList<Circle>();
         private boolean currentFillStyle = true;
     private Color currentColor = Color.BLACK; // the currently selected color
+    private double currentThickness = 1;
 
 
     /**
@@ -30,6 +31,13 @@ public class PaintModel extends Observable {
         this.currentColor = color;
         notifyObserversOfChange(); // redraw view to use this color for new shapes
     }
+
+    public void setCurrentThickness(double thickness) {
+        this.currentThickness = thickness;
+        notifyObserversOfChange();
+    }
+
+    public double getCurrentThickness() {return this.currentThickness;}
 
     /**
      * Returns the current color of this object.
@@ -65,7 +73,7 @@ public class PaintModel extends Observable {
         }
 
     public void startSquiggle() {
-        currentSquiggle = new Squiggle(this.currentColor); // use the selected color
+        currentSquiggle = new Squiggle(this.currentColor, this.currentThickness); // use the selected color
     }
 
     public void addPointToCurrentSquiggle(Point p) {
