@@ -87,9 +87,9 @@ Oct 31,2025
 	Obstacles I face:
 
 Nov 1,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started fixing PaintModel structure.
+	What I will do today: Implement Drawing Tool Class
+	Obstacles I face: How to make the DrawingTool interface smooth and easy?
 
 Nov 2,2025
 	What I did yesterday:
@@ -143,8 +143,8 @@ Nov 11,2025
 
 Nov 12,2025
 	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I will do today: Acutally get US3.007 to review
+	Obstacles I face: How to save to remote???
 
 Nov 13,2025
 	What I did yesterday:
