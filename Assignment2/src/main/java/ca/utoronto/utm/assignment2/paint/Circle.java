@@ -8,12 +8,14 @@ public class Circle implements Shape {
         private double radius;
         private Color color; // new field
         private boolean filled;
+        private double thickness;
 
-        public Circle(Point centre, int radius, Color color, boolean filled){
+        public Circle(Point centre, int radius, Color color, boolean filled, double thickness){
                 this.centre = centre;
                 this.radius = radius;
                 this.color = color; // default
                 this.filled = filled;
+                this.thickness = thickness;
         }
 
         /**
@@ -33,6 +35,10 @@ public class Circle implements Shape {
         public Color getColor() {
             return this.color;
         }
+
+        public double getThickness() {return this.thickness;}
+
+        public void setThickness(double thickness) {this.thickness = thickness;}
 
         public Point getCentre() {
                 return centre;

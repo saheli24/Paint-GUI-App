@@ -133,18 +133,6 @@ ISSUE    : Code is not modular and is difficult to expand. Need a better
            'if' blocks in the PaintPanel mouse event code.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : BUG BUG3.004 : habiban4 : Started
-NAME     : Architecture behind Model is poor
-PRIORITY : 3
-ESTIMATE : (3 hours)    ACTUAL :
-ISSUE    : Having a list of different types of drawable things in the
-           model is cumbersome. In fact, it is currently incorrect, with
-           Squiggle's not drawing properly. Need to re-architect the Model
-           so that it is more flexible, and easier to work with.
-           Consider some design patterns, or change of responsibility
-           here.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
 TYPE     : BUG BUG1.005 : UTORID : NotStarted 
 NAME     : Squiggle is broken
 PRIORITY : 1
@@ -219,6 +207,18 @@ I WANT   : To click and drag to define a square, where all sides are equal.
            The square should be drawn using the current color, line thickness,
            and fill style, similar to how rectangles and circles are drawn.
 SO THAT  : I can draw squares like in Microsoft Paint.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : BUG BUG3.004 : habiban4 : Completed
+NAME     : Architecture behind Model is poor
+PRIORITY : 3
+ESTIMATE : 3 hours    ACTUAL : 3 hours
+ISSUE    : Having a list of different types of drawable things in the
+           model is cumbersome. In fact, it is currently incorrect, with
+           Squiggle's not drawing properly. Need to re-architect the Model
+           so that it is more flexible, and easier to work with.
+           Consider some design patterns, or change of responsibility
+           here.
 --------------------------------------------------------------------------
 
 # OMITTED USER STORIES/BUGS BELOW   ###########################################

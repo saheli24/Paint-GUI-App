@@ -142,9 +142,9 @@ Nov 9,2025
 	Obstacles I face:
 
 Nov 10,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Nothing was done yesterday.
+	What I will do today: Check pullRequest.txt and take a look at US3.007
+	Obstacles I face: I need to look at the code, and make sure that the user story works correctly.
 
 Nov 11,2025
 	What I did yesterday:

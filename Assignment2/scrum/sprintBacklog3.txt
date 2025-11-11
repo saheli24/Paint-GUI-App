@@ -6,10 +6,10 @@
 # Sprint 3 Backlog UserStories go below
 
 --------------------------------------------------------------------------
-TYPE     : BUG BUG3.004 : habiban4 : Started
+TYPE     : BUG BUG3.004 : habiban4 : Completed
 NAME     : Architecture behind Model is poor
 PRIORITY : 3
-ESTIMATE : 3 hours   ACTUAL :
+ESTIMATE : 3 hours   ACTUAL : 3 hours
 ISSUE    : Having a list of different types of drawable things in the
            model is cumbersome. In fact, it is currently incorrect, with
            Squiggle's not drawing properly. Need to re-architect the Model
@@ -64,10 +64,10 @@ I WANT   : To be able to select the current drawing style (filled or outline), t
 SO THAT  :
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US3.007 : UTORID : irfanda3 Started
+TYPE     : USER STORY US3.007 : UTORID : irfanda3 Complete
 NAME     : Line thickness selector
 PRIORITY : 3
-ESTIMATE : (2 days)    ACTUAL :
+ESTIMATE : (2 days)    ACTUAL : 2 days
 AS A     : user
 I WANT   : To be able to select the current line thickness, to be applied
            to subsequent shapes. Example:
