@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Squiggle {
     private ArrayList<Point> points = new ArrayList<>();
     private Color color;
+    private double thickness;
 
     /**
      * Constructs a Squiggle with a given color.
@@ -12,8 +13,9 @@ public class Squiggle {
      *
      * @param color the color of the squiggle
      */
-    public Squiggle(Color color) {
+    public Squiggle(Color color, double thickness) {
         this.color = (color != null) ? color : Color.BLACK;
+        this.thickness = thickness;
     }
 
     public void addPoint(Point p) {
@@ -41,4 +43,8 @@ public class Squiggle {
     public Color getColor() {
         return this.color;
     }
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 }

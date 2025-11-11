@@ -15,6 +15,7 @@ public class Square {
     private double height;
     private boolean filled;
     private Color color; // new field
+    private double thickness;
 
 
     /**
@@ -24,12 +25,13 @@ public class Square {
      * @param side the width and height of the square
      *
      */
-    public Square(Point origin, double side, Color color, boolean filled) {
+    public Square(Point origin, double side, Color color, boolean filled, double thickness) {
         this.origin = origin;
         this.width = side;
         this.height = side;
         this.color = color; // default
         this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -112,5 +114,9 @@ public class Square {
     }
 
     public boolean isFilled() { return filled; }
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
 }

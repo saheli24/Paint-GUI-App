@@ -15,6 +15,7 @@ public class Rectangle {
     private double height;
     private Color color; // new field
     private boolean filled;
+    private double thickness;
 
     /**
      * Constructs a new Rectangle with the specified origin, width, and height.
@@ -24,12 +25,13 @@ public class Rectangle {
      * @param height the height of the rectangle
      *
      */
-    public Rectangle(Point origin, double width, double height, Color color, boolean filled) {
+    public Rectangle(Point origin, double width, double height, Color color, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
         this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -118,4 +120,8 @@ public class Rectangle {
     }
 
     public boolean isFilled() { return filled; }
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 }
