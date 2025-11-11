@@ -1,5 +1,4 @@
 package ca.utoronto.utm.assignment2.paint;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -16,6 +15,7 @@ public class Rectangle implements Shape {
     private double height;
     private Color color; // new field
     private boolean filled;
+    private double thickness;
 
     /**
      * Constructs a new Rectangle with the specified origin, width, and height.
@@ -25,12 +25,13 @@ public class Rectangle implements Shape {
      * @param height the height of the rectangle
      *
      */
-    public Rectangle(Point origin, double width, double height, Color color, boolean filled) {
+    public Rectangle(Point origin, double width, double height, Color color, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
         this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -120,6 +121,10 @@ public class Rectangle implements Shape {
 
     public boolean isFilled() { return filled; }
 
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
+
     /**
      * Draws a rectangle.
      *
@@ -143,12 +148,14 @@ public class Rectangle implements Shape {
         double drawHeight = Math.abs(height);
 
         Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
 
         if (filled) {
             g.setFill(drawColor);
             g.fillRect(drawX, drawY, drawWidth, drawHeight);
         } else {
             g.setStroke(drawColor);
+            g.setLineWidth(t);
             g.strokeRect(drawX, drawY, drawWidth, drawHeight);
         }
     }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Squiggle implements Shape {
     private ArrayList<Point> points = new ArrayList<>();
     private Color color;
+    private double thickness;
 
     /**
      * Constructs a Squiggle with a given color.
@@ -13,8 +14,9 @@ public class Squiggle implements Shape {
      *
      * @param color the color of the squiggle
      */
-    public Squiggle(Color color) {
+    public Squiggle(Color color, double thickness) {
         this.color = (color != null) ? color : Color.BLACK;
+        this.thickness = thickness;
     }
 
     public void addPoint(Point p) {
@@ -39,9 +41,11 @@ public class Squiggle implements Shape {
      *
      * @return the Color of this object
      */
-    public Color getColor() {
-        return this.color;
-    }
+    public Color getColor() {return this.color;}
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
     /**
      * Draws a squiggle.
@@ -56,6 +60,8 @@ public class Squiggle implements Shape {
         if (points == null || points.size() < 2) return;
 
         Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
+        g.setLineWidth(t);
         g.setStroke(drawColor);
 
         for (int i = 0; i < points.size() - 1; i++) {

@@ -8,13 +8,15 @@ public class Triangle implements Shape {
     private double height;
     private Color color; // new field
     private boolean filled;
+    private double thickness;
 
-    public Triangle(Point origin, double width, double height,  Color color, boolean filled) {
+    public Triangle(Point origin, double width, double height,  Color color, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
         this.color = color; // default
         this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -59,7 +61,11 @@ public class Triangle implements Shape {
         this.height = height;
     }
 
-    public boolean isFilled() { return filled; }
+    public boolean isFilled() {return filled;}
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
     /**
      * Draws a triangle.
@@ -94,12 +100,14 @@ public class Triangle implements Shape {
         }
 
         Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
 
         if (filled) {
             g.setFill(drawColor);
             g.fillPolygon(xPoints, yPoints, 3);
         } else {
             g.setStroke(drawColor);
+            g.setLineWidth(t);
             g.strokePolygon(xPoints, yPoints, 3);
         }
     }

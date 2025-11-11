@@ -30,7 +30,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     /**
      *  Controller
      */
-    public void setMode(String mode){
+    public void setMode(String mode) {
         this.mode = mode;
         // "Circle", "Rectangle", "Square", "Squiggle", "Polyline", "Oval", "Triangle"
         switch(this.mode) {
@@ -64,18 +64,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Circle");
-
             Point centre = new Point(e.getX(), e.getY());
             Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-
-            Circle c = new Circle(centre, 0, shapeColor, model.ifFillStyle());
-
+            Circle c = new Circle(centre, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
             model.setCurrentShape(c);
         }
 
         @Override
         public void dragged(MouseEvent e) {
-
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Circle) {
                 Circle c = (Circle) current.get(0);
@@ -108,7 +104,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             Point origin = new Point(e.getX(), e.getY());
             Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
 
-            Rectangle r = new Rectangle(origin, 0, 0, shapeColor, model.ifFillStyle());
+            Rectangle r = new Rectangle(origin, 0, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
 
             model.setCurrentShape(r);
         }
@@ -150,7 +146,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             Point start = new Point(e.getX(), e.getY());
             Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
 
-            Square s = new Square(start, 0, shapeColor, model.ifFillStyle());
+            Square s = new Square(start, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
             s.setStartPoint(start);
 
             model.setCurrentShape(s);
@@ -194,7 +190,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     public class SquiggleTool implements DrawingTool {
         @Override
         public void pressed(MouseEvent e) {
-            Squiggle s = new Squiggle(model.getCurrentColor());
+            Squiggle s = new Squiggle(model.getCurrentColor(), model.getCurrentThickness());
             s.addPoint(new Point(e.getX(), e.getY()));
             model.setCurrentShape(s);
         }
@@ -237,12 +233,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Oval");
-
             Point origin = new Point(e.getX(), e.getY());
             Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-
-            Oval oval = new Oval(origin, 0, 0, shapeColor, model.ifFillStyle());
-
+            Oval oval = new Oval(origin, 0, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
             model.setCurrentShape(oval);
         }
 
@@ -251,13 +244,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Oval) {
                 Oval oval = (Oval) current.get(0);
-
                 double width = e.getX() - oval.getOrigin().x;
                 double height = e.getY() - oval.getOrigin().y;
-
                 oval.setWidth(width);
                 oval.setHeight(height);
-
                 model.notifyObserversOfChange();
             }
         }
@@ -267,7 +257,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Oval) {
                 Oval oval = (Oval) current.get(0);
-
                 model.addShape(oval);
                 model.clearCurrentShape();
                 System.out.println("Added Oval");
@@ -280,12 +269,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Triangle");
-
             Point start = new Point(e.getX(), e.getY());
             Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-
-            Triangle t = new Triangle(start, 0, 0, shapeColor, model.ifFillStyle());
-
+            Triangle t = new Triangle(start, 0, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
             model.setCurrentShape(t);
         }
 
@@ -294,18 +280,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Triangle) {
                 Triangle t = (Triangle) current.get(0);
-
                 double startX = t.getOrigin().x;
                 double startY = t.getOrigin().y;
                 double currX = e.getX();
                 double currY = e.getY();
-
                 double width = currX - startX;
                 double height = currY - startY;
-
                 t.setWidth(width);
                 t.setHeight(height);
-
                 model.notifyObserversOfChange();
             }
         }
@@ -315,7 +297,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Triangle) {
                 Triangle t = (Triangle) current.get(0);
-
                 model.addShape(t);
                 model.clearCurrentShape();
                 System.out.println("Added Triangle");

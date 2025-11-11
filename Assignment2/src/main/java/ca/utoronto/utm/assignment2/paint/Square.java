@@ -16,6 +16,7 @@ public class Square implements Shape {
     private double height;
     private boolean filled;
     private Color color; // new field
+    private double thickness;
     private Point startPoint;
 
 
@@ -25,12 +26,13 @@ public class Square implements Shape {
      * @param origin starting (x, y) of the square
      * @param side   the width and height of the square
      */
-    public Square(Point origin, double side, Color color, boolean filled) {
+    public Square(Point origin, double side, Color color, boolean filled, double thickness) {
         this.origin = origin;
         this.width = side;
         this.height = side;
         this.color = color; // default
         this.filled = filled;
+        this.thickness = thickness;
     }
 
     /**
@@ -55,6 +57,7 @@ public class Square implements Shape {
      * Returns the origin of the following square
      *
      * @return origin
+     *
      */
     public Point getOrigin() {
         return origin;
@@ -83,6 +86,7 @@ public class Square implements Shape {
      * also set to be the same value as the width.
      *
      * @param width the new width value of the Square in pixels
+     *
      */
     public void setWidth(double width) {
         this.width = width;
@@ -93,6 +97,7 @@ public class Square implements Shape {
      * Returns the height of the following square
      *
      * @return width
+     *
      */
     public double getHeight() {
         return this.height;
@@ -109,15 +114,15 @@ public class Square implements Shape {
         this.width = height;
     }
 
-    public boolean isFilled() {
-        return filled;
-    }
-
     public Point getStartPoint() {return this.startPoint;}
 
-    public void setStartPoint(Point p) {
-        this.startPoint = p;
-    }
+    public void setStartPoint(Point p) {this.startPoint = p;}
+
+    public boolean isFilled() { return filled; }
+
+    public double getThickness() {return this.thickness;}
+
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
     /**
      * Draws a Square.
@@ -138,12 +143,14 @@ public class Square implements Shape {
         double drawSide = Math.abs(side);
 
         Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
 
         if (filled) {
             g.setFill(drawColor);
             g.fillRect(drawX, drawY, drawSide, drawSide);
         } else {
             g.setStroke(drawColor);
+            g.setLineWidth(t);
             g.strokeRect(drawX, drawY, drawSide, drawSide);
         }
     }
