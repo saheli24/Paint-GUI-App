@@ -118,8 +118,8 @@ Nov 6,2025
 
 Nov 7,2025
 	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I will do today: Do US3.007 and implement line thickness
+	Obstacles I face: How to use java graphics to alter line thickness...
 
 Nov 8,2025
 	What I did yesterday:
@@ -132,19 +132,19 @@ Nov 9,2025
 	Obstacles I face:
 
 Nov 10,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Turns out I somehow didn't get US3.007 onto remote for whatever reason
+	What I will do today: Acutally get US3.007 to review
+	Obstacles I face: How to save to remote???
 
 Nov 11,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Got US3.007 approved.
+	What I will do today: Approve BUG3.004.
+	Obstacles I face: Make sure the code is good...
 
 Nov 12,2025
 	What I did yesterday:
-	What I will do today: Acutally get US3.007 to review
-	Obstacles I face: How to save to remote???
+	What I will do today:
+	Obstacles I face:
 
 Nov 13,2025
 	What I did yesterday:
