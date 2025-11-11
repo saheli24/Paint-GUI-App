@@ -1,5 +1,6 @@
 package ca.utoronto.utm.assignment2.paint;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
@@ -8,7 +9,7 @@ import javafx.scene.paint.Color;
  *
  * @author Saheli | sahasah1
  */
-public class Oval {
+public class Oval implements Shape {
     private Point origin;  // top-left corner
     private double width;
     private double height;
@@ -108,4 +109,32 @@ public class Oval {
     public double getThickness() {return this.thickness;}
 
     public void setThickness(double thickness) {this.thickness = thickness;}
+
+    /**
+     * Draws the Oval.
+     *
+     * @param g
+     * @param opacity
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public void draw(GraphicsContext g, double opacity) {
+        double drawX = width >= 0 ? origin.x : origin.x + width;
+        double drawY = height >= 0 ? origin.y : origin.y + height;
+        double drawWidth = Math.abs(width);
+        double drawHeight = Math.abs(height);
+
+        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
+
+        if (filled) {
+            g.setFill(drawColor);
+            g.fillOval(drawX, drawY, drawWidth, drawHeight);
+        } else {
+            g.setStroke(drawColor);
+            g.setLineWidth(t);
+            g.strokeOval(drawX, drawY, drawWidth, drawHeight);
+        }
+    }
 }

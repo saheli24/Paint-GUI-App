@@ -1,18 +1,19 @@
 package ca.utoronto.utm.assignment2.paint;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 
-public class Circle {
+public class Circle implements Shape {
         private Point centre;
         private double radius;
-        private Color color; // new field
+        private Color color;
         private boolean filled;
         private double thickness;
 
-        public Circle(Point centre, int radius, Color color, boolean filled, double thickness){
+        public Circle(Point centre, int radius, Color color, boolean filled, double thickness) {
                 this.centre = centre;
                 this.radius = radius;
-                this.color = color; // default
+                this.color = color;
                 this.filled = filled;
                 this.thickness = thickness;
         }
@@ -56,4 +57,32 @@ public class Circle {
         }
 
         public boolean isFilled() { return filled; }
+
+        /**
+         * Draws the circle.
+         *
+         * @param g
+         * @param opacity
+         *
+         * @author Anas H. | habiban4
+         *
+         */
+        @Override
+        public void draw(GraphicsContext g, double opacity) {
+                double x = getCentre().x - getRadius();
+                double y = getCentre().y - getRadius();
+                double diameter = getRadius() * 2;
+
+                Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+                double t = this.getThickness();
+
+                if (filled) {
+                        g.setFill(drawColor);
+                        g.fillOval(x, y, diameter, diameter);
+                } else {
+                        g.setStroke(drawColor);
+                        g.setLineWidth(t);
+                        g.strokeOval(x, y, diameter, diameter);
+                }
+        }
 }

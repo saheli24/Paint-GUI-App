@@ -1,15 +1,15 @@
 package ca.utoronto.utm.assignment2.paint;
-
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
  * Represents a geometric rectangle that can be drawn on the canvas.
- * Stores its origin point, width, and height.
+ * Stores its origin point, width, and height. A rectangle is a Shape.
  *
  * @author Anas H. | habiban4
  *
  */
-public class Rectangle {
+public class Rectangle implements Shape {
     private Point origin;
     private double width;
     private double height;
@@ -124,4 +124,39 @@ public class Rectangle {
     public double getThickness() {return this.thickness;}
 
     public void setThickness(double thickness) {this.thickness = thickness;}
+
+    /**
+     * Draws a rectangle.
+     *
+     * @param g
+     * @param opacity
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public void draw(GraphicsContext g, double opacity) {
+        // gets original x, y, width, and height values from Rectangle
+        double x = getOrigin().x;
+        double y = getOrigin().y;
+        double width = getWidth();
+        double height = getHeight();
+
+        // Calculates values based on where the ending point is
+        double drawX = width >= 0 ? x : x + width;
+        double drawY = height >= 0 ? y : y + height;
+        double drawWidth = Math.abs(width);
+        double drawHeight = Math.abs(height);
+
+        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
+
+        if (filled) {
+            g.setFill(drawColor);
+            g.fillRect(drawX, drawY, drawWidth, drawHeight);
+        } else {
+            g.setStroke(drawColor);
+            g.setLineWidth(t);
+            g.strokeRect(drawX, drawY, drawWidth, drawHeight);
+        }
+    }
 }

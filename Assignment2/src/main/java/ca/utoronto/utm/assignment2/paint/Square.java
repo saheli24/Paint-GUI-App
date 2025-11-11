@@ -1,29 +1,30 @@
 package ca.utoronto.utm.assignment2.paint;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
  * Represents a geometric square that can be drawn on the canvas.
  * Stores its origin point, width, and height. Both the width and
- * height are the same values.
+ * height are the same values. A square is a shape.
  *
  * @author Anas H. | habiban4
  *
  */
-public class Square {
+public class Square implements Shape {
     private Point origin;
     private double width;
     private double height;
     private boolean filled;
     private Color color; // new field
     private double thickness;
+    private Point startPoint;
 
 
     /**
      * Constructs a new Square with the specified origin and side
      *
      * @param origin starting (x, y) of the square
-     * @param side the width and height of the square
-     *
+     * @param side   the width and height of the square
      */
     public Square(Point origin, double side, Color color, boolean filled, double thickness) {
         this.origin = origin;
@@ -113,10 +114,44 @@ public class Square {
         this.width = height;
     }
 
+    public Point getStartPoint() {return this.startPoint;}
+
+    public void setStartPoint(Point p) {this.startPoint = p;}
+
     public boolean isFilled() { return filled; }
 
     public double getThickness() {return this.thickness;}
 
     public void setThickness(double thickness) {this.thickness = thickness;}
 
+    /**
+     * Draws a Square.
+     *
+     * @param g
+     * @param opacity
+     *
+     * @author Anas H. | habiban4
+     *
+     */
+    public void draw(GraphicsContext g, double opacity) {
+        double x = getOrigin().x;
+        double y = getOrigin().y;
+        double side = getWidth(); // assume width = height for square
+
+        double drawX = side >= 0 ? x : x + side;
+        double drawY = side >= 0 ? y : y + side;
+        double drawSide = Math.abs(side);
+
+        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        double t = this.getThickness();
+
+        if (filled) {
+            g.setFill(drawColor);
+            g.fillRect(drawX, drawY, drawSide, drawSide);
+        } else {
+            g.setStroke(drawColor);
+            g.setLineWidth(t);
+            g.strokeRect(drawX, drawY, drawSide, drawSide);
+        }
+    }
 }

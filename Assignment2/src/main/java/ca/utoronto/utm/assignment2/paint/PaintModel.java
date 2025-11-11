@@ -4,32 +4,51 @@ import java.util.ArrayList;
 import java.util.Observable;
 import javafx.scene.paint.Color;
 
+/**
+ * Presents the paint board. The paint board has
+ * shapes of all different colors and sizes
+ * on it.
+ *
+ * The code uses the Observable/Observer pattern, so the view and controller update automatically when the
+ * model changes. Shapes are stored as individual objects, which makes it easier to modify them separately.
+ * The controller and view are connected through the model, so changes in the UI are reflected on the canvas.
+ *
+ * @author Anas H. | habiban4
+ *
+ */
 public class PaintModel extends Observable {
-        private ArrayList<Point> points=new ArrayList<Point>();
-        private ArrayList<Circle> circles=new ArrayList<Circle>();
-        private boolean currentFillStyle = true;
+    private final ArrayList<Shape> shapes = new ArrayList<>();
+    private final ArrayList<Shape> currentShapes = new ArrayList<>();
+    private boolean currentFillStyle = true;
     private Color currentColor = Color.BLACK; // the currently selected color
-    private double currentThickness = 1;
+    private double currentThickness = 1; // the currently selected thickness
 
-
-    /**
-     * Constructs a Squiggle with a given color.
-     * If null, defaults to BLACK.
-     *
-     * @param color the color of the squiggle
-     */
-    public void Squiggle(Color color) {
-        this.currentColor = (color != null) ? color : Color.BLACK;
+    public void addShape(Shape s) {
+        if (s != null) {
+            shapes.add(s);
+            notifyObserversOfChange();
+        }
     }
 
-    /**
-     * Sets the current color of this object and notifies observers of the change.
-     *
-     * @param color the new Color to set as current
-     */
-    public void setCurrentColor(Color color) {
-        this.currentColor = color;
-        notifyObserversOfChange(); // redraw view to use this color for new shapes
+    public ArrayList<Shape> getShapes() {
+        return shapes;
+    }
+
+    public ArrayList<Shape> getCurrentShapes() {
+        return currentShapes;
+    }
+
+    public void setCurrentShape(Shape s) {
+        currentShapes.clear();
+        if (s != null) {
+            currentShapes.add(s);
+            notifyObserversOfChange();
+        }
+    }
+
+    public void clearCurrentShape() {
+        currentShapes.clear();
+        notifyObserversOfChange();
     }
 
     public void setCurrentThickness(double thickness) {
@@ -37,251 +56,40 @@ public class PaintModel extends Observable {
         notifyObserversOfChange();
     }
 
-    public double getCurrentThickness() {return this.currentThickness;}
+    public double getCurrentThickness() { return this.currentThickness; }
 
-    /**
-     * Returns the current color of this object.
-     *
-     * @return the current Color
-     */
+
+    public ArrayList<Shape> getAllShapes() {
+        ArrayList<Shape> all = new ArrayList<>();
+        all.addAll(shapes);
+        all.addAll(currentShapes);
+        return all;
+    }
+
     public Color getCurrentColor() {
-        return this.currentColor;
+        return currentColor;
     }
 
-    // @habiban4
-    private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
-    private ArrayList<Square> squares = new ArrayList<Square>();
-
-        private ArrayList<Squiggle> squiggles = new ArrayList<>();
-
-        private ArrayList<Oval> ovals = new ArrayList<>();
-        private Oval currentOval;
-
-        private Circle currentCircle;
-        private Squiggle currentSquiggle;
-
-        private ArrayList<Triangle> triangles = new ArrayList<>();
-        private Triangle currentTriangle;
-        public void addPoint(Point p){
-                this.points.add(p);
-                this.setChanged();
-                this.notifyObservers();
-        }
-
-        public ArrayList<Point> getPoints(){
-                return points;
-        }
-
-    public void startSquiggle() {
-        currentSquiggle = new Squiggle(this.currentColor, this.currentThickness); // use the selected color
-    }
-
-    public void addPointToCurrentSquiggle(Point p) {
-        if (currentSquiggle != null) {
-            currentSquiggle.addPoint(p);
-            notifyObserversOfChange();
-        }
-    }
-
-    public void endSquiggle() {
-        if (currentSquiggle != null) {
-            squiggles.add(currentSquiggle);
-            currentSquiggle = null;
-            setChanged();
-            notifyObservers();
-        }
-    }
-
-    public ArrayList<Squiggle> getSquiggles() {
-        return squiggles;
-    }
-        public void addCircle(Circle c){
-                this.circles.add(c);
-                this.setChanged();
-                this.notifyObservers();
-        }
-
-        public ArrayList<Circle> getCircles(){
-                return circles;
-        }
-
-    public Squiggle getCurrentSquiggle() {
-            return currentSquiggle;
-    }
-
-    public Circle getCurrentCircle() {
-        return currentCircle;
-    }
-
-    public void setCurrentCircle(Circle c) {
-        this.currentCircle = c;
+    public void setCurrentFillStyle(String fillStyle) {
+        this.currentFillStyle = fillStyle.equalsIgnoreCase("Solid");
         notifyObserversOfChange();
     }
 
-    public void clearCurrentCircle() {
-        currentCircle = null;
+    public boolean getCurrentFillStyle() {
+        return this.currentFillStyle;
+    }
+
+    public void setCurrentColor(Color c) {
+        currentColor = (c != null) ? c : Color.BLACK;
         notifyObserversOfChange();
-
     }
 
-    /**
-     * Adds a Rectangle to the list of displayed Rectangles.
-     * Then notifies the rest of the observers.
-     *
-     * @param rectangle the rectangle to be added to the list of models
-     *
-     * @author Anas H. | habiban4
-     *
-     */
-    public void addRectangle(Rectangle rectangle) {
-            rectangles.add(rectangle);
-            this.setChanged();
-            this.notifyObservers();
+    public boolean ifFillStyle() {
+        return currentFillStyle;
     }
 
-    /**
-     * Returns the ArrayList of Rectangles
-     *
-     * @return rectangles
-     *
-     * @author Anas H. | habiban4
-     *
-     */
-    public ArrayList<Rectangle> getRectangles(){
-            return rectangles;
+    public void notifyObserversOfChange() {
+        setChanged();
+        notifyObservers();
     }
-
-    /**
-     * Adds a square to the list of displayed squares.
-     * Then notifies the rest of the observers.
-     *
-     * @param square the square to be added to the list of models
-     *
-     * @author Anas H. | habiban4
-     *
-     */
-    public void addSquare(Square square) {
-        squares.add(square);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    /**
-     * Returns the ArrayList of squares
-     *
-     * @return squares
-     *
-     * @author Anas H. | habiban4
-     *
-     */
-    public ArrayList<Square> getSquares() {
-        return squares;
-    }
-
-
-        /**
-         * Adds a completed Oval to the list of drawn ovals and updates observers.
-         *
-         * @param oval the Oval object to be added to the canvas
-         */
-        public void addOval(Oval oval) {
-            ovals.add(oval);
-            notifyObserversOfChange();
-        }
-
-        /**
-         * Sets the currently active Oval that is being drawn and updates observers.
-         *
-         * @param oval the Oval currently being drawn
-         */
-        public void setCurrentOval(Oval oval) {
-            this.currentOval = oval;
-            notifyObserversOfChange();
-        }
-
-        /**
-         * Returns the Oval currently being drawn on the canvas.
-         *
-         * @return the current Oval, or null if none is being drawn
-         */
-        public Oval getCurrentOval() {
-            return currentOval;
-        }
-
-        /**
-         * Clears the reference to the current Oval when drawing is complete.
-         */
-        public void clearCurrentOval() {
-            this.currentOval = null;
-        }
-
-        /**
-         * Returns a list of all completed Ovals drawn on the canvas.
-         *
-         * @return a list of all Ovals
-         */
-        public ArrayList<Oval> getOvals() {
-            return ovals;
-        }
-
-        /**
-         * Notifies all observers that the model has changed for mid-construction shapes,
-         * like when dragging a rectangle or circle, without adding it permanently to the model.
-         * Allowing the view to provide live feedback (ghost shapes) as the user drags.
-         */
-        public void notifyObserversOfChange() {
-            this.setChanged();
-            this.notifyObservers();
-        }
-        /**
-         * Adds a completed Triangle to the model and notifies observers.
-         * @param triangle the triangle to be added
-         */
-        public void addTriangle(Triangle triangle) {
-            triangles.add(triangle);
-            notifyObserversOfChange();
-        }
-
-        /**
-         * Returns the list of all completed triangles.
-         */
-        public ArrayList<Triangle> getTriangles() {
-            return triangles;
-        }
-
-        /**
-         * Sets the current triangle being drawn.
-         */
-        public void setCurrentTriangle(Triangle triangle) {
-            this.currentTriangle = triangle;
-            notifyObserversOfChange();
-        }
-
-        /**
-         * Returns the current triangle being drawn.
-         */
-        public Triangle getCurrentTriangle() {
-            return currentTriangle;
-        }
-
-        /**
-         * Clears the current triangle reference.
-         */
-        public void clearCurrentTriangle() {
-            this.currentTriangle = null;
-        }
-
-        public void setCurrentFillStyle(String fillStyle) {
-            this.currentFillStyle = fillStyle.equalsIgnoreCase("Solid");
-            notifyObserversOfChange();
-        }
-
-        public boolean getCurrentFillStyle() {
-            return this.currentFillStyle;
-        }
-
-        public boolean ifFillStyle() {
-            return this.currentFillStyle;
-        }
 }
-
