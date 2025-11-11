@@ -43,6 +43,7 @@ DESIGN PATTERNS USED
 	Composite:
 	Factory:
 	Builder:
+
 	Observer/Observable:
 	... (any others you find useful) ...
 

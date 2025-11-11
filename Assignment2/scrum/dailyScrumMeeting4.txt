@@ -147,9 +147,12 @@ Nov 10,2025
 	Obstacles I face: I need to look at the code, and make sure that the user story works correctly.
 
 Nov 11,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Yesterday I took a look at US3.007, and merged the code.
+	What I will do today: Today, I need to refactor my code in my branch of BUG3.004. This is because we had two
+	tasks in sprint 3 that changed the general structure of the code. Thus, I had to change it up to make sure that
+	the code could still work just fine when merged with the master branch.
+	Obstacles I face: My biggest obstacle is the idea of looking at both of the branches, and trying to understand
+	what to change, and what to keep the same.
 
 Nov 12,2025
 	What I did yesterday:
