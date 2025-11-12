@@ -16,10 +16,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     private PaintModel model;
 
     public PaintPanel(PaintModel model) {
-        super(300, 300);
+        super(500, 500);
         this.model=model;
         this.model.addObserver(this);
-
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, this);
         this.addEventHandler(MouseEvent.MOUSE_RELEASED, this);
         this.addEventHandler(MouseEvent.MOUSE_MOVED, this);
@@ -31,6 +30,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
      *  Controller
      */
     public void setMode(String mode) {
+        // Discard any unfinished polyline if switching tools
+        if (currentTool instanceof PolylineTool polyTool) {
+            polyTool.discardGhost();
+        }
         this.mode = mode;
         // "Circle", "Rectangle", "Square", "Squiggle", "Polyline", "Oval", "Triangle"
         switch(this.mode) {
@@ -88,6 +91,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Circle) {
                 Circle c = (Circle) current.get(0);
+                model.saveState();
                 model.addShape(c);
                 model.clearCurrentShape();
                 System.out.println("Added Circle");
@@ -131,6 +135,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Rectangle) {
                 Rectangle r = (Rectangle) current.get(0);
+                model.saveState();
                 model.addShape(r);
                 model.clearCurrentShape();
                 System.out.println("Added Rectangle");
@@ -180,6 +185,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Square) {
                 Square s = (Square) current.get(0);
+                model.saveState();
                 model.addShape(s);
                 model.clearCurrentShape();
                 System.out.println("Added Square");
@@ -205,28 +211,137 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         @Override
         public void released(MouseEvent e) {
             Shape s = model.getCurrentShapes().get(0);
+            model.saveState();
             model.addShape(s);
             model.clearCurrentShape();
         }
     }
 
+
     public class PolylineTool implements DrawingTool {
+        private Polyline currentPolyline;
+        private Point lastPoint;   // last placed vertex
+        private Point mousePoint;  // current mouse position for live feedback
 
         @Override
         public void pressed(MouseEvent e) {
+            Point p = new Point(e.getX(), e.getY());
 
+            if (currentPolyline == null) {
+                // Start a new polyline
+                currentPolyline = new Polyline(model.getCurrentColor(), model.getCurrentThickness());
+                currentPolyline.addPoint(p);
+
+                // Add to model once for undo/redo
+                model.addShape(currentPolyline);
+                model.saveState();
+            } else {
+                // Update color/thickness for live feedback
+                currentPolyline.setColor(model.getCurrentColor());
+                currentPolyline.setThickness(model.getCurrentThickness());
+
+                // Add vertex to existing polyline
+                currentPolyline.addPoint(p);
+            }
+
+            lastPoint = p;
+            mousePoint = new Point(p.x, p.y);
+            model.setCurrentShape(currentPolyline);
+            model.notifyObserversOfChange();
         }
 
         @Override
         public void dragged(MouseEvent e) {
-
+            if (currentPolyline != null) {
+                mousePoint = new Point(e.getX(), e.getY());
+                model.notifyObserversOfChange();
+            }
         }
 
         @Override
         public void released(MouseEvent e) {
+            // No-op: vertices are added on click
+        }
 
+        public void updateMousePoint(MouseEvent e) {
+            if (currentPolyline != null) {
+                mousePoint = new Point(e.getX(), e.getY());
+                model.notifyObserversOfChange();
+            }
+        }
+
+        public void discardGhost() {
+            if (currentPolyline != null) {
+                mousePoint = null;
+                model.clearCurrentShape();
+                model.notifyObserversOfChange();
+            }
+        }
+
+
+        public void drawFeedback(GraphicsContext g) {
+            if (currentPolyline == null || lastPoint == null || mousePoint == null) return;
+
+            // Update color/thickness for ghost
+            currentPolyline.setColor(model.getCurrentColor());
+            currentPolyline.setThickness(model.getCurrentThickness());
+
+            ArrayList<Point> points = currentPolyline.getPoints();
+
+            // Draw finalized segments
+            if (points.size() > 1) {
+                g.setStroke(currentPolyline.getColor());
+                g.setLineWidth(currentPolyline.getThickness());
+                for (int i = 0; i < points.size() - 1; i++) {
+                    Point p1 = points.get(i);
+                    Point p2 = points.get(i + 1);
+                    g.strokeLine(p1.x, p1.y, p2.x, p2.y);
+                }
+            }
+
+            // Draw ghost segment
+            Color c = currentPolyline.getColor();
+            g.setStroke(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.4));
+            g.setLineWidth(currentPolyline.getThickness());
+            g.strokeLine(lastPoint.x, lastPoint.y, mousePoint.x, mousePoint.y);
+        }
+
+        /**
+         * Restore live feedback after undo or redo
+         */
+        public void resumeAfterUndoRedo() {
+            ArrayList<Shape> shapes = model.getShapes();
+            if (!shapes.isEmpty() && shapes.get(shapes.size() - 1) instanceof Polyline lastPolyline) {
+                currentPolyline = lastPolyline;
+
+                ArrayList<Point> pts = lastPolyline.getPoints();
+                if (!pts.isEmpty()) {
+                    lastPoint = pts.get(pts.size() - 1);
+                    mousePoint = new Point(lastPoint.x, lastPoint.y);
+                }
+
+                model.setCurrentShape(currentPolyline);
+            } else {
+                currentPolyline = null;
+                lastPoint = null;
+                mousePoint = null;
+                model.clearCurrentShape();
+            }
+            model.notifyObserversOfChange();
         }
     }
+
+
+    public void undoRedoUpdatePolyline() {
+        if (currentTool instanceof PolylineTool polyTool) {
+            polyTool.resumeAfterUndoRedo();
+        }
+    }
+
+
+
+
+
 
     public class OvalTool implements DrawingTool {
 
@@ -257,8 +372,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Oval) {
                 Oval oval = (Oval) current.get(0);
+                model.saveState();
                 model.addShape(oval);
                 model.clearCurrentShape();
+                 
                 System.out.println("Added Oval");
             }
         }
@@ -297,8 +414,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             ArrayList<Shape> current = model.getCurrentShapes();
             if (!current.isEmpty() && current.get(0) instanceof Triangle) {
                 Triangle t = (Triangle) current.get(0);
+                model.saveState();
                 model.addShape(t);
                 model.clearCurrentShape();
+                 
                 System.out.println("Added Triangle");
             }
         }
@@ -311,10 +430,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         // https://docs.oracle.com/javafx/2/events/DraggablePanelsExample.java.htm
         EventType<MouseEvent> mouseEventType = (EventType<MouseEvent>) mouseEvent.getEventType();
 
-        if(mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
-             currentTool.pressed(mouseEvent);
+        if (mouseEventType.equals(MouseEvent.MOUSE_PRESSED)) {
+            currentTool.pressed(mouseEvent);
         } else if (mouseEventType.equals(MouseEvent.MOUSE_DRAGGED)) {
-             currentTool.dragged(mouseEvent);
+            currentTool.dragged(mouseEvent);
+        } else if (mouseEventType.equals(MouseEvent.MOUSE_MOVED)) {
+            if (currentTool instanceof PolylineTool polyTool) {
+                polyTool.updateMousePoint(mouseEvent);
+            }
         } else if (mouseEventType.equals(MouseEvent.MOUSE_RELEASED)) {
             currentTool.released(mouseEvent);
         }
@@ -331,6 +454,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
         for (Shape s : model.getCurrentShapes()) {
             s.draw(g2d, 0.3);
+        }
+        if (currentTool instanceof PolylineTool polyTool) {
+            polyTool.drawFeedback(g2d);
         }
     }
 }

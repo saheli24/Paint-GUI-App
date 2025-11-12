@@ -1,0 +1,75 @@
+EXTRA FEATURES
+--------------------------------------------------------------------------------
+FeatureName: Select x Cut x Copy x Paste x Drag
+
+Description: Allows users to select shapes with a visible highlight, move them around, cut or copy them, and paste duplicates. Improves interactivity and editing capabilities.
+
+Reference: US2.008, US2.009, US2.010, BUG2.003, BUG3.004
+--------------------------------------------------------------------------------
+FeatureName: Text Tool
+
+Description:
+Adds a drawing mode that lets users insert text on the canvas with adjustable font size and style. Supports multiple text objects.
+
+Reference:
+US1.002, US1.003, BUG2.003
+--------------------------------------------------------------------------------
+FeatureName: Group / Ungroup
+
+Description:
+Enables multiple shapes to be grouped together and manipulated as a single object, with the ability to ungroup for individual adjustments.
+
+Reference:
+US2.008, US2.009, BUG2.003, BUG3.004
+--------------------------------------------------------------------------------
+FeatureName: Polyline
+
+Description:
+Allows users to draw connected line segments by clicking repeatedly, forming continuous shapes or outlines.
+
+Reference:
+US2.010, BUG1.005, BUG3.004
+--------------------------------------------------------------------------------
+FeatureName: Undo / Redo
+
+Description:
+Implements reversible actions so users can undo or redo recent edits or drawings, improving usability and workflow reliability.
+
+Reference:
+US1.002, US1.003, BUG3.004
+--------------------------------------------------------------------------------
+FeatureName: Shape Resize
+
+Description:
+Lets users click and drag handles on existing shapes to dynamically resize them while preserving proportions or shape constraints.
+
+Reference:
+US2.008, US2.009, US2.010, BUG3.004
+--------------------------------------------------------------------------------
+FeatureName: Rotate
+
+Description:
+Adds rotation functionality for drawn shapes, enabling flexible design, orientation adjustments, and improved creative control.
+
+Reference:
+US2.008, US2.009, US2.010, BUG3.004
+--------------------------------------------------------------------------------
+FeatureName: Modify Color × Fill × Stroke × Thickness
+
+Description:
+Allows users to change a shape’s properties (fill color, border color, outline thickness) after it has been drawn, enhancing customization and flexibility.
+
+Reference:
+US1.002, US1.003, US2.008, US2.009, US2.010, BUG3.004
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+FeatureName: Color Picker
+
+Description:
+Allows the user to pick a custom color from a color wheel and/or enter a hex code.
+Once selected, the user can draw or modify shapes using the chosen color.
+
+Reference:
+US3.005
+--------------------------------------------------------------------------------
+

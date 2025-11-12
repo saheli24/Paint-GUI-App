@@ -5,3 +5,84 @@
 # Sprint 4 Nov 7-Nov 13, 2025
 # Sprint 4 Backlog UserStories go below
 
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.001 : UTORID : ?
+NAME     : Select × Cut × Copy × Paste × Drag
+PRIORITY : 3
+ESTIMATE : ?    ACTUAL : ?
+AS A     : user
+I WANT   : To be able to select shapes with a visible highlight, move them around, cut or copy them, and paste duplicates.
+SO THAT  : I can manipulate shapes easily and edit my canvas efficiently.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.002 : UTORID : ?
+NAME     : Text Tool
+PRIORITY : 3
+ESTIMATE : ?    ACTUAL : ?
+AS A     : user
+I WANT   : To be able to insert text on the canvas, with adjustable font size and style, supporting multiple text objects.
+SO THAT  : I can add labels, notes, or other textual elements to my drawings.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.003 : UTORID : ?
+NAME     : Group / Ungroup
+PRIORITY : 3
+ESTIMATE : ?    ACTUAL : ?
+AS A     : user
+I WANT   : To be able to group multiple shapes together to manipulate them as a single object and ungroup them for individual adjustments.
+SO THAT  : I can manage complex drawings more easily.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.004 : sahasah1 : Complete
+NAME     : Polyline
+PRIORITY : 3
+ESTIMATE :(1 day)     ACTUAL : (2 days)
+AS A     : user
+I WANT   : To draw connected line segments by clicking repeatedly to form continuous shapes or outlines.
+SO THAT  : I can create complex line-based designs or sketches.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.005 : sahasah1 : Complete
+NAME     : Undo / Redo
+PRIORITY : 3
+ESTIMATE : (1 day)    ACTUAL : (2 days)
+AS A     : user
+I WANT   : To be able to undo or redo my recent edits or drawings.
+SO THAT  : I can correct mistakes or revert changes without losing my work.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.006 : UTORID : ?
+NAME     : Shape Resize
+PRIORITY : 3
+ESTIMATE : ?    ACTUAL : ?
+AS A     : user
+I WANT   : To resize existing shapes by clicking and dragging handles, while preserving proportions or constraints.
+SO THAT  : I can adjust shapes without redrawing them.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.007 : UTORID : ?
+NAME     : Rotate
+PRIORITY : 3
+ESTIMATE : ?    ACTUAL : ?
+AS A     : user
+I WANT   : To rotate drawn shapes to any desired angle.
+SO THAT  : I can orient shapes creatively for more dynamic designs.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.008 : UTORID : ?
+NAME     : Modify Color × Fill × Stroke × Thickness
+PRIORITY : 3
+ESTIMATE : ?    ACTUAL : ?
+AS A     : user
+I WANT   : To modify a shape’s fill color, border color, and outline thickness after it has been drawn.
+SO THAT  : I can customize shapes without redrawing them.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.009 : sahasah1 : Complete
+NAME     : Color Picker
+PRIORITY : 3
+ESTIMATE : (1 day)    ACTUAL : (2 days)
+AS A     : user
+I WANT   : To pick a custom color from a color wheel and/or enter a hex code.
+SO THAT  : I can draw or modify shapes using the selected color.
+--------------------------------------------------------------------------

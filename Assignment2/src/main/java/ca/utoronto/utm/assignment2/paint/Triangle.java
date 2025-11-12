@@ -111,5 +111,18 @@ public class Triangle implements Shape {
             g.strokePolygon(xPoints, yPoints, 3);
         }
     }
+
+    @Override
+    public Shape clone() {
+        return new Triangle(
+                new Point(origin.x, origin.y), // deep copy of the origin point
+                width,
+                height,
+                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                filled,
+                thickness
+        );
+    }
+
 }
 

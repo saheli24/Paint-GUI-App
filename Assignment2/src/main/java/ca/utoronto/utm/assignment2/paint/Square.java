@@ -154,4 +154,16 @@ public class Square implements Shape {
             g.strokeRect(drawX, drawY, drawSide, drawSide);
         }
     }
+
+    @Override
+    public Shape clone() {
+        return new Square(
+                new Point(origin.x, origin.y), // deep copy of origin
+                width,                         // width = height
+                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), // new Color
+                filled,
+                thickness
+        );
+    }
+
 }

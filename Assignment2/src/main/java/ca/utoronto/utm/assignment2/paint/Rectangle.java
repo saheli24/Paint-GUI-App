@@ -159,4 +159,16 @@ public class Rectangle implements Shape {
             g.strokeRect(drawX, drawY, drawWidth, drawHeight);
         }
     }
+    @Override
+    public Shape clone() {
+        return new Rectangle(
+                new Point(origin.x, origin.y), // deep copy of Point
+                width,
+                height,
+                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), // new Color
+                filled,
+                thickness
+        );
+    }
+
 }

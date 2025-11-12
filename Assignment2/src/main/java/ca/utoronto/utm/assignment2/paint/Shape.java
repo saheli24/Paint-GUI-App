@@ -21,4 +21,5 @@ public interface Shape {
      *
      */
     void draw(GraphicsContext g, double opacity);
+    Shape clone();
 }

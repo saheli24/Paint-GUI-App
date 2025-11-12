@@ -132,19 +132,22 @@ Nov 9,2025
 	Obstacles I face:
 
 Nov 10,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started thinking about the Extrafeatures and discussing them with team mates
+    What I will do today: Implment extraFeatures.txt and update the productBacklog.txt and Sprint4 Backlog.txt
+    Obstacles I face: None
+
 
 Nov 11,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started thinking about the Extrafeatures and discussing them with team mates
+    What I will do today: Implment extraFeatures.txt and update the productBacklog.txt and Sprint4 Backlog.txt
+    Obstacles I face: None
+
+
 
 Nov 12,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Implment extraFeature.txt
+	What I will do today: In the same branch do Polyline and Undo/Redo
+	Obstacles I face: connect Polyline to Undo/Redo
 
 Nov 13,2025
 	What I did yesterday:

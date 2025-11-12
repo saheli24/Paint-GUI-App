@@ -1,68 +1,40 @@
 package ca.utoronto.utm.assignment2.paint;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
-public class Squiggle implements Shape {
+public class Polyline implements Shape {
     private ArrayList<Point> points = new ArrayList<>();
     private Color color;
     private double thickness;
 
-    /**
-     * Constructs a Squiggle with a given color.
-     * If null, defaults to BLACK.
-     *
-     * @param color the color of the squiggle
-     */
-    public Squiggle(Color color, double thickness) {
+    public Polyline(Color color, double thickness) {
         this.color = (color != null) ? color : Color.BLACK;
         this.thickness = thickness;
     }
 
     public void addPoint(Point p) {
-        points.add(p);
+        if (p != null) points.add(p);
     }
 
     public ArrayList<Point> getPoints() {
         return points;
     }
 
-    /**
-     * Sets the color of this object.
-     *
-     * @param color the new Color to set
-     */
-    public void setColor(Color color) {
-        this.color = color;
-    }
+    public Color getColor() { return this.color; }
+    public void setColor(Color color) { this.color = color; }
 
-    /**
-     * Returns the current color of this object.
-     *
-     * @return the Color of this object
-     */
-    public Color getColor() {return this.color;}
+    public double getThickness() { return this.thickness; }
+    public void setThickness(double thickness) { this.thickness = thickness; }
 
-    public double getThickness() {return this.thickness;}
-
-    public void setThickness(double thickness) {this.thickness = thickness;}
-
-    /**
-     * Draws a squiggle.
-     *
-     * @param g
-     * @param opacity
-     *
-     * @author Anas H. | habiban4
-     *
-     */
+    @Override
     public void draw(GraphicsContext g, double opacity) {
         if (points == null || points.size() < 2) return;
 
         Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
-        double t = this.getThickness();
-        g.setLineWidth(t);
         g.setStroke(drawColor);
+        g.setLineWidth(this.thickness);
 
         for (int i = 0; i < points.size() - 1; i++) {
             Point p1 = points.get(i);
@@ -73,14 +45,13 @@ public class Squiggle implements Shape {
 
     @Override
     public Shape clone() {
-        Squiggle copy = new Squiggle(
+        Polyline copy = new Polyline(
                 Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
                 thickness
         );
         for (Point p : points) {
-            copy.addPoint(new Point(p.x, p.y)); // deep copy each point
+            copy.addPoint(new Point(p.x, p.y)); // deep copy points
         }
         return copy;
     }
-
 }

@@ -85,4 +85,15 @@ public class Circle implements Shape {
                         g.strokeOval(x, y, diameter, diameter);
                 }
         }
+
+        @Override
+        public Shape clone() {
+            return new Circle(
+                    new Point(centre.x, centre.y), // make a new Point copy
+                    (int) radius,
+                    Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                    filled,
+                    thickness
+            );
+        }
 }

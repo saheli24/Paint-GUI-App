@@ -22,6 +22,49 @@ public class PaintModel extends Observable {
     private boolean currentFillStyle = true;
     private Color currentColor = Color.BLACK; // the currently selected color
     private double currentThickness = 1; // the currently selected thickness
+    private final ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
+    private final ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
+
+    public void saveState() {
+        // Make a deep copy of the shapes list
+        ArrayList<Shape> copy = new ArrayList<>();
+        for (Shape s : shapes) {
+            copy.add(s.clone()); // You need a clone method in Shape
+        }
+        undoStack.add(copy);
+        redoStack.clear(); // Clear redo after a new action
+    }
+
+    // Undo last action
+    public void undo() {
+        if (!undoStack.isEmpty()) {
+            ArrayList<Shape> copy = new ArrayList<>();
+            for (Shape s : shapes) copy.add(s.clone());
+            redoStack.add(copy);
+
+            ArrayList<Shape> lastState = undoStack.remove(undoStack.size() - 1);
+            shapes.clear();
+            for (Shape s : lastState) shapes.add(s.clone());
+
+            notifyObserversOfChange();
+        }
+    }
+
+    // Redo last undone action
+    public void redo() {
+        if (!redoStack.isEmpty()) {
+            ArrayList<Shape> copy = new ArrayList<>();
+            for (Shape s : shapes) copy.add(s.clone());
+            undoStack.add(copy);
+
+            ArrayList<Shape> nextState = redoStack.remove(redoStack.size() - 1);
+            shapes.clear();
+            for (Shape s : nextState) shapes.add(s.clone());
+
+            notifyObserversOfChange();
+        }
+    }
+
 
     public void addShape(Shape s) {
         if (s != null) {

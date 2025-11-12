@@ -50,7 +50,7 @@ public class ColorChooserPanel extends VBox {
             this.getChildren().add(btn);
         }
 
-        pickerButton = new Button("...");
+        pickerButton = new Button("+");
         pickerButton.setFont(Font.font(18));
         pickerButton.setMinSize(40, 40);
         pickerButton.setMaxSize(40, 40);
