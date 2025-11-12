@@ -15,19 +15,19 @@ I WANT   : To be able to select shapes with a visible highlight, move them aroun
 SO THAT  : I can manipulate shapes easily and edit my canvas efficiently.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.002 : UTORID : ?
+TYPE     : USER STORY US4.002 : UTORID : irfanda3
 NAME     : Text Tool
 PRIORITY : 3
-ESTIMATE : ?    ACTUAL : ?
+ESTIMATE : (4 hours)    ACTUAL : ?
 AS A     : user
 I WANT   : To be able to insert text on the canvas, with adjustable font size and style, supporting multiple text objects.
 SO THAT  : I can add labels, notes, or other textual elements to my drawings.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.003 : UTORID : ?
+TYPE     : USER STORY US4.003 : UTORID : irfanda3
 NAME     : Group / Ungroup
 PRIORITY : 3
-ESTIMATE : ?    ACTUAL : ?
+ESTIMATE : (4 hours)     ACTUAL : ?
 AS A     : user
 I WANT   : To be able to group multiple shapes together to manipulate them as a single object and ungroup them for individual adjustments.
 SO THAT  : I can manage complex drawings more easily.
