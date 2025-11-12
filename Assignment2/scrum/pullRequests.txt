@@ -8,4 +8,4 @@ US3.007  | author:irfanda3 | puller:habiban4 | status:Complete
 
 Pull Requests Sprint 4:
 
-US4.005 | author:sahasah1 | puller:pate2652 | status: Waiting
+US4.005 | author:sahasah1 | puller:pate2652 | status: Completed

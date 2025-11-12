@@ -51,10 +51,10 @@ I WANT   : To be able to undo or redo my recent edits or drawings.
 SO THAT  : I can correct mistakes or revert changes without losing my work.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.006 : UTORID : ?
+TYPE     : USER STORY US4.006 : UTORID : pate2652 Started
 NAME     : Shape Resize
 PRIORITY : 3
-ESTIMATE : ?    ACTUAL : ?
+ESTIMATE :     ACTUAL : ?
 AS A     : user
 I WANT   : To resize existing shapes by clicking and dragging handles, while preserving proportions or constraints.
 SO THAT  : I can adjust shapes without redrawing them.
@@ -69,10 +69,10 @@ I WANT   : To rotate drawn shapes to any desired angle.
 SO THAT  : I can orient shapes creatively for more dynamic designs.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.008 : UTORID : ?
+TYPE     : USER STORY US4.008 : UTORID : pate2652 : Started
 NAME     : Modify Color × Fill × Stroke × Thickness
 PRIORITY : 3
-ESTIMATE : ?    ACTUAL : ?
+ESTIMATE : (1 day)    ACTUAL : ?
 AS A     : user
 I WANT   : To modify a shape’s fill color, border color, and outline thickness after it has been drawn.
 SO THAT  : I can customize shapes without redrawing them.
