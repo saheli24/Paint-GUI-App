@@ -64,8 +64,10 @@ public class Polyline implements Shape {
 
     public void discardGhost(PaintModel model) {
         this.mousePoint = null;
+        this.lastPoint = null;
         model.clearCurrentShape();
     }
+
 
     @Override
     public void handleDrag(MouseEvent e) {

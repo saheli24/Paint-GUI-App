@@ -29,6 +29,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
      *  Controller
      */
     public void setMode(String mode) {
+        if (currentTool != null) {
+            currentTool.discardGhost(model);
+        }
+
         this.mode = mode;
         // "Circle", "Rectangle", "Square", "Squiggle", "Polyline", "Oval", "Triangle"
         switch(this.mode) {
@@ -237,6 +241,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 currentPolyline = null;
             }
         }
+
 
         @Override
         public void resumeAfterUndoRedo() {
