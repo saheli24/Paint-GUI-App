@@ -24,7 +24,7 @@ I WANT   : To be able to insert text on the canvas, with adjustable font size an
 SO THAT  : I can add labels, notes, or other textual elements to my drawings.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.003 : UTORID : irfanda3
+TYPE     : USER STORY US4.003 : irfanda3 : started
 NAME     : Eraser
 PRIORITY : 2
 ESTIMATE : (2 hours)     ACTUAL : ?
@@ -87,7 +87,7 @@ I WANT   : To pick a custom color from a color wheel and/or enter a hex code.
 SO THAT  : I can draw or modify shapes using the selected color.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.010 : UTORID : irfanda3
+TYPE     : USER STORY US4.010 : irfanda3 : started
 NAME     : Save File
 PRIORITY : 2
 ESTIMATE : (2 hours)     ACTUAL : ?
