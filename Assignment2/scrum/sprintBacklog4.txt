@@ -6,7 +6,7 @@
 # Sprint 4 Backlog UserStories go below
 
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.001 : UTORID : ?
+TYPE     : USER STORY US4.001 : habiban4 : Not Started
 NAME     : Select × Cut × Copy × Paste × Drag
 PRIORITY : 3
 ESTIMATE : ?    ACTUAL : ?
@@ -60,7 +60,7 @@ I WANT   : To resize existing shapes by clicking and dragging handles, while pre
 SO THAT  : I can adjust shapes without redrawing them.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.007 : UTORID : ?
+TYPE     : USER STORY US4.007 : habiban4 : Not Started
 NAME     : Rotate
 PRIORITY : 3
 ESTIMATE : ?    ACTUAL : ?
