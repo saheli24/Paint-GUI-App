@@ -62,7 +62,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     }
 
     public class CircleTool implements DrawingTool {
-
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Circle");
@@ -93,7 +92,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     }
 
     public class RectangleTool implements DrawingTool {
-
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Rectangle");
@@ -159,7 +157,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
     }
 
-
     public class SquiggleTool implements DrawingTool {
         @Override
         public void pressed(MouseEvent e) {
@@ -187,7 +184,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             }
         }
     }
-
 
     public class PolylineTool implements DrawingTool {
         private Polyline currentPolyline;
@@ -242,7 +238,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             }
         }
 
-
         @Override
         public void resumeAfterUndoRedo() {
             if (currentPolyline != null) {
@@ -290,7 +285,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     }
 
     public class OvalTool implements DrawingTool {
-
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Oval");

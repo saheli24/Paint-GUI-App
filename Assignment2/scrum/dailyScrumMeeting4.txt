@@ -155,9 +155,10 @@ Nov 11,2025
 	what to change, and what to keep the same.
 
 Nov 12,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Yesterday I looked at US3.007
+	What I will do today: Today I will have to fix one of our issues that we had from Sprint 3.
+	Obstacles I face: The largest issue will be on how I will be going about fixing up the abstraction and how to
+	change the "instanceof" keyword. I need to find a way to replace it.
 
 Nov 13,2025
 	What I did yesterday:

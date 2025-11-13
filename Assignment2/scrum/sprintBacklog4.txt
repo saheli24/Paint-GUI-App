@@ -60,10 +60,10 @@ I WANT   : To resize existing shapes by clicking and dragging handles, while pre
 SO THAT  : I can adjust shapes without redrawing them.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.007 : habiban4 : Not Started
+TYPE     : USER STORY US4.007 : habiban4 : Started
 NAME     : Rotate
 PRIORITY : 3
-ESTIMATE : ?    ACTUAL : ?
+ESTIMATE : (2 hours)   ACTUAL : (2 hours)
 AS A     : user
 I WANT   : To rotate drawn shapes to any desired angle.
 SO THAT  : I can orient shapes creatively for more dynamic designs.
