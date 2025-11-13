@@ -97,10 +97,10 @@ SO THAT  : I can draw or modify shapes using the selected color.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 TYPE     : USER STORY US4.010 : irfanda3 : started
-NAME     : Save File
+NAME     : Reset
 PRIORITY : 2
 ESTIMATE : (2 hours)     ACTUAL : ?
 AS A     : user
-I WANT   : To be able to download a PNG representation of my drawing to my computer.
-SO THAT  : I can access the drawing later.
+I WANT   : To be able to reset the drawing and all settings.
+SO THAT  : I can start a new drawing with the original settings.
 --------------------------------------------------------------------------
