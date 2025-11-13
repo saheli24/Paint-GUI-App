@@ -52,6 +52,15 @@ SO THAT  : I can correct mistakes or revert changes without losing my work.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 TYPE     : USER STORY US4.006 : UTORID : pate2652 Started
+NAME     : Shape Effects Feature
+PRIORITY : 3
+ESTIMATE :  (4 hours)   ACTUAL : ?
+AS A     : user
+I WANT   : To resize existing shapes by clicking and dragging handles, while preserving proportions or constraints.
+SO THAT  : I can adjust shapes without redrawing them.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY US4.006 : UTORID : pate2652 Started
 NAME     : Shape Resize
 PRIORITY : 3
 ESTIMATE :     ACTUAL : ?
