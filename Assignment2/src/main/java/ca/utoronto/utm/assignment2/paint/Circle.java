@@ -37,9 +37,20 @@ public class Circle implements Shape {
             return this.color;
         }
 
-        public double getThickness() {return this.thickness;}
+    /**
+     * Returns the line thickness of this object or its outline.
+     *
+     * @return the line thickness of this object or its outline
+     */
+    public double getThickness() {return this.thickness;}
 
-        public void setThickness(double thickness) {this.thickness = thickness;}
+
+    /**
+     * Sets the thickness of this object or its line thickness.
+     *
+     * @param thickness the new thickness to set
+     */
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
         public Point getCentre() {
                 return centre;

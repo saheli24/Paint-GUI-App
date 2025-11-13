@@ -29,8 +29,20 @@ public class Polyline implements Shape {
     public Color getColor() { return this.color; }
     public void setColor(Color color) { this.color = color; }
 
-    public double getThickness() { return this.thickness; }
-    public void setThickness(double thickness) { this.thickness = thickness; }
+    /**
+     * Returns the line thickness of this object or its outline.
+     *
+     * @return the line thickness of this object or its outline
+     */
+    public double getThickness() {return this.thickness;}
+
+
+    /**
+     * Sets the thickness of this object or its line thickness.
+     *
+     * @param thickness the new thickness to set
+     */
+    public void setThickness(double thickness) {this.thickness = thickness;}
 
     @Override
     public void draw(GraphicsContext g, double opacity) {

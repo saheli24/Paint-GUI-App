@@ -4,6 +4,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
+/**
+ * Represents a squiggly line made up of points that can be drawn on the canvas.
+ * A squiggle is a shape.
+ *
+ */
 public class Squiggle implements Shape {
     private ArrayList<Point> points = new ArrayList<>();
     private Color color;
@@ -14,16 +19,26 @@ public class Squiggle implements Shape {
      * If null, defaults to BLACK.
      *
      * @param color the color of the squiggle
+     * @param thickness how thick the squiggle is
      */
     public Squiggle(Color color, double thickness) {
         this.color = (color != null) ? color : Color.BLACK;
         this.thickness = thickness;
     }
 
+    /**
+     * Adds a point to the squiggle.
+     *
+     * @param p The point to add.
+     */
     public void addPoint(Point p) {
         points.add(p);
     }
 
+    /**
+     * Returns the points that makes up the squiggle.
+     * @return all points
+     */
     public ArrayList<Point> getPoints() {
         return points;
     }
@@ -44,8 +59,19 @@ public class Squiggle implements Shape {
      */
     public Color getColor() {return this.color;}
 
+    /**
+     * Returns the line thickness of this object or its outline.
+     *
+     * @return the line thickness of this object or its outline
+     */
     public double getThickness() {return this.thickness;}
 
+
+    /**
+     * Sets the thickness of this object or its line thickness.
+     *
+     * @param thickness the new thickness to set
+     */
     public void setThickness(double thickness) {this.thickness = thickness;}
 
     /**

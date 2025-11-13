@@ -107,8 +107,19 @@ public class Oval implements Shape {
 
     public boolean isFilled() { return filled; }
 
+    /**
+     * Returns the line thickness of this object or its outline.
+     *
+     * @return the line thickness of this object or its outline
+     */
     public double getThickness() {return this.thickness;}
 
+
+    /**
+     * Sets the thickness of this object or its line thickness.
+     *
+     * @param thickness the new thickness to set
+     */
     public void setThickness(double thickness) {this.thickness = thickness;}
 
     /**
