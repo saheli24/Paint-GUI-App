@@ -52,6 +52,10 @@ public class Polyline implements Shape {
         }
     }
 
+    public Point getMousePoint() {
+        return this.mousePoint;
+    }
+
     public void addVertex(Point p) {
         addPoint(p);
         lastPoint = p;

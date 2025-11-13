@@ -258,8 +258,29 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
         @Override
         public void drawFeedback(GraphicsContext g) {
-            if (currentPolyline != null) {
-                currentPolyline.draw(g, 1.0);
+            if (currentPolyline == null || currentPolyline.getPoints().isEmpty()) return;
+
+            ArrayList<Point> points = currentPolyline.getPoints();
+            Point lastPoint = points.get(points.size() - 1);
+            Point mousePoint = currentPolyline.getMousePoint();
+
+            Color currentColor = model.getCurrentColor();
+            double currentThickness = model.getCurrentThickness();
+
+            if (points.size() > 1) {
+                g.setStroke(currentColor);
+                g.setLineWidth(currentThickness);
+                for (int i = 0; i < points.size() - 1; i++) {
+                    Point p1 = points.get(i);
+                    Point p2 = points.get(i + 1);
+                    g.strokeLine(p1.x, p1.y, p2.x, p2.y);
+                }
+            }
+
+            if (lastPoint != null && mousePoint != null) {
+                g.setStroke(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(), 0.4));
+                g.setLineWidth(currentThickness);
+                g.strokeLine(lastPoint.x, lastPoint.y, mousePoint.x, mousePoint.y);
             }
         }
     }
