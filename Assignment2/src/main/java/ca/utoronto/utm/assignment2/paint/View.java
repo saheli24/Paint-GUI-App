@@ -17,7 +17,6 @@ public class View implements EventHandler<ActionEvent> {
         private PaintPanel paintPanel;
         private ShapeChooserPanel shapeChooserPanel;
         private FillStyleChooserPanel fillStylePanel;
-        private ThicknessChooserPanel thicknessChooserPanel;
         public View(PaintModel model, Stage stage) {
 
             ColorChooserPanel colorChooserPanel = new ColorChooserPanel(this);

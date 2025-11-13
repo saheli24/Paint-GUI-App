@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,6 +14,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     private String mode = "Circle";
     private DrawingTool currentTool = new CircleTool();
     private PaintModel model;
+    private boolean EraserOn = false;
 
     public PaintPanel(PaintModel model) {
         super(500, 500);
@@ -57,6 +59,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             case "Triangle":
                 currentTool = new TriangleTool();
                 break;
+            case "Eraser":
+                currentTool = new EraserTool();
+        }
+        if (Objects.equals(this.mode, "Eraser")) {
+            EraserOn = true;
+        }
+        else {
+            EraserOn = false;
         }
         System.out.println(this.mode);
     }
@@ -280,6 +290,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
     }
 
+
+
     public void undoRedoUpdatePolyline() {
         currentTool.resumeAfterUndoRedo();
     }
@@ -344,6 +356,35 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
     }
 
+    public class EraserTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            Eraser eraser = new Eraser(model.getCurrentThickness());
+            eraser.addPoint(new Point(e.getX(), e.getY()));
+            model.setCurrentShape(eraser);
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+            ArrayList<Shape> current = model.getCurrentShapes();
+            if (!current.isEmpty()) {
+                Shape shape = current.get(0);
+                shape.handleDrag(e);
+                model.notifyObserversOfChange();
+            }
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            ArrayList<Shape> current = model.getCurrentShapes();
+            if (!current.isEmpty()) {
+                Shape shape = current.get(0);
+                shape.handleRelease(model);
+            }
+        }
+    }
+
     @Override
     public void handle(MouseEvent mouseEvent) {
         // Later when we learn about inner classes...
@@ -373,7 +414,12 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
 
         for (Shape s : model.getCurrentShapes()) {
-            s.draw(g2d, 0.3);
+            if (EraserOn) {
+                s.draw(g2d,1.0);
+            }
+            else {
+                s.draw(g2d, 0.3);
+            }
         }
 
         currentTool.drawFeedback(g2d);
