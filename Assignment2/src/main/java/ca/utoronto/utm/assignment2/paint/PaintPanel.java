@@ -378,5 +378,10 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
         currentTool.drawFeedback(g2d);
     }
+
+    public void reset() {
+        mode = "Circle";
+        currentTool = new CircleTool();
+    }
 }
 
