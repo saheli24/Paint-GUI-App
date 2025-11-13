@@ -1,5 +1,6 @@
 package ca.utoronto.utm.assignment2.paint;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class Triangle implements Shape {
@@ -111,6 +112,29 @@ public class Triangle implements Shape {
             g.strokePolygon(xPoints, yPoints, 3);
         }
     }
+
+    @Override
+    public void handleDrag(MouseEvent e) {
+        double startX = this.getOrigin().x;
+        double startY = this.getOrigin().y;
+        double currX = e.getX();
+        double currY = e.getY();
+
+        double width = currX - startX;
+        double height = currY - startY;
+
+        this.setWidth(width);
+        this.setHeight(height);
+    }
+
+    @Override
+    public void handleRelease(PaintModel model) {
+        model.saveState();
+        model.addShape(this);
+        model.clearCurrentShape();
+        System.out.println("Added Triangle");
+    }
+
 
     @Override
     public Shape clone() {

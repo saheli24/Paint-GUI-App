@@ -1,5 +1,6 @@
 package ca.utoronto.utm.assignment2.paint;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -159,6 +160,27 @@ public class Rectangle implements Shape {
             g.strokeRect(drawX, drawY, drawWidth, drawHeight);
         }
     }
+
+    @Override
+    public void handleDrag(MouseEvent e) {
+        Point start = this.getOrigin();
+        double width = e.getX() - start.x;
+        double height = e.getY() - start.y;
+
+        this.setWidth(width);
+        this.setHeight(height);
+    }
+
+    @Override
+    public void handleRelease(PaintModel model) {
+        model.saveState();
+        model.addShape(this);
+        model.clearCurrentShape();
+
+        System.out.println("Added Rectangle");
+    }
+
+
     @Override
     public Shape clone() {
         return new Rectangle(

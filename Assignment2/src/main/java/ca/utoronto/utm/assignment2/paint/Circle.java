@@ -1,5 +1,6 @@
 package ca.utoronto.utm.assignment2.paint;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 
@@ -84,6 +85,22 @@ public class Circle implements Shape {
                         g.setLineWidth(t);
                         g.strokeOval(x, y, diameter, diameter);
                 }
+        }
+
+        @Override
+        public void handleDrag(MouseEvent e) {
+                Point centre = this.getCentre();
+                double dx = e.getX() - centre.x;
+                double dy = e.getY() - centre.y;
+                this.setRadius(Math.sqrt(dx * dx + dy * dy));
+        }
+
+        @Override
+        public void handleRelease(PaintModel model) {
+                model.saveState();
+                model.addShape(this);
+                model.clearCurrentShape();
+                System.out.println("Added Circle");
         }
 
         @Override

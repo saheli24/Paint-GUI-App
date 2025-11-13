@@ -1,5 +1,6 @@
 package ca.utoronto.utm.assignment2.paint;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
@@ -72,14 +73,28 @@ public class Squiggle implements Shape {
     }
 
     @Override
+    public void handleDrag(MouseEvent e) {
+        this.addPoint(new Point(e.getX(), e.getY()));
+    }
+
+    @Override
+    public void handleRelease(PaintModel model) {
+        model.saveState();
+        model.addShape(this);
+        model.clearCurrentShape();
+    }
+
+    @Override
     public Shape clone() {
         Squiggle copy = new Squiggle(
-                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
-                thickness
+            Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+            thickness
         );
+
         for (Point p : points) {
-            copy.addPoint(new Point(p.x, p.y)); // deep copy each point
+            copy.addPoint(new Point(p.x, p.y));
         }
+
         return copy;
     }
 

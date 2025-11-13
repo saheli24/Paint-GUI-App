@@ -1,5 +1,6 @@
 package ca.utoronto.utm.assignment2.paint;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -153,6 +154,31 @@ public class Square implements Shape {
             g.setLineWidth(t);
             g.strokeRect(drawX, drawY, drawSide, drawSide);
         }
+    }
+
+    @Override
+    public void handleDrag(MouseEvent e) {
+        Point start = this.getStartPoint();
+
+        double dx = e.getX() - start.x;
+        double dy = e.getY() - start.y;
+
+        double side = Math.min(Math.abs(dx), Math.abs(dy));
+
+        double newX = dx >= 0 ? start.x : start.x - side;
+        double newY = dy >= 0 ? start.y : start.y - side;
+
+        this.setOrigin(new Point(newX, newY));
+        this.setWidth(side);
+        this.setHeight(side);
+    }
+
+    @Override
+    public void handleRelease(PaintModel model) {
+        model.saveState();
+        model.addShape(this);
+        model.clearCurrentShape();
+        System.out.println("Added Square");
     }
 
     @Override

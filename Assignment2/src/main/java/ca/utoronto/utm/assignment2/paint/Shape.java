@@ -1,6 +1,7 @@
 package ca.utoronto.utm.assignment2.paint;
-
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
+
 
 /**
  * Represents a drawable shape.
@@ -21,5 +22,10 @@ public interface Shape {
      *
      */
     void draw(GraphicsContext g, double opacity);
+
+    void handleDrag(MouseEvent e);
+
+    void handleRelease(PaintModel model);
+
     Shape clone();
 }

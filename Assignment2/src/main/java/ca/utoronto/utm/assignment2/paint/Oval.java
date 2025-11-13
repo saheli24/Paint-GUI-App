@@ -1,6 +1,7 @@
 package ca.utoronto.utm.assignment2.paint;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -136,6 +137,24 @@ public class Oval implements Shape {
             g.setLineWidth(t);
             g.strokeOval(drawX, drawY, drawWidth, drawHeight);
         }
+    }
+
+    @Override
+    public void handleDrag(MouseEvent e) {
+        double width = e.getX() - this.getOrigin().x;
+        double height = e.getY() - this.getOrigin().y;
+
+        this.setWidth(width);
+        this.setHeight(height);
+    }
+
+    @Override
+    public void handleRelease(PaintModel model) {
+        model.saveState();
+        model.addShape(this);
+        model.clearCurrentShape();
+
+        System.out.println("Added Oval");
     }
 
     @Override
