@@ -120,6 +120,12 @@ public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEv
             triangleButton.setMinWidth(100);
             this.add(triangleButton, 0, 6);     // add to the 7th row
             triangleButton.setOnAction(this);
+
+            Button textButton = new Button("Text");
+            textButton.setUserData("Text");
+            textButton.setMinWidth(100);
+            this.add(textButton, 0, 7);
+            textButton.setOnAction(this);
         }
 
         @Override

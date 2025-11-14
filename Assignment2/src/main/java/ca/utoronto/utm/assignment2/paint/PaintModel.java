@@ -1,8 +1,10 @@
 package ca.utoronto.utm.assignment2.paint;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 /**
  * Presents the paint board. The paint board has
@@ -22,6 +24,7 @@ public class PaintModel extends Observable {
     private boolean currentFillStyle = true;
     private Color currentColor = Color.BLACK; // the currently selected color
     private double currentThickness = 1; // the currently selected thickness
+    private Font currentFont = new Font("30px Arial", 20);
     private final ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
     private final ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
     private boolean multiColorMode = false;
@@ -99,10 +102,20 @@ public class PaintModel extends Observable {
 
     public void setCurrentThickness(double thickness) {
         this.currentThickness = thickness;
+        String fontName = this.currentFont.getName();
+        this.currentFont = new Font(fontName, currentThickness*10);
         notifyObserversOfChange();
     }
 
     public double getCurrentThickness() { return this.currentThickness; }
+
+    public void setCurrentFont(String font) {
+        this.currentFont = new Font(font, currentThickness*10);
+        System.out.println(this.currentFont.getName());
+        notifyObserversOfChange();
+    }
+
+    public Font getCurrentFont() {return this.currentFont;}
 
 
     public ArrayList<Shape> getAllShapes() {
