@@ -66,8 +66,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         public void pressed(MouseEvent e) {
             System.out.println("Started Circle");
             Point centre = new Point(e.getX(), e.getY());
-            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-            Circle c = new Circle(centre, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
+            Circle c;
+            if (model.isMultiColorMode() && model.ifFillStyle()) {
+                c = new Circle(centre, 0, model.getPrimaryColor(), model.getSecondaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            } else {
+                c = new Circle(centre, 0, model.getPrimaryColor(), model.getPrimaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            }
             model.setCurrentShape(c);
         }
 
@@ -95,11 +101,15 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Rectangle");
-
             Point origin = new Point(e.getX(), e.getY());
-            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-
-            Rectangle r = new Rectangle(origin, 0, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
+            Rectangle r;
+            if (model.isMultiColorMode() && model.ifFillStyle()) {
+                r = new Rectangle(origin, 0, 0, model.getPrimaryColor(), model.getSecondaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            } else {
+                r = new Rectangle(origin, 0, 0, model.getPrimaryColor(), model.getPrimaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            }
             model.setCurrentShape(r);
         }
 
@@ -127,13 +137,15 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         @Override
         public void pressed(MouseEvent e) {
             System.out.println("Started Square");
-
             Point start = new Point(e.getX(), e.getY());
-            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-
-            Square s = new Square(start, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
-            s.setStartPoint(start);
-
+            Square s;
+            if (model.isMultiColorMode() && model.ifFillStyle()) {
+                s = new Square(start, 0, model.getPrimaryColor(), model.getSecondaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            } else {
+                s = new Square(start,0, model.getPrimaryColor(), model.getPrimaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            }
             model.setCurrentShape(s);
         }
 
@@ -160,7 +172,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
     public class SquiggleTool implements DrawingTool {
         @Override
         public void pressed(MouseEvent e) {
-            Squiggle s = new Squiggle(model.getCurrentColor(), model.getCurrentThickness());
+            Squiggle s = new Squiggle(model.getPrimaryColor(), model.getCurrentThickness());
             s.addPoint(new Point(e.getX(), e.getY()));
             model.setCurrentShape(s);
         }
@@ -193,12 +205,12 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             Point p = new Point(e.getX(), e.getY());
 
             if (currentPolyline == null) {
-                currentPolyline = new Polyline(model.getCurrentColor(), model.getCurrentThickness());
+                currentPolyline = new Polyline(model.getPrimaryColor(), model.getCurrentThickness());
                 currentPolyline.addVertex(p);
                 model.addShape(currentPolyline);
                 model.saveState();
             } else {
-                currentPolyline.setColor(model.getCurrentColor());
+                currentPolyline.setColor(model.getPrimaryColor());
                 currentPolyline.setThickness(model.getCurrentThickness());
                 currentPolyline.addVertex(p);
             }
@@ -259,7 +271,7 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
             Point lastPoint = points.get(points.size() - 1);
             Point mousePoint = currentPolyline.getMousePoint();
 
-            Color currentColor = model.getCurrentColor();
+            Color currentColor = model.getPrimaryColor();
             double currentThickness = model.getCurrentThickness();
 
             if (points.size() > 1) {
@@ -289,8 +301,14 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         public void pressed(MouseEvent e) {
             System.out.println("Started Oval");
             Point origin = new Point(e.getX(), e.getY());
-            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-            Oval oval = new Oval(origin, 0, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
+            Oval oval;
+            if (model.isMultiColorMode() && model.ifFillStyle()) {
+                oval = new Oval(origin, 0, 0, model.getPrimaryColor(), model.getSecondaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            } else {
+                oval = new Oval(origin, 0, 0, model.getPrimaryColor(), model.getPrimaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            }
             model.setCurrentShape(oval);
         }
 
@@ -319,8 +337,13 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         public void pressed(MouseEvent e) {
             System.out.println("Started Triangle");
             Point start = new Point(e.getX(), e.getY());
-            Color shapeColor = model.getCurrentColor() != null ? model.getCurrentColor() : Color.BLACK;
-            Triangle t = new Triangle(start, 0, 0, shapeColor, model.ifFillStyle(), model.getCurrentThickness());
+            Triangle t;
+            if (model.isMultiColorMode() && model.ifFillStyle()) {
+                t = new Triangle(start, 0, 0, model.getPrimaryColor(), model.getSecondaryColor(),
+                        model.ifFillStyle(), model.getCurrentThickness());
+            } else {
+                t = new Triangle(start, 0, 0, model.getPrimaryColor(), model.getPrimaryColor(), model.ifFillStyle(), model.getCurrentThickness());
+            }
             model.setCurrentShape(t);
         }
 

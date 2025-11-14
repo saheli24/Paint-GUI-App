@@ -24,6 +24,9 @@ public class PaintModel extends Observable {
     private double currentThickness = 1; // the currently selected thickness
     private final ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
     private final ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
+    private boolean multiColorMode = false;
+    private Color primaryColor = Color.BLACK;
+    private Color secondaryColor = Color.WHITE;
 
     public void saveState() {
         // Make a deep copy of the shapes list
@@ -129,6 +132,32 @@ public class PaintModel extends Observable {
 
     public boolean ifFillStyle() {
         return currentFillStyle;
+    }
+    public boolean isMultiColorMode() {
+        return multiColorMode;
+    }
+
+    public void setMultiColorMode(boolean multiColorMode) {
+        this.multiColorMode = multiColorMode;
+        notifyObserversOfChange();
+    }
+
+    public Color getPrimaryColor() {
+        return primaryColor;
+    }
+
+    public void setPrimaryColor(Color primaryColor) {
+        this.primaryColor = primaryColor;
+        notifyObserversOfChange();
+    }
+
+    public Color getSecondaryColor() {
+        return secondaryColor;
+    }
+
+    public void setSecondaryColor(Color secondaryColor) {
+        this.secondaryColor = secondaryColor;
+        notifyObserversOfChange();
     }
 
     public void notifyObserversOfChange() {

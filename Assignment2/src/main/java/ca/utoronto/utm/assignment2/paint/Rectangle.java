@@ -14,9 +14,11 @@ public class Rectangle implements Shape {
     private Point origin;
     private double width;
     private double height;
-    private Color color; // new field
+    private Color color;
+    private Color fillColor;
     private boolean filled;
     private double thickness;
+    private boolean multiColor = false;
 
     /**
      * Constructs a new Rectangle with the specified origin, width, and height.
@@ -26,13 +28,16 @@ public class Rectangle implements Shape {
      * @param height the height of the rectangle
      *
      */
-    public Rectangle(Point origin, double width, double height, Color color, boolean filled, double thickness) {
+    public Rectangle(Point origin, double width, double height, Color borderColor, Color fillColor, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
-        this.color = color; // default
+        this.color = borderColor;
         this.filled = filled;
+        this.fillColor = fillColor;
         this.thickness = thickness;
+        this.multiColor = (fillColor != null && !fillColor.equals(borderColor));
+
     }
 
     /**
@@ -42,6 +47,21 @@ public class Rectangle implements Shape {
      */
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void startMultiColor(Color borderColor, Color fillColor) {
+        this.color = borderColor;
+        this.fillColor = fillColor;
+        this.multiColor = true;
+    }
+
+    public void stopMultiColor() {
+        this.fillColor = this.color;
+        this.multiColor = false;
+    }
+
+    public boolean isMultiColor() {
+        return multiColor;
     }
 
     /**
@@ -159,14 +179,15 @@ public class Rectangle implements Shape {
         double drawWidth = Math.abs(width);
         double drawHeight = Math.abs(height);
 
-        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color borderDrawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color fillDrawColor = multiColor ? new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), opacity) : borderDrawColor;
         double t = this.getThickness();
 
         if (filled) {
-            g.setFill(drawColor);
+            g.setFill(fillDrawColor);
             g.fillRect(drawX, drawY, drawWidth, drawHeight);
-        } else {
-            g.setStroke(drawColor);
+        } if (thickness > 0 && (multiColor || ! filled)){
+            g.setStroke(borderDrawColor);
             g.setLineWidth(t);
             g.strokeRect(drawX, drawY, drawWidth, drawHeight);
         }
@@ -194,14 +215,16 @@ public class Rectangle implements Shape {
 
     @Override
     public Shape clone() {
-        return new Rectangle(
-                new Point(origin.x, origin.y), // deep copy of Point
-                width,
-                height,
-                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), // new Color
-                filled,
-                thickness
-        );
-    }
-
+        Rectangle c = new Rectangle(
+                new Point(origin.x, origin.y), width, height,
+                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()) :
+                        Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),  filled,  thickness);
+        if (multiColor) {
+            c.startMultiColor(Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                    Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()));
+        }
+        return c;
+        }
 }
+

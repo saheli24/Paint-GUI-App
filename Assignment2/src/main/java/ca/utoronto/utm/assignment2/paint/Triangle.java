@@ -7,17 +7,21 @@ public class Triangle implements Shape {
     private Point origin;
     private double width;
     private double height;
-    private Color color; // new field
+    private Color color;
+    private Color fillColor;
     private boolean filled;
     private double thickness;
+    private boolean multiColor = false;
 
-    public Triangle(Point origin, double width, double height,  Color color, boolean filled, double thickness) {
+    public Triangle(Point origin, double width, double height,  Color borderColor, Color fillColor, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
-        this.color = color; // default
+        this.color = borderColor;
+        this.fillColor = fillColor;
         this.filled = filled;
         this.thickness = thickness;
+        this.multiColor = (fillColor != null && ! fillColor.equals(borderColor));
     }
 
     /**
@@ -79,6 +83,21 @@ public class Triangle implements Shape {
      */
     public void setThickness(double thickness) {this.thickness = thickness;}
 
+    public void startMultiColor(Color borderColor, Color fillColor) {
+        this.color = borderColor;
+        this.fillColor = fillColor;
+        this.multiColor = true;
+    }
+
+    public void stopMultiColor() {
+        this.fillColor = this.color;
+        this.multiColor = false;
+    }
+
+    public boolean isMultiColor() {
+        return multiColor;
+    }
+
     /**
      * Draws a triangle.
      *
@@ -111,14 +130,15 @@ public class Triangle implements Shape {
             yPoints = new double[]{drawY, drawY + drawHeight, drawY};
         }
 
-        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color borderDrawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color fillDrawColor = multiColor ? new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), opacity): borderDrawColor;
         double t = this.getThickness();
 
         if (filled) {
-            g.setFill(drawColor);
+            g.setFill(fillDrawColor);
             g.fillPolygon(xPoints, yPoints, 3);
-        } else {
-            g.setStroke(drawColor);
+        }  if (thickness > 0 && (multiColor || ! filled)) {
+            g.setStroke(borderDrawColor);
             g.setLineWidth(t);
             g.strokePolygon(xPoints, yPoints, 3);
         }
@@ -149,14 +169,18 @@ public class Triangle implements Shape {
 
     @Override
     public Shape clone() {
-        return new Triangle(
-                new Point(origin.x, origin.y), // deep copy of the origin point
-                width,
-                height,
+        Triangle t = new Triangle(new Point(origin.x, origin.y), width, height,
                 Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
-                filled,
-                thickness
-        );
+                fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()) :
+                        Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), filled, thickness);
+        if (multiColor) {
+            t.startMultiColor(
+                    Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                    fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()) :
+                            Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity())
+            );
+        }
+        return t;
     }
 
 }
