@@ -117,39 +117,39 @@ Nov 6,2025
 	Obstacles I face: When I changed the fill style, the shapes drawn earlier also changed their fill style. So, had to resolve that.
 
 Nov 7,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Finished US3.006
+	What I will do today: Talk with the product Owner and chek in with team on their Sprint 3 US's.
+	Obstacles I face: No difficulties.
 
 Nov 8,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Checked in with my Team to check on the Status of Sprint US's.
+	What I will do today: I will decide with the Product Owner as to what feature we can add.
+	Obstacles I face: No difficulties.
 
 Nov 9,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started discussing what features we want to add for Sprint 4.
+	What I will do today: Finalize which features we want to start on.
+	Obstacles I face: No difficulties.
 
 Nov 10,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Decide which feature we want to add.
+	What I will do today: Wait for the Product Owner to update the Sprint4 backlog, and select the feature I want to implement.
+	Obstacles I face: No difficulties.
 
 Nov 11,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Selected the features I wanted to add.
+	What I will do today: Start working on the features.
+	Obstacles I face: I have to wait for one of my teammates to implement the Select Feature as my feature depend on it.
 
 Nov 12,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Started working, but did not complete my feature.
+	What I will do today: Check in with my teammate who's doing the select feature.
+	Obstacles I face: No difficulties.
 
 Nov 13,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Checked in with my team.
+	What I will do today: Implement the MultiColour feature.
+	Obstacles I face: For Oval and Square, my MultiColour option wasn't working correctly, as the fill colour was the same as the border colour, but I was able to resolve it :).
 
 Nov 14,2025
 	What I did yesterday:
