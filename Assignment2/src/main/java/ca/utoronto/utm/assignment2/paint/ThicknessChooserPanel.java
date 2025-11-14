@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.layout.GridPane;
 
-
+/**
+ * Lets the user choose the thickness of a line or the outline of a shape while drawing.
+ *
+ * @author irfanda3 | Danial Irfan
+ */
 public class ThicknessChooserPanel extends GridPane {
     private View view;
     private List<Button> buttons = new ArrayList<>();
