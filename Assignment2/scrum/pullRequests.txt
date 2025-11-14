@@ -9,6 +9,7 @@ US3.007  | author:irfanda3 | puller:habiban4 | status:Complete
 Pull Requests Sprint 4:
 
 US4.001 | author:habiban4 | puller:UTORID | status: NONE
+US4.002 | author:irfanda3 | puller:UTORID | status: Waiting
 US4.003 | author:irfanda3 | puller:UTORID | status: Waiting
 US4.005 | author:sahasah1 | puller:pate2652 | status: Completed
 US4.006 | author:pate2652 | puller:sahasah1 | status: Completed

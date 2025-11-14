@@ -161,12 +161,12 @@ Nov 12,2025
 	change the "instanceof" keyword. I need to find a way to replace it.
 
 Nov 13,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Claimed my stuff
+	What I will do today: Complete eraser and reset user stories.
+	Obstacles I face: Figure out how to implement eraser and how to reset all settings.
 
 Nov 14,2025
-	What I did yesterday:
-	What I will do today:
-	Obstacles I face:
+	What I did yesterday: Completed eraser and reset user stories.
+	What I will do today: Complete text user story.
+	Obstacles I face: Learn how to use Font, its methods, and manipulate them to add text with size and style options.
 
