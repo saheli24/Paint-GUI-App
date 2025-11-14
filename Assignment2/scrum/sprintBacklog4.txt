@@ -6,12 +6,12 @@
 # Sprint 4 Backlog UserStories go below
 
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.001 : habiban4 : Not Started
-NAME     : Select × Cut × Copy × Paste × Drag
+TYPE     : USER STORY US4.001 : habiban4 : Started
+NAME     : Select × Cut × Copy × Paste
 PRIORITY : 3
-ESTIMATE : ?    ACTUAL : ?
+ESTIMATE : (2 hours)    ACTUAL : (2 hours)
 AS A     : user
-I WANT   : To be able to select shapes with a visible highlight, move them around, cut or copy them, and paste duplicates.
+I WANT   : To be able to select shapes with a visible highlight, cut or copy them, and paste duplicates.
 SO THAT  : I can manipulate shapes easily and edit my canvas efficiently.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
