@@ -14,9 +14,11 @@ public class Oval implements Shape {
     private Point origin;  // top-left corner
     private double width;
     private double height;
-    private Color color; // new field
+    private Color color;
+    private Color fillColor;
     private boolean filled;
     private double thickness;
+    private boolean multiColor = false;
     /**
      * Constructs a new Oval with the specified origin, width, and height.
      *
@@ -24,13 +26,15 @@ public class Oval implements Shape {
      * @param width  the horizontal diameter of Oval
      * @param height the vertical diameter of Oval
      */
-    public Oval(Point origin, double width, double height, Color color, boolean filled, double thickness) {
+    public Oval(Point origin, double width, double height, Color borderColor, Color fillColor, boolean filled, double thickness) {
         this.origin = origin;
         this.width = width;
         this.height = height;
-        this.color = color; // default
+        this.color = borderColor; // default
+        this.fillColor = fillColor;
         this.filled = filled;
         this.thickness = thickness;
+        this.multiColor = (fillColor != null && ! fillColor.equals(borderColor));
     }
 
     /**
@@ -122,6 +126,20 @@ public class Oval implements Shape {
      */
     public void setThickness(double thickness) {this.thickness = thickness;}
 
+    public void startMultiColor(Color borderColor, Color fillColor) {
+        this.color = borderColor;
+        this.fillColor = fillColor;
+        this.multiColor = true;
+    }
+
+    public void stopMultiColor() {
+        this.fillColor = this.color;
+        this.multiColor = false;
+    }
+
+    public boolean isMultiColor() {
+        return multiColor;
+    }
     /**
      * Draws the Oval.
      *
@@ -137,14 +155,16 @@ public class Oval implements Shape {
         double drawWidth = Math.abs(width);
         double drawHeight = Math.abs(height);
 
-        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color borderDrawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color fillDrawColor = multiColor ? new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), opacity): borderDrawColor;
+
         double t = this.getThickness();
 
         if (filled) {
-            g.setFill(drawColor);
+            g.setFill(fillDrawColor);
             g.fillOval(drawX, drawY, drawWidth, drawHeight);
-        } else {
-            g.setStroke(drawColor);
+        } if (thickness > 0 && (multiColor || ! filled)) {
+            g.setStroke(borderDrawColor);
             g.setLineWidth(t);
             g.strokeOval(drawX, drawY, drawWidth, drawHeight);
         }
@@ -170,13 +190,15 @@ public class Oval implements Shape {
 
     @Override
     public Shape clone() {
-        return new Oval(
-                new Point(origin.x, origin.y), // deep copy of Point
-                width,
-                height,
-                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), // new Color
-                filled,
-                thickness
-        );
+        Oval o = new Oval(new Point(origin.x, origin.y), width, height, Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()):
+                        Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), filled, thickness);
+        if (multiColor) {
+            o.startMultiColor(Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                    fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()) :
+                            Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity())
+            );
+        }
+        return o;
     }
 }

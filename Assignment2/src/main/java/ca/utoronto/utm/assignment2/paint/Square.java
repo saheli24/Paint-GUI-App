@@ -16,9 +16,11 @@ public class Square implements Shape {
     private double width;
     private double height;
     private boolean filled;
-    private Color color; // new field
+    private Color color;
+    private Color fillColor;
     private double thickness;
     private Point startPoint;
+    private boolean multiColor = false;
 
 
     /**
@@ -27,13 +29,15 @@ public class Square implements Shape {
      * @param origin starting (x, y) of the square
      * @param side   the width and height of the square
      */
-    public Square(Point origin, double side, Color color, boolean filled, double thickness) {
+    public Square(Point origin, double side, Color borderColor, Color fillColor, boolean filled, double thickness) {
         this.origin = origin;
         this.width = side;
         this.height = side;
-        this.color = color; // default
+        this.color = borderColor;
+        this.fillColor = fillColor;
         this.filled = filled;
         this.thickness = thickness;
+        this.multiColor = (fillColor != null && ! fillColor.equals(borderColor));
     }
 
     /**
@@ -136,6 +140,21 @@ public class Square implements Shape {
      */
     public void setThickness(double thickness) {this.thickness = thickness;}
 
+    public void startMultiColor(Color borderColor, Color fillColor) {
+        this.color = borderColor;
+        this.fillColor = fillColor;
+        this.multiColor = true;
+    }
+
+    public void stopMultiColor() {
+        this.fillColor = this.color;
+        this.multiColor = false;
+    }
+
+    public boolean isMultiColor() {
+        return multiColor;
+    }
+
     /**
      * Draws a Square.
      *
@@ -146,22 +165,29 @@ public class Square implements Shape {
      *
      */
     public void draw(GraphicsContext g, double opacity) {
+        if (color == null) {
+            color = Color.BLACK;
+        }
+        if (fillColor == null) {
+            fillColor = color;
+        }
         double x = getOrigin().x;
         double y = getOrigin().y;
-        double side = getWidth(); // assume width = height for square
+        double side = getWidth();
 
         double drawX = side >= 0 ? x : x + side;
         double drawY = side >= 0 ? y : y + side;
         double drawSide = Math.abs(side);
 
-        Color drawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color borderDrawColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+        Color fillDrawColor = multiColor ? new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), opacity): borderDrawColor;
         double t = this.getThickness();
 
         if (filled) {
-            g.setFill(drawColor);
+            g.setFill(fillDrawColor);
             g.fillRect(drawX, drawY, drawSide, drawSide);
-        } else {
-            g.setStroke(drawColor);
+        } if (thickness > 0 && (multiColor || !filled)) {
+            g.setStroke(borderDrawColor);
             g.setLineWidth(t);
             g.strokeRect(drawX, drawY, drawSide, drawSide);
         }
@@ -169,15 +195,15 @@ public class Square implements Shape {
 
     @Override
     public void handleDrag(MouseEvent e) {
-        Point start = this.getStartPoint();
+        Point origin = this.getOrigin();
 
-        double dx = e.getX() - start.x;
-        double dy = e.getY() - start.y;
+        double dx = e.getX() - origin.x;
+        double dy = e.getY() - origin.y;
 
         double side = Math.min(Math.abs(dx), Math.abs(dy));
 
-        double newX = dx >= 0 ? start.x : start.x - side;
-        double newY = dy >= 0 ? start.y : start.y - side;
+        double newX = dx >= 0 ? origin.x : origin.x - side;
+        double newY = dy >= 0 ? origin.y : origin.y - side;
 
         this.setOrigin(new Point(newX, newY));
         this.setWidth(side);
@@ -194,13 +220,15 @@ public class Square implements Shape {
 
     @Override
     public Shape clone() {
-        return new Square(
-                new Point(origin.x, origin.y), // deep copy of origin
-                width,                         // width = height
-                Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), // new Color
-                filled,
-                thickness
-        );
-    }
-
+        Square s = new Square(new Point(origin.x, origin.y), width, Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()) :
+                        Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()), filled, thickness);
+        if (multiColor) {
+            s.startMultiColor(
+                    Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()),
+                    fillColor != null ? Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), fillColor.getOpacity()) :
+                            Color.color(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity()));
+        }
+        return s;
+        }
 }

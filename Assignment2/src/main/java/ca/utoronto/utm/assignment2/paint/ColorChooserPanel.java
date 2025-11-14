@@ -2,6 +2,8 @@ package ca.utoronto.utm.assignment2.paint;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
@@ -23,8 +25,11 @@ public class ColorChooserPanel extends VBox {
     private List<Button> buttons = new ArrayList<>();
     private Button selectedButton = null;
     private Button pickerButton;
-    private ColorPicker colorPicker;
-
+    private ColorPicker primaryColorPicker;
+    private ColorPicker secondaryColorPicker;
+    private ToggleButton multiColorToggle;
+    private Label primaryLabel;
+    private Label secondaryLabel;
     /**
      * Constructs a new ColorChooserPanel linked to the given View.
      * Initializes preset color buttons and a hidden color picker.
@@ -37,8 +42,50 @@ public class ColorChooserPanel extends VBox {
         this.setSpacing(10);
         this.setPadding(new Insets(10));
 
-        Color[] colors = { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.PURPLE };
+        multiColorToggle = new ToggleButton("Multi-Color");
+        multiColorToggle.setStyle("-fx-background-color: lightgray;");
+        multiColorToggle.setOnAction(e -> {
+            boolean multiColor = multiColorToggle.isSelected();
+            view.getPaintModel().setMultiColorMode(multiColor);
+            updateMultiColorUI(multiColor);
 
+            if (multiColor) {
+                multiColorToggle.setStyle("-fx-background-color: lightblue;");
+            } else {
+                multiColorToggle.setStyle("-fx-background-color: lightgray;");
+            }
+        });
+        primaryLabel = new Label("Border:");
+        primaryColorPicker = new ColorPicker(Color.BLACK);
+        primaryColorPicker.setOnAction(e -> {
+            view.getPaintModel().setPrimaryColor(primaryColorPicker.getValue());
+        });
+
+        // Secondary color picker (for fill in multi-color mode)
+        secondaryLabel = new Label("Fill:");
+        secondaryColorPicker = new ColorPicker(Color.WHITE);
+        secondaryColorPicker.setOnAction(e -> {
+            view.getPaintModel().setSecondaryColor(secondaryColorPicker.getValue());
+        });
+
+        updateMultiColorUI(false);
+        HBox multiColorBox = new HBox(5);
+        multiColorBox.getChildren().addAll(multiColorToggle);
+        this.getChildren().add(multiColorBox);
+
+        HBox primaryColorBox = new HBox(5);
+        primaryColorBox.getChildren().addAll(primaryLabel, primaryColorPicker);
+        this.getChildren().add(primaryColorBox);
+        HBox secondaryColorBox = new HBox(5);
+        secondaryColorBox.getChildren().addAll(secondaryLabel, secondaryColorPicker);
+        this.getChildren().add(secondaryColorBox);
+
+        Color[] colors = { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.PURPLE };
+        Label presetLabel = new Label("Preset Colors:");
+        this.getChildren().add(presetLabel);
+        FlowPane colorButtonsPane = new FlowPane();
+        colorButtonsPane.setHgap(5);
+        colorButtonsPane.setVgap(5);
         for (Color color : colors) {
             Button btn = new Button();
             applyButtonStyle(btn, color, false);
@@ -54,24 +101,20 @@ public class ColorChooserPanel extends VBox {
         pickerButton.setFont(Font.font(18));
         pickerButton.setMinSize(40, 40);
         pickerButton.setMaxSize(40, 40);
+        pickerButton.setOnAction(e -> primaryColorPicker.show());
+        colorButtonsPane.getChildren().add(pickerButton);
         this.getChildren().add(pickerButton);
 
-        colorPicker = new ColorPicker();
-        colorPicker.setVisible(false);
-        colorPicker.setManaged(false);
-        colorPicker.setOnAction(e -> {
-            Color picked = colorPicker.getValue();
-            view.getPaintModel().setCurrentColor(picked);
-            applyButtonStyle(pickerButton, picked, true);
+    }
 
-            if (selectedButton != null) {
-                applyButtonStyle(selectedButton, getButtonColor(selectedButton), false);
-                selectedButton = null;
-            }
-        });
-
-        pickerButton.setOnAction(e -> colorPicker.show());
-        this.getChildren().add(colorPicker);
+    /**
+     * Updates the visibility of multi-color UI elements
+     */
+    private void updateMultiColorUI(boolean multiColorEnabled) {
+        secondaryLabel.setVisible(multiColorEnabled);
+        secondaryLabel.setManaged(multiColorEnabled);
+        secondaryColorPicker.setVisible(multiColorEnabled);
+        secondaryColorPicker.setManaged(multiColorEnabled);
     }
 
     /**
@@ -82,7 +125,7 @@ public class ColorChooserPanel extends VBox {
      * @param color the color with the button
      */
     private void selectColor(Button btn, Color color) {
-        view.getPaintModel().setCurrentColor(color);
+        view.getPaintModel().setPrimaryColor(color);
 
         if (selectedButton != null) {
             applyButtonStyle(selectedButton, getButtonColor(selectedButton), false);
@@ -91,7 +134,7 @@ public class ColorChooserPanel extends VBox {
         applyButtonStyle(btn, color, true);
         selectedButton = btn;
 
-        applyButtonStyle(pickerButton, colorPicker.getValue(), false);
+        applyButtonStyle(pickerButton, primaryColorPicker.getValue(), false);
     }
 
     /**
@@ -126,6 +169,19 @@ public class ColorChooserPanel extends VBox {
             return (Color) fill.getFill();
         } catch (Exception e) {
             return Color.BLACK;
+        }
+    }
+    public void updateFromModel() {
+        PaintModel model = view.getPaintModel();
+        primaryColorPicker.setValue(model.getPrimaryColor());
+        secondaryColorPicker.setValue(model.getSecondaryColor());
+        multiColorToggle.setSelected(model.isMultiColorMode());
+        updateMultiColorUI(model.isMultiColorMode());
+
+        if (model.isMultiColorMode()) {
+            multiColorToggle.setStyle("-fx-background-color: lightblue;");
+        } else {
+            multiColorToggle.setStyle("-fx-background-color: lightgray;");
         }
     }
 }
