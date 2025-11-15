@@ -6,7 +6,7 @@
 # Sprint 4 Backlog UserStories go below
 
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.001 : habiban4 : Started
+TYPE     : USER STORY US4.001 : habiban4 : Complete
 NAME     : Select × Cut × Copy × Paste
 PRIORITY : 3
 ESTIMATE : (2 hours)    ACTUAL : (2 hours)
@@ -15,7 +15,7 @@ I WANT   : To be able to select shapes with a visible highlight, cut or copy the
 SO THAT  : I can manipulate shapes easily and edit my canvas efficiently.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.002 : UTORID : irfanda3 : Complete
+TYPE     : USER STORY US4.002 : irfanda3 : Complete
 NAME     : Text Tool
 PRIORITY : 3
 ESTIMATE : (4 hours)    ACTUAL : 4 hours
@@ -51,7 +51,7 @@ I WANT   : To be able to undo or redo my recent edits or drawings.
 SO THAT  : I can correct mistakes or revert changes without losing my work.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.006 : UTORID : pate2652 Complete
+TYPE     : USER STORY US4.006 : pate2652 : Complete
 NAME     : MultiColoredShapes
 PRIORITY : 3
 ESTIMATE :  (4 hours)   ACTUAL : 2 days
@@ -60,7 +60,7 @@ I WANT   : Shapes have one colour for the interior and one for the border if the
 SO THAT  : I can customize shapes outline, and interior (fill) colour)
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.007 : habiban4 : Started
+TYPE     : USER STORY US4.007 : habiban4 : Complete
 NAME     : Rotate
 PRIORITY : 3
 ESTIMATE : (2 hours)   ACTUAL : (2 hours)
