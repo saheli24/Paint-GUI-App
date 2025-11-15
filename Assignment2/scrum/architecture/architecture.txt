@@ -26,25 +26,32 @@ High Level Architecture:
 	buttons are clicked, resulting in a mode change in the PaintPanel.
 	
 ---------------------------------------------------------------------
-TODO!!! Add in more architecture and discussion. For example, 
-do you do something interesting to fix the association between the 
-ShapeChooser and the PaintPanel? How about the PaintModel, something
-is clearly wrong with it. Can you come up with a better architecture?
+
+DESIGN PATTERNS USED: MODEL-VIEW-CONTROLLER, OBSERVER/OBSERVABLE, STRATEGY
+	The architecture of the following Paint App program our group has created follows the Model-View-Controller
+	pattern. The "PaintModel" acts as the acts as the Model, holding all the data related to shapes,
+	colors, canvas state, and many more. The View is represented by the View class and its subcomponents that are
+	utilized heavily, such as "PaintPanel" and "ColorChooserPanel", which handle rendering and at the same time help
+	with being able to select different colors. We decided to implement each view structure to listen to its own
+	events. This means that we do not have a controller on our own, but it allows us to be able to be a lot more
+	organized and efficient.
+
+	We utilized two additional different types of designs, Observer/Observable and the Strategy Pattern.
+	For the Observer/Observable pattern, the "PaintModel" extends "Observable" while the "PaintPanel" implements "Observer."
+	This allows the shapes on the actual canvas to automatically update whenever the model changes, such as
+	adding, modifying, copy and pasting, or removing shapes. We also made sure to use the Strategy pattern in this
+	Paint App program as well. It's applied in the "PaintPanel" through the use of different "DrawingTool" classes, which
+	make sure specific behaviors for shapes like circles, rectangles, and squiggles work well. This makes it easy to
+	switch tools and keeps the code straightforward to understand and work well.
+
+	Although this is not a design pattern, we also made sure to use abstraction and good OOP choices. For example,
+	previously we had a different class for every single type of shape. Such as square, circle, oval, etc. But we
+	decided to go ahead and change this by making sure that we can have a general class for all of these shapes.
+	Thus, we decided to create a general "Shape" interface. Each shape would be implementing this Shape interface,
+	and then having its own methods such as draw(), offset(), or containspoint(). All of these require different
+	implementations for each shape, since they require different calculations. We decided the best way to go about this,
+	was to use a interface.
+
 ---------------------------------------------------------------------
-
-DESIGN PATTERNS USED
-	TODO!!! If you introduce a Design Pattern to solve a problem, 
-	discuss it below. Only add design patterns if they simplify and improve
-	the code. I see at least two that would greatly improve code. 
-		
-	Strategy:
-	Command: 
-	Singleton:
-	Composite:
-	Factory:
-	Builder:
-
-	Observer/Observable:
-	... (any others you find useful) ...
 
 OTHER ARCHITECTURE DISCUSSIONS
