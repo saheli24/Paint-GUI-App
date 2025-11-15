@@ -71,6 +71,19 @@ public class PaintModel extends Observable {
         }
     }
 
+    // Reset to an empty canvas and default settings
+    public void reset() {
+        shapes.clear();
+        currentShapes.clear();
+        currentFillStyle = true;
+        currentColor = Color.BLACK;
+        currentThickness = 1;
+        undoStack.clear();
+        redoStack.clear();
+
+        notifyObserversOfChange();
+    }
+
 
     public void addShape(Shape s) {
         if (s != null) {

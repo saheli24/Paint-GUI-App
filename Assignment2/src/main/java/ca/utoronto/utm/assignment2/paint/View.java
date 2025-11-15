@@ -52,8 +52,14 @@ public class View implements EventHandler<ActionEvent> {
                 paintPanel.undoRedoUpdatePolyline(); // restore Polyline ghost
                 flashButton(redoArrow);
             });
+            Button resetButton = new Button("Reset");
+            resetButton.setOnAction(e -> {
+                paintModel.reset();
+                paintPanel.reset();
+                flashButton(resetButton);
+            });
             HBox topBar = new HBox();
-            topBar.getChildren().addAll(menuBar, undoArrow, redoArrow);
+            topBar.getChildren().addAll(menuBar, undoArrow, redoArrow, resetButton);
             topBar.setSpacing(5);
 
             HBox bottomBar = new HBox();

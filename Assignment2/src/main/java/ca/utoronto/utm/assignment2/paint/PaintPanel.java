@@ -451,8 +451,6 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
     }
 
-
-
     @Override
     public void update(Observable o, Object arg) {
         GraphicsContext g2d = this.getGraphicsContext2D();
@@ -470,11 +468,13 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 s.draw(g2d, 0.3);
             }
         }
-
         currentTool.drawFeedback(g2d);
     }
-
-
+    
+    public void reset() {
+        mode = "Circle";
+        currentTool = new CircleTool();
+    }
 }
 
 
