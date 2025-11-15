@@ -51,22 +51,13 @@ I WANT   : To be able to undo or redo my recent edits or drawings.
 SO THAT  : I can correct mistakes or revert changes without losing my work.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : USER STORY US4.006 : UTORID : pate2652 Started
+TYPE     : USER STORY US4.006 : UTORID : pate2652 Complete
 NAME     : MultiColoredShapes
 PRIORITY : 3
-ESTIMATE :  (4 hours)   ACTUAL : ?
+ESTIMATE :  (4 hours)   ACTUAL : 2 days
 AS A     : user
 I WANT   : Shapes have one colour for the interior and one for the border if the shape is solid (filled)
 SO THAT  : I can customize shapes outline, and interior (fill) colour)
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-TYPE     : USER STORY US4.006 : UTORID : pate2652 Started
-NAME     : Shape Resize
-PRIORITY : 3
-ESTIMATE :     ACTUAL : ?
-AS A     : user
-I WANT   : To resize existing shapes by clicking and dragging handles, while preserving proportions or constraints.
-SO THAT  : I can adjust shapes without redrawing them.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 TYPE     : USER STORY US4.007 : habiban4 : Started
@@ -76,15 +67,6 @@ ESTIMATE : (2 hours)   ACTUAL : (2 hours)
 AS A     : user
 I WANT   : To rotate drawn shapes to any desired angle.
 SO THAT  : I can orient shapes creatively for more dynamic designs.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-TYPE     : USER STORY US4.008 : UTORID : pate2652 : Started
-NAME     : Modify Color × Fill × Stroke × Thickness
-PRIORITY : 3
-ESTIMATE : (1 day)    ACTUAL : ?
-AS A     : user
-I WANT   : To modify a shape’s fill color, border color, and outline thickness after it has been drawn.
-SO THAT  : I can customize shapes without redrawing them.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 TYPE     : USER STORY US4.009 : sahasah1 : Complete
