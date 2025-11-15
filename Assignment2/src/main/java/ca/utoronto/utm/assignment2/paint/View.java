@@ -18,19 +18,24 @@ public class View implements EventHandler<ActionEvent> {
         private ShapeChooserPanel shapeChooserPanel;
         private FillStyleChooserPanel fillStylePanel;
         private ThicknessChooserPanel thicknessChooserPanel;
+        private FontChooserPanel fontChooserPanel;
         public View(PaintModel model, Stage stage) {
 
             ColorChooserPanel colorChooserPanel = new ColorChooserPanel(this);
-            ThicknessChooserPanel thicknessChooserPanel1 = new ThicknessChooserPanel(this);
+            thicknessChooserPanel = new ThicknessChooserPanel(this);
 
             this.paintModel = model;
 
             this.paintPanel = new PaintPanel(this.paintModel);
             this.shapeChooserPanel = new ShapeChooserPanel(this);
             this.fillStylePanel = new FillStyleChooserPanel(this);
+            this.fontChooserPanel = new FontChooserPanel(this);
+
             VBox leftPanel = new VBox();
             leftPanel.setSpacing(10);
-            leftPanel.getChildren().addAll(this.shapeChooserPanel, this.fillStylePanel, thicknessChooserPanel1);
+            leftPanel.getChildren().addAll(this.shapeChooserPanel, this.fillStylePanel, thicknessChooserPanel);
+
+
 
             BorderPane root = new BorderPane();
 
@@ -51,10 +56,15 @@ public class View implements EventHandler<ActionEvent> {
             topBar.getChildren().addAll(menuBar, undoArrow, redoArrow);
             topBar.setSpacing(5);
 
+            HBox bottomBar = new HBox();
+            bottomBar.getChildren().add(fontChooserPanel);
+            bottomBar.setSpacing(10);
+
             root.setTop(topBar);
             root.setCenter(this.paintPanel);
             root.setLeft(leftPanel);
             root.setRight(colorChooserPanel); // add color panel on the right side
+            root.setBottom(fontChooserPanel);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Paint");

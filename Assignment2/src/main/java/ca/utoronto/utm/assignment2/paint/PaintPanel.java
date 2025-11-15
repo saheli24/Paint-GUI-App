@@ -5,14 +5,19 @@ import javafx.event.EventType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Observer {
     private String mode = "Circle";
     private DrawingTool currentTool = new CircleTool();
     private PaintModel model;
+    private Scanner scanner = new Scanner(System.in);
 
     public PaintPanel(PaintModel model) {
         super(500, 500);
@@ -56,6 +61,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
                 break;
             case "Triangle":
                 currentTool = new TriangleTool();
+                break;
+            case "Text":
+                currentTool = new TextTool();
                 break;
         }
         System.out.println(this.mode);
@@ -367,6 +375,37 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
     }
 
+    public class TextTool implements DrawingTool {
+
+        @Override
+        public void pressed(MouseEvent e) {
+            System.out.println("Started Text");
+            String currentString = scanner.nextLine();
+            Point origin = new Point(e.getX(), e.getY());
+            Font font = model.getCurrentFont();
+            Text text = new Text(origin, font, currentString);
+            model.addShape(text);
+            model.setCurrentShape(text);
+
+
+        }
+
+        @Override
+        public void dragged(MouseEvent e) {
+
+        }
+
+        @Override
+        public void released(MouseEvent e) {
+            ArrayList<Shape> current = model.getCurrentShapes();
+            if (!current.isEmpty()) {
+                Shape shape = current.getFirst();
+                shape.handleRelease(model);
+                System.out.println("Added Text");
+            }
+        }
+    }
+
     @Override
     public void handle(MouseEvent mouseEvent) {
         // Later when we learn about inner classes...
@@ -386,6 +425,8 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
         }
     }
 
+
+
     @Override
     public void update(Observable o, Object arg) {
         GraphicsContext g2d = this.getGraphicsContext2D();
@@ -401,5 +442,9 @@ public class PaintPanel extends Canvas implements EventHandler<MouseEvent>, Obse
 
         currentTool.drawFeedback(g2d);
     }
+
+
 }
+
+
 
