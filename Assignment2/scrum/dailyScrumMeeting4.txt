@@ -161,12 +161,17 @@ Nov 12,2025
 	change the "instanceof" keyword. I need to find a way to replace it.
 
 Nov 13,2025
-	What I did yesterday: Claimed my stuff
-	What I will do today: Complete eraser and reset user stories.
-	Obstacles I face: Figure out how to implement eraser and how to reset all settings.
+	What I did yesterday: YesterdayI looked at US3.007 and I went ahead and solved the issue.
+	What I will do today: Claimed US4.001 and US4.007.
+	Obstacles I face: The hardest idea is how to go about doing rotate. I have no clue and how I will do any of that.
+	Not only I also need to create the "select" tool as well. The rotate and select tool both really work together.
+	So that's the scary part, and something that I am not sure if I will be able to do.
 
 Nov 14,2025
-	What I did yesterday: Completed eraser and reset user stories.
-	What I will do today: Complete text user story.
-	Obstacles I face: Learn how to use Font, its methods, and manipulate them to add text with size and style options.
+	What I did yesterday: Claimed US4.001 and US4.007.
+	What I will do today: I will complete Architecture.txt, US4.001, US4.007, and make sure to merge my teammates code.
+	Obstacles I face: The first biggest issue that I faced, Architecture.txt took a long time to implement. That is for sure.
+	Next, US4.007, which was rotate, was absolutely terrible. It took so long for me to do. Rotate was my biggest issue.
+	US4.001, was straightforward and easy, and both US4.001 and US4.007 really did connect together. Merging of course
+	is always the hardest one since you need to look through a lot of different code to make sure it all works together.
 
