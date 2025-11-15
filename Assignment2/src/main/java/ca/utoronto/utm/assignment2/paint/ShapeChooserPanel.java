@@ -126,6 +126,12 @@ public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEv
             textButton.setMinWidth(100);
             this.add(textButton, 0, 7);
             textButton.setOnAction(this);
+
+            Button eraserButton = new Button("Eraser");
+            eraserButton.setUserData("Eraser");
+            eraserButton.setMinWidth(100);
+            this.add(eraserButton, 0, 6);
+            eraserButton.setOnAction(this);
         }
 
         @Override
