@@ -1,4 +1,0 @@
-member1: sahasah1 Saheli Saha sahelisaha47@gmail.com
-member2: pate2652 Prem Patel prem.patel@mail.utoronto.ca
-member3: habiban4 Anas Habib anas.habib@mail.utoronto.ca
-member4: irfanda3  Danial Irfan danirfan@yahoo.com
